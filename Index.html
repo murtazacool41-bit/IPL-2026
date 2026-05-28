@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>IPL 2026 Predictions 🏏</title>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --gold: #F5B800;
+    --gold2: #FFD84D;
+    --green: #00C853;
+    --red: #FF3D57;
+    --bg: #07090F;
+    --card: #0F1521;
+    --card2: #151E2E;
+    --border: #1E2C42;
+    --text: #EEE5C8;
+    --muted: #6B7A99;
+    --accent: #1A80E5;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  /* ── HEADER ── */
+  .header {
+    background: linear-gradient(135deg, #0D1829 0%, #07090F 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .logo { display: flex; align-items: center; gap: 10px; }
+  .logo-icon { font-size: 30px; }
+  .logo-title { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--gold); letter-spacing: 0.5px; }
+  .logo-sub { font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+  .nav { display: flex; gap: 6px; flex-wrap: wrap; }
+  .nav-btn {
+    padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border);
+    background: transparent; color: var(--muted); cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; transition: all 0.2s;
+  }
+  .nav-btn:hover { color: var(--text); border-color: #2E3F5C; }
+  .nav-btn.active { background: rgba(245,184,0,0.12); border-color: var(--gold); color: var(--gold); font-weight: 600; }
+
+  /* ── PAGES ── */
+  .page { display: none; max-width: 860px; margin: 0 auto; padding: 24px 16px; }
+  .page.active { display: block; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 20px; margin-bottom: 14px;
+  }
+  .card-gold { border-color: rgba(245,184,0,0.25); }
+
+  /* ── INPUTS ── */
+  input[type=text], input[type=password], input[type=number], select, textarea {
+    width: 100%; padding: 11px 14px; border-radius: 9px;
+    border: 1px solid var(--border); background: #0A0F1A;
+    color: var(--text); font-family: 'DM Sans', sans-serif;
+    font-size: 14px; outline: none; transition: border 0.2s;
+    margin-bottom: 10px;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--gold); }
+
+  /* ── BUTTONS ── */
+  .btn {
+    padding: 12px 20px; border-radius: 9px; border: none;
+    font-family: 'DM Sans', sans-serif; font-size: 14px;
+    font-weight: 600; cursor: pointer; transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .btn-full { width: 100%; justify-content: center; }
+  .btn-gold { background: linear-gradient(135deg, #F5B800, #E6A800); color: #07090F; }
+  .btn-gold:hover { background: linear-gradient(135deg, #FFD84D, #F5B800); }
+  .btn-green { background: linear-gradient(135deg, #00C853, #00A844); color: white; }
+  .btn-green:hover { opacity: 0.9; }
+  .btn-red { background: rgba(255,61,87,0.15); color: var(--red); border: 1px solid rgba(255,61,87,0.3); }
+  .btn-sm { padding: 6px 12px; font-size: 12px; border-radius: 7px; }
+  .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* ── LOGIN SCREEN ── */
+  .login-wrap { display: flex; justify-content: center; align-items: center; min-height: 70vh; }
+  .login-card {
+    background: var(--card); border: 1px solid rgba(245,184,0,0.2);
+    border-radius: 20px; padding: 40px 32px; max-width: 380px; width: 100%; text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .login-emoji { font-size: 60px; margin-bottom: 12px; }
+  .login-title { font-family: 'DM Serif Display', serif; font-size: 26px; color: var(--gold); margin-bottom: 6px; }
+  .login-sub { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+
+  /* ── WELCOME BAR ── */
+  .welcome-bar {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px 16px; margin-bottom: 16px;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    flex-wrap: wrap;
+  }
+  .welcome-name { color: var(--gold); font-weight: 700; }
+  .badge {
+    padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700;
+    background: rgba(0,200,83,0.15); color: var(--green); border: 1px solid rgba(0,200,83,0.3);
+  }
+
+  /* ── QUESTION CARD ── */
+  .q-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 20px; margin-bottom: 14px;
+    transition: border-color 0.2s;
+  }
+  .q-card.answered { border-color: rgba(0,200,83,0.3); }
+  .q-num { font-size: 10px; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px; }
+  .q-text { font-family: 'DM Serif Display', serif; font-size: 18px; color: #F9FAFB; margin-bottom: 6px; line-height: 1.4; }
+  .q-pts { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
+  .q-pts span { color: var(--gold); font-weight: 700; }
+  .opts-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .opt-btn {
+    padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border);
+    background: #0A0F1A; color: #C4CBD9; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; transition: all 0.15s;
+  }
+  .opt-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .opt-btn.selected { background: rgba(245,184,0,0.12); border-color: var(--gold); color: var(--gold); font-weight: 700; }
+
+  /* ── LEADERBOARD ── */
+  .lb-header { text-align: center; margin-bottom: 28px; }
+  .lb-title { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--gold); }
+  .lb-meta { color: var(--muted); font-size: 13px; margin-top: 6px; }
+  .lb-list { display: flex; flex-direction: column; gap: 8px; }
+  .lb-row {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 14px 18px; transition: border-color 0.2s;
+  }
+  .lb-row.top3 { border-color: rgba(245,184,0,0.3); }
+  .lb-rank { font-size: 22px; width: 36px; text-align: center; }
+  .lb-name { flex: 1; font-size: 16px; font-weight: 600; color: #F9FAFB; }
+  .lb-pts { font-size: 22px; font-weight: 700; color: var(--gold); }
+  .lb-pts-label { font-size: 11px; color: var(--muted); }
+  .lb-answered { font-size: 12px; color: var(--muted); }
+
+  /* ── ADMIN ── */
+  .section-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .stab {
+    padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border);
+    background: transparent; color: var(--muted); cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; transition: all 0.2s;
+  }
+  .stab.active { background: var(--card2); border-color: var(--gold); color: var(--gold); }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--gold); margin: 16px 0 12px; }
+  .label { font-size: 12px; color: var(--muted); margin-bottom: 6px; display: block; }
+  .row { display: flex; gap: 8px; align-items: flex-start; }
+  .player-grid { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 12px; }
+  .p-chip {
+    padding: 6px 12px; border-radius: 20px; border: 1px solid var(--border);
+    background: #0A0F1A; color: #C4CBD9; cursor: pointer; font-size: 12px; transition: all 0.15s;
+  }
+  .p-chip.selected { background: rgba(245,184,0,0.12); border-color: var(--gold); color: var(--gold); }
+  .sel-count { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+
+  .q-admin-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px; margin-bottom: 12px;
+  }
+  .q-admin-top { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .status-badge {
+    padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; color: white;
+  }
+  .open-badge { background: #065F46; }
+  .closed-badge { background: #5B21B6; }
+  .q-admin-text { font-size: 15px; color: #F9FAFB; font-weight: 600; margin-bottom: 4px; }
+  .q-admin-meta { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+  .answer-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .ans-btn {
+    padding: 5px 11px; border-radius: 6px; border: 1px solid var(--border);
+    background: #0A0F1A; color: #C4CBD9; cursor: pointer; font-size: 12px; transition: all 0.15s;
+  }
+  .ans-btn.correct { background: rgba(0,200,83,0.15); border-color: var(--green); color: var(--green); font-weight: 700; }
+  .q-admin-actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+
+  .entry-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px; margin-bottom: 12px;
+  }
+  .entry-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .entry-name { font-size: 15px; font-weight: 700; color: var(--gold); }
+  .entry-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 13px;
+  }
+  .entry-q { color: var(--muted); max-width: 60%; }
+  .ans-correct { color: var(--green); font-weight: 700; }
+  .ans-wrong { color: var(--red); font-weight: 700; }
+  .ans-pending { color: var(--text); }
+
+  .player-row {
+    display: flex; align-items: center; justify-content: space-between;
+    background: #0A0F1A; border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 12px;
+  }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(60px);
+    background: var(--card2); border: 1px solid var(--green);
+    color: var(--green); padding: 10px 22px; border-radius: 30px;
+    font-size: 14px; font-weight: 600; z-index: 999;
+    transition: transform 0.3s ease; pointer-events: none;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ── EMPTY STATE ── */
+  .empty { text-align: center; padding: 48px 20px; }
+  .empty-icon { font-size: 52px; margin-bottom: 12px; }
+  .empty-text { color: var(--muted); font-size: 15px; }
+
+  /* ── LOADING ── */
+  .loading { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 16px; }
+
+  /* ── BREAKDOWN ── */
+  .breakdown-card {
+    background: var(--card2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px; margin-bottom: 8px;
+  }
+  .breakdown-q { font-size: 14px; color: var(--text); margin-bottom: 4px; }
+  .breakdown-ans { font-size: 13px; color: var(--muted); }
+  .breakdown-ans span { color: var(--green); font-weight: 700; }
+  .breakdown-stat { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  @media (max-width: 480px) {
+    .header { padding: 10px 14px; }
+    .logo-title { font-size: 17px; }
+    .nav-btn { padding: 6px 10px; font-size: 12px; }
+    .page { padding: 16px 12px; }
+    .lb-title { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">
+    <div class="logo-icon">🏏</div>
+    <div>
+      <div class="logo-title">IPL 2026 Predictor</div>
+      <div class="logo-sub">Group Predictions</div>
+    </div>
+  </div>
+  <nav class="nav">
+    <button class="nav-btn active" onclick="showPage('predict')">🏏 Predict</button>
+    <button class="nav-btn" onclick="showPage('leaderboard')">🏆 Leaderboard</button>
+    <button class="nav-btn" onclick="showPage('admin')">🔒 Admin</button>
+  </nav>
+</header>
+
+<!-- PREDICTIONS PAGE -->
+<div class="page active" id="page-predict">
+  <!-- Login -->
+  <div class="login-wrap" id="predict-login">
+    <div class="login-card">
+      <div class="login-emoji">🏏</div>
+      <div class="login-title">Join Predictions</div>
+      <div class="login-sub">Enter your name to start predicting for IPL 2026</div>
+      <input type="text" id="member-name" placeholder="Your name…" onkeydown="if(event.key==='Enter')memberLogin()"/>
+      <button class="btn btn-gold btn-full" onclick="memberLogin()">Let's Go →</button>
+    </div>
+  </div>
+  <!-- Questions -->
+  <div id="predict-questions" style="display:none">
+    <div class="welcome-bar">
+      <span>👋 Hey <span class="welcome-name" id="welcome-name"></span>!</span>
+      <span class="badge" id="submit-badge" style="display:none">✅ Submitted</span>
+    </div>
+    <div id="questions-list"></div>
+    <button class="btn btn-green btn-full" id="submit-btn" onclick="submitPredictions()">🚀 Submit Predictions</button>
+    <div style="height:20px"></div>
+  </div>
+</div>
+
+<!-- LEADERBOARD PAGE -->
+<div class="page" id="page-leaderboard">
+  <div class="lb-header">
+    <div class="lb-title">🏆 Leaderboard</div>
+    <div class="lb-meta" id="lb-meta">Loading…</div>
+  </div>
+  <div id="lb-list"></div>
+  <div class="section-title" id="breakdown-title" style="display:none">📋 Question Results</div>
+  <div id="breakdown-list"></div>
+</div>
+
+<!-- ADMIN PAGE -->
+<div class="page" id="page-admin">
+  <!-- Admin Login -->
+  <div class="login-wrap" id="admin-login">
+    <div class="login-card">
+      <div class="login-emoji">🔒</div>
+      <div class="login-title">Admin Access</div>
+      <div class="login-sub">Enter your admin password</div>
+      <input type="password" id="admin-pw" placeholder="Password…" onkeydown="if(event.key==='Enter')adminLogin()"/>
+      <p id="pw-err" style="color:#FF3D57;font-size:13px;margin-bottom:10px;display:none">Wrong password</p>
+      <button class="btn btn-gold btn-full" onclick="adminLogin()">Unlock →</button>
+      <p style="color:var(--muted);font-size:12px;margin-top:10px">Default: cricket123</p>
+    </div>
+  </div>
+  <!-- Admin Panel -->
+  <div id="admin-panel" style="display:none">
+    <h2 style="font-family:'DM Serif Display',serif;color:var(--gold);margin-bottom:16px">⚙️ Admin Panel</h2>
+    <div class="section-tabs">
+      <button class="stab active" onclick="adminSection('questions')">📋 Questions</button>
+      <button class="stab" onclick="adminSection('players')">👥 Players</button>
+      <button class="stab" onclick="adminSection('entries')">📊 Entries</button>
+    </div>
+
+    <!-- QUESTIONS SECTION -->
+    <div id="asec-questions">
+      <div class="card card-gold">
+        <div class="section-title" style="margin-top:0">➕ Add New Question</div>
+        <input type="text" id="q-text" placeholder="Question text e.g. Who will be top scorer?"/>
+        <div class="row">
+          <div style="flex:1">
+            <label class="label">Points for correct answer</label>
+            <input type="number" id="q-pts" value="1" min="1" max="10" style="margin-bottom:0"/>
+          </div>
+        </div>
+        <label class="label" style="margin-top:10px">Select player options (pick at least 2):</label>
+        <div class="player-grid" id="add-q-players"></div>
+        <div class="row">
+          <input type="text" id="custom-opt" placeholder="Or type custom option…" style="margin-bottom:0;flex:1"/>
+          <button class="btn btn-outline btn-sm" onclick="addCustomOpt()" style="margin-top:0">+ Add</button>
+        </div>
+        <div class="sel-count" id="sel-count"></div>
+        <button class="btn btn-gold btn-full" onclick="addQuestion()" style="margin-top:8px">➕ Add Question</button>
+      </div>
+      <div class="section-title">📋 All Questions</div>
+      <div id="admin-q-list"></div>
+    </div>
+
+    <!-- PLAYERS SECTION -->
+    <div id="asec-players" style="display:none">
+      <div class="card card-gold">
+        <div class="section-title" style="margin-top:0">➕ Add Player to Roster</div>
+        <div class="row">
+          <input type="text" id="new-player" placeholder="Player name…" style="margin-bottom:0;flex:1" onkeydown="if(event.key==='Enter')addPlayer()"/>
+          <button class="btn btn-gold" onclick="addPlayer()">Add</button>
+        </div>
+      </div>
+      <div class="section-title">👥 Current Roster</div>
+      <div class="player-grid" id="players-list"></div>
+    </div>
+
+    <!-- ENTRIES SECTION -->
+    <div id="asec-entries" style="display:none">
+      <div class="section-title">📊 All Member Entries</div>
+      <div id="entries-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, doc, getDoc, getDocs, setDoc, deleteDoc, onSnapshot, serverTimestamp }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDLFPHmOn36JRWo-CC3KXog8XId6153pzg",
+  authDomain: "ipl-2026-predictions.firebaseapp.com",
+  projectId: "ipl-2026-predictions",
+  storageBucket: "ipl-2026-predictions.firebasestorage.app",
+  messagingSenderId: "855843129395",
+  appId: "1:855843129395:web:374b30acd9781317a8bb46"
+};
+
+const app = initializeApp(firebaseConfig);
+const db  = getFirestore(app);
+
+// ── STATE ──
+let questions = [];
+let entries   = {};
+let players   = [
+  "Rohit Sharma","Virat Kohli","Shubman Gill","KL Rahul","Shreyas Iyer",
+  "Hardik Pandya","Ravindra Jadeja","MS Dhoni","Jasprit Bumrah","Mohammed Shami",
+  "Kuldeep Yadav","Yuzvendra Chahal","Axar Patel","Suryakumar Yadav","Ishan Kishan",
+  "Rishabh Pant","Sanju Samson","Deepak Chahar","Bhuvneshwar Kumar","Arshdeep Singh",
+  "Mohammed Siraj","Rinku Singh","Tilak Varma","Ruturaj Gaikwad","Yashasvi Jaiswal"
+];
+let currentMember = null;
+let memberAnswers  = {};
+let selectedOpts   = [];
+let adminAuthed    = false;
+const ADMIN_PW     = "cricket123";
+
+// ── TOAST ──
+function toast(msg, color="#00C853") {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.style.borderColor = color; t.style.color = color;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ── PAGE ROUTING ──
+window.showPage = function(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  event.target.classList.add('active');
+  if (name === 'leaderboard') renderLeaderboard();
+  if (name === 'admin' && adminAuthed) renderAdminQuestions();
+};
+
+// ── FIRESTORE HELPERS ──
+async function loadPlayers() {
+  const snap = await getDoc(doc(db, 'config', 'players'));
+  if (snap.exists()) players = snap.data().list;
+}
+async function savePlayers() {
+  await setDoc(doc(db, 'config', 'players'), { list: players });
+}
+async function loadQuestions() {
+  const snap = await getDocs(collection(db, 'questions'));
+  questions = [];
+  snap.forEach(d => questions.push({ id: d.id, ...d.data() }));
+  questions.sort((a,b) => (a.createdAt||0) - (b.createdAt||0));
+}
+async function loadEntries() {
+  const snap = await getDocs(collection(db, 'entries'));
+  entries = {};
+  snap.forEach(d => { entries[d.id] = d.data(); });
+}
+
+// ── MEMBER FLOW ──
+window.memberLogin = async function() {
+  const name = document.getElementById('member-name').value.trim();
+  if (!name) return;
+  currentMember = name;
+  document.getElementById('welcome-name').textContent = name;
+  await loadQuestions();
+  const snap = await getDoc(doc(db, 'entries', name));
+  memberAnswers = snap.exists() ? (snap.data().answers || {}) : {};
+  const submitted = Object.keys(memberAnswers).length > 0;
+  document.getElementById('submit-badge').style.display = submitted ? 'inline-block' : 'none';
+  document.getElementById('submit-btn').textContent = submitted ? '🔄 Update Predictions' : '🚀 Submit Predictions';
+  renderMemberQuestions();
+  document.getElementById('predict-login').style.display = 'none';
+  document.getElementById('predict-questions').style.display = 'block';
+};
+
+function renderMemberQuestions() {
+  const openQ = questions.filter(q => q.status === 'open');
+  const el = document.getElementById('questions-list');
+  if (openQ.length === 0) {
+    el.innerHTML = `<div class="empty"><div class="empty-icon">🏏</div><div class="empty-text">No open questions yet. Check back soon!</div></div>`;
+    return;
+  }
+  el.innerHTML = openQ.map((q,i) => `
+    <div class="q-card ${memberAnswers[q.id]?'answered':''}" id="qcard-${q.id}">
+      <div class="q-num">Question ${i+1}</div>
+      <div class="q-text">${q.text}</div>
+      <div class="q-pts">Points: <span>${q.points||1}</span></div>
+      <div class="opts-grid">
+        ${(q.options||[]).map(opt => `
+          <button class="opt-btn ${memberAnswers[q.id]===opt?'selected':''}"
+            onclick="selectOpt('${q.id}','${opt.replace(/'/g,"\\'")}',this)">
+            ${memberAnswers[q.id]===opt?'✓ ':''}${opt}
+          </button>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+window.selectOpt = function(qId, opt, btn) {
+  memberAnswers[qId] = opt;
+  const card = document.getElementById('qcard-'+qId);
+  card.querySelectorAll('.opt-btn').forEach(b => {
+    b.classList.remove('selected');
+    b.textContent = b.textContent.replace('✓ ','');
+  });
+  btn.classList.add('selected');
+  btn.textContent = '✓ ' + opt;
+  card.classList.add('answered');
+};
+
+window.submitPredictions = async function() {
+  if (!currentMember) return;
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true; btn.textContent = 'Saving…';
+  await setDoc(doc(db, 'entries', currentMember), { answers: memberAnswers, updatedAt: Date.now() });
+  btn.disabled = false; btn.textContent = '🔄 Update Predictions';
+  document.getElementById('submit-badge').style.display = 'inline-block';
+  toast('✅ Predictions saved!');
+};
+
+// ── LEADERBOARD ──
+async function renderLeaderboard() {
+  await loadQuestions(); await loadEntries();
+  const closedQ = questions.filter(q => q.status==='closed' && q.answer);
+  const totalPts = closedQ.reduce((s,q)=>s+(q.points||1),0);
+  document.getElementById('lb-meta').textContent =
+    `${closedQ.length} question${closedQ.length!==1?'s':''} closed · ${totalPts} pts available · ${Object.keys(entries).length} participants`;
+
+  const scores = Object.entries(entries).map(([name, data]) => {
+    let pts = 0;
+    closedQ.forEach(q => { if ((data.answers||{})[q.id] === q.answer) pts += (q.points||1); });
+    return { name, pts, answered: Object.keys(data.answers||{}).length };
+  }).sort((a,b) => b.pts - a.pts);
+
+  const medals = ['🥇','🥈','🥉'];
+  const lb = document.getElementById('lb-list');
+  if (scores.length === 0) {
+    lb.innerHTML = `<div class="empty"><div class="empty-icon">📊</div><div class="empty-text">Leaderboard will appear once questions are closed with correct answers.</div></div>`;
+    document.getElementById('breakdown-title').style.display = 'none';
+  } else {
+    lb.innerHTML = scores.map((s,i) => `
+      <div class="lb-row ${i<3?'top3':''}">
+        <div class="lb-rank">${medals[i]||'#'+(i+1)}</div>
+        <div>
+          <div class="lb-name">${s.name}</div>
+          <div class="lb-answered">${s.answered} answered</div>
+        </div>
+        <div style="text-align:right">
+          <div class="lb-pts">${s.pts}</div>
+          <div class="lb-pts-label">points</div>
+        </div>
+      </div>`).join('');
+    document.getElementById('breakdown-title').style.display = closedQ.length?'block':'none';
+  }
+
+  // Breakdown
+  const bl = document.getElementById('breakdown-list');
+  bl.innerHTML = closedQ.map(q => {
+    const total   = Object.values(entries).filter(e=>(e.answers||{})[q.id]).length;
+    const correct = Object.values(entries).filter(e=>(e.answers||{})[q.id]===q.answer).length;
+    return `<div class="breakdown-card">
+      <div class="breakdown-q">${q.text}</div>
+      <div class="breakdown-ans">Correct answer: <span>${q.answer}</span></div>
+      <div class="breakdown-stat">${correct} / ${total} got it right · ${q.points||1} pt${(q.points||1)>1?'s':''}</div>
+    </div>`;
+  }).join('');
+}
+
+// ── ADMIN LOGIN ──
+window.adminLogin = function() {
+  if (document.getElementById('admin-pw').value === ADMIN_PW) {
+    adminAuthed = true;
+    document.getElementById('admin-login').style.display = 'none';
+    document.getElementById('admin-panel').style.display = 'block';
+    Promise.all([loadQuestions(), loadEntries(), loadPlayers()]).then(() => {
+      renderAddQPlayers(); renderAdminQuestions(); renderAdminPlayers(); renderAdminEntries();
+    });
+  } else {
+    document.getElementById('pw-err').style.display = 'block';
+  }
+};
+
+// ── ADMIN SECTIONS ──
+window.adminSection = function(name) {
+  ['questions','players','entries'].forEach(s => {
+    document.getElementById('asec-'+s).style.display = s===name?'block':'none';
+  });
+  document.querySelectorAll('.stab').forEach((b,i) => {
+    b.classList.toggle('active', ['questions','players','entries'][i]===name);
+  });
+  if (name==='entries') renderAdminEntries();
+  if (name==='players') renderAdminPlayers();
+};
+
+// ── ADD QUESTION ──
+function renderAddQPlayers() {
+  document.getElementById('add-q-players').innerHTML = players.map(p =>
+    `<button class="p-chip ${selectedOpts.includes(p)?'selected':''}"
+      onclick="toggleOpt('${p.replace(/'/g,"\\'")}',this)">${selectedOpts.includes(p)?'✓ ':''}${p}</button>`
+  ).join('');
+  document.getElementById('sel-count').textContent =
+    selectedOpts.length ? `Selected: ${selectedOpts.join(', ')}` : '';
+}
+
+window.toggleOpt = function(p, btn) {
+  if (selectedOpts.includes(p)) {
+    selectedOpts = selectedOpts.filter(x=>x!==p);
+    btn.classList.remove('selected');
+    btn.textContent = p;
+  } else {
+    selectedOpts.push(p);
+    btn.classList.add('selected');
+    btn.textContent = '✓ ' + p;
+  }
+  document.getElementById('sel-count').textContent =
+    selectedOpts.length ? `Selected: ${selectedOpts.join(', ')}` : '';
+};
+
+window.addCustomOpt = function() {
+  const val = document.getElementById('custom-opt').value.trim();
+  if (!val || selectedOpts.includes(val)) return;
+  selectedOpts.push(val);
+  document.getElementById('custom-opt').value = '';
+  renderAddQPlayers();
+};
+
+window.addQuestion = async function() {
+  const text = document.getElementById('q-text').value.trim();
+  const pts  = parseInt(document.getElementById('q-pts').value) || 1;
+  if (!text || selectedOpts.length < 2) { toast('Need a question & at least 2 options','#FF3D57'); return; }
+  const id = Date.now().toString();
+  await setDoc(doc(db,'questions',id), { text, options:[...selectedOpts], points:pts, status:'open', answer:null, createdAt:Date.now() });
+  document.getElementById('q-text').value = '';
+  document.getElementById('q-pts').value = '1';
+  selectedOpts = [];
+  await loadQuestions();
+  renderAddQPlayers(); renderAdminQuestions();
+  toast('✅ Question added!');
+};
+
+// ── ADMIN QUESTIONS LIST ──
+async function renderAdminQuestions() {
+  await loadEntries();
+  const el = document.getElementById('admin-q-list');
+  if (questions.length===0) { el.innerHTML='<p style="color:var(--muted)">No questions yet.</p>'; return; }
+  el.innerHTML = questions.map((q,i) => {
+    const resp = Object.values(entries).filter(e=>(e.answers||{})[q.id]).length;
+    return `<div class="q-admin-card">
+      <div class="q-admin-top">
+        <span class="status-badge ${q.status==='open'?'open-badge':'closed-badge'}">
+          ${q.status==='open'?'🟢 Open':'🔴 Closed'}
+        </span>
+        <span style="font-size:12px;color:var(--gold);margin-left:auto">${q.points||1} pt${(q.points||1)>1?'s':''}</span>
+      </div>
+      <div class="q-admin-text">Q${i+1}: ${q.text}</div>
+      <div class="q-admin-meta">${resp} response${resp!==1?'s':''}</div>
+      <label class="label">Set correct answer:</label>
+      <div class="answer-grid">
+        ${(q.options||[]).map(opt=>`
+          <button class="ans-btn ${q.answer===opt?'correct':''}"
+            onclick="setAnswer('${q.id}','${opt.replace(/'/g,"\\'")}',this)">
+            ${q.answer===opt?'✓ ':''}${opt}
+          </button>`).join('')}
+      </div>
+      <div class="q-admin-actions">
+        <button class="btn btn-sm btn-outline" onclick="toggleQStatus('${q.id}')">
+          ${q.status==='open'?'🔴 Close Q':'🟢 Open Q'}
+        </button>
+        <button class="btn btn-sm btn-red" onclick="deleteQuestion('${q.id}')">🗑️ Delete</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+window.setAnswer = async function(qId, answer, btn) {
+  await setDoc(doc(db,'questions',qId), { answer, status:'closed' }, { merge:true });
+  await loadQuestions(); renderAdminQuestions();
+  toast('✅ Correct answer set!');
+};
+
+window.toggleQStatus = async function(qId) {
+  const q = questions.find(x=>x.id===qId);
+  const newStatus = q.status==='open'?'closed':'open';
+  await setDoc(doc(db,'questions',qId), { status:newStatus }, { merge:true });
+  await loadQuestions(); renderAdminQuestions();
+  toast(`Question ${newStatus}`);
+};
+
+window.deleteQuestion = async function(qId) {
+  if (!confirm('Delete this question?')) return;
+  await deleteDoc(doc(db,'questions',qId));
+  await loadQuestions(); renderAdminQuestions();
+  toast('🗑️ Question deleted','#FF3D57');
+};
+
+// ── ADMIN PLAYERS ──
+async function renderAdminPlayers() {
+  document.getElementById('players-list').innerHTML = players.map(p =>
+    `<div class="player-row">
+      <span style="color:var(--text);font-size:13px">${p}</span>
+      <button class="btn btn-sm btn-red" onclick="removePlayer('${p.replace(/'/g,"\\'")}')">✕</button>
+    </div>`
+  ).join('');
+}
+
+window.addPlayer = async function() {
+  const val = document.getElementById('new-player').value.trim();
+  if (!val || players.includes(val)) return;
+  players.push(val);
+  document.getElementById('new-player').value = '';
+  await savePlayers(); renderAdminPlayers(); renderAddQPlayers();
+  toast('👤 Player added!');
+};
+
+window.removePlayer = async function(p) {
+  players = players.filter(x=>x!==p);
+  await savePlayers(); renderAdminPlayers(); renderAddQPlayers();
+  toast('Player removed','#FF3D57');
+};
+
+// ── ADMIN ENTRIES ──
+async function renderAdminEntries() {
+  await loadEntries();
+  const el = document.getElementById('entries-list');
+  const names = Object.keys(entries);
+  if (names.length===0) { el.innerHTML='<p style="color:var(--muted)">No entries yet.</p>'; return; }
+  el.innerHTML = names.map(name => {
+    const ans = entries[name].answers || {};
+    return `<div class="entry-card">
+      <div class="entry-top">
+        <span class="entry-name">👤 ${name}</span>
+        <button class="btn btn-sm btn-red" onclick="clearEntry('${name.replace(/'/g,"\\'")}')">🗑️ Clear</button>
+      </div>
+      ${questions.map(q => `
+        <div class="entry-row">
+          <span class="entry-q">${q.text.length>45?q.text.slice(0,45)+'…':q.text}</span>
+          <span class="${q.answer&&ans[q.id]===q.answer?'ans-correct':q.answer&&ans[q.id]?'ans-wrong':'ans-pending'}">
+            ${ans[q.id]||'—'}${q.answer&&ans[q.id]===q.answer?' ✓':''}
+          </span>
+        </div>`).join('')}
+    </div>`;
+  }).join('');
+}
+
+window.clearEntry = async function(name) {
+  if (!confirm(`Clear all answers for ${name}?`)) return;
+  await deleteDoc(doc(db,'entries',name));
+  await loadEntries(); renderAdminEntries();
+  toast('Entry cleared','#FF3D57');
+};
+
+// ── INIT ──
+(async () => {
+  await loadPlayers();
+})();
+</script>
+</body>
+</html>
