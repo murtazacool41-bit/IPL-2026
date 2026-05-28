@@ -49,7 +49,18 @@ input:focus{border-color:#F5B800;}
 .ans-grid{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px;}
 .ans-btn{padding:5px 10px;border-radius:6px;border:1px solid #1E2C42;background:#0A0F1A;color:#C4CBD9;cursor:pointer;font-size:12px;}
 .ans-btn.correct{background:rgba(0,200,83,.15);border-color:#00C853;color:#00C853;font-weight:700;}
-.lb-row{display:flex;align-items:center;gap:14px;background:#0F1521;border:1px solid #1E2C42;border-radius:12px;padding:13px 16px;margin-bottom:8px;}
+.lb-table{width:100%;border-collapse:collapse;margin-bottom:20px;}
+.lb-table th{background:#1E2C42;color:#F5B800;padding:10px 8px;font-size:12px;text-align:left;border-bottom:2px solid #F5B800;}
+.lb-table td{padding:10px 8px;font-size:13px;border-bottom:1px solid #1E2C42;vertical-align:middle;}
+.lb-table tr:hover td{background:rgba(245,184,0,.05);}
+.lb-rank-cell{font-weight:700;font-size:16px;text-align:center;width:40px;}
+.lb-name-cell{font-weight:600;color:#F9FAFB;}
+.lb-prev-cell{color:#6B7A99;text-align:center;}
+.lb-new-cell{color:#00C853;font-weight:700;text-align:center;}
+.lb-total-cell{color:#F5B800;font-weight:700;font-size:15px;text-align:center;}
+.lb-bar-cell{width:80px;}
+.lb-bar-bg{background:#1E2C42;border-radius:4px;height:6px;width:100%;}
+.lb-bar-fill{background:linear-gradient(90deg,#F5B800,#00C853);border-radius:4px;height:6px;}
 .entry-card{background:#0F1521;border:1px solid #1E2C42;border-radius:12px;padding:14px;margin-bottom:10px;}
 .empty{text-align:center;padding:44px 18px;color:#6B7A99;}
 .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);background:#0F1521;border:1px solid #00C853;color:#00C853;padding:9px 22px;border-radius:30px;font-size:13px;font-weight:700;z-index:999;transition:transform .3s;pointer-events:none;}
@@ -57,6 +68,9 @@ input:focus{border-color:#F5B800;}
 .row{display:flex;gap:8px;align-items:center;margin-bottom:10px;}
 .label{font-size:12px;color:#6B7A99;display:block;margin-bottom:6px;}
 .player-row{display:flex;align-items:center;justify-content:space-between;background:#0A0F1A;border:1px solid #1E2C42;border-radius:8px;padding:7px 11px;margin-bottom:6px;}
+.lb-legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;font-size:12px;color:#6B7A99;}
+.lb-legend span{display:flex;align-items:center;gap:5px;}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;}
 </style>
 </head>
 <body>
@@ -97,11 +111,30 @@ input:focus{border-color:#F5B800;}
 
 <!-- LEADERBOARD PAGE -->
 <div class="page" id="page-leaderboard">
-  <div style="text-align:center;margin-bottom:24px">
-    <div style="font-size:30px;color:#F5B800;font-weight:bold">🏆 Leaderboard</div>
+  <div style="text-align:center;margin-bottom:20px">
+    <div style="font-size:28px;color:#F5B800;font-weight:bold">🏆 Leaderboard</div>
     <div style="color:#6B7A99;font-size:13px;margin-top:5px" id="lb-meta"></div>
   </div>
-  <div id="lb-list"></div>
+  <div class="lb-legend">
+    <span><span class="dot" style="background:#6B7A99"></span> Previous pts</span>
+    <span><span class="dot" style="background:#00C853"></span> New pts</span>
+    <span><span class="dot" style="background:#F5B800"></span> Total</span>
+  </div>
+  <div style="overflow-x:auto">
+    <table class="lb-table">
+      <thead>
+        <tr>
+          <th style="text-align:center">Rank</th>
+          <th>Player</th>
+          <th style="text-align:center">Prev</th>
+          <th style="text-align:center">New</th>
+          <th style="text-align:center">Total</th>
+          <th>Bar</th>
+        </tr>
+      </thead>
+      <tbody id="lb-list"></tbody>
+    </table>
+  </div>
   <div id="breakdown-section"></div>
 </div>
 
@@ -123,7 +156,6 @@ input:focus{border-color:#F5B800;}
       <button class="stab" onclick="adminSection('players',this)">👥 Players</button>
       <button class="stab" onclick="adminSection('entries',this)">📊 Entries</button>
     </div>
-    <!-- QUESTIONS -->
     <div id="asec-questions">
       <div class="card">
         <div class="sec-title" style="margin-top:0">➕ New Question</div>
@@ -144,7 +176,6 @@ input:focus{border-color:#F5B800;}
       <div class="sec-title">All Questions</div>
       <div id="admin-q-list"></div>
     </div>
-    <!-- PLAYERS -->
     <div id="asec-players" style="display:none">
       <div class="card">
         <div class="sec-title" style="margin-top:0">➕ Add Player</div>
@@ -156,7 +187,6 @@ input:focus{border-color:#F5B800;}
       <div class="sec-title">Roster</div>
       <div id="players-list"></div>
     </div>
-    <!-- ENTRIES -->
     <div id="asec-entries" style="display:none">
       <div class="sec-title">All Entries</div>
       <div id="entries-list"></div>
@@ -172,6 +202,16 @@ const fb=initializeApp({apiKey:"AIzaSyDLFPHmOn36JRWo-CC3KXog8XId6153pzg",authDom
 const db=getFirestore(fb);
 
 const ADMIN_PW="4450";
+
+// ── PREVIOUS POINTS FROM IMAGE ──
+const PREV_PTS={
+  "AMMAR":13,"BURHAN KAP":7,"SHABBIR KOT":10,"IBRAHIM":12,"MURTAZA D":9,
+  "SHABBIR RCB":9,"TAHER":7,"MURTAZA B":10,"ABBAS":8,"MOHAMMED":6,
+  "HATIM BHAI":6,"MOIZ":4,"ALI":7,"BURHAN KOT":8,"ADNAN":6,
+  "AZIZ":6,"TAHA":7,"ABDEALI":3,"MUSTAFA":2,"IDRIS":3,
+  "FAKHRI BHAI":2,"AZIZ K":1
+};
+
 let questions=[],entries={},currentMember=null,memberAnswers={},selectedOpts=[],adminAuthed=false;
 let players=["Rohit Sharma","Virat Kohli","Shubman Gill","KL Rahul","Shreyas Iyer","Hardik Pandya","Ravindra Jadeja","MS Dhoni","Jasprit Bumrah","Mohammed Shami","Kuldeep Yadav","Yuzvendra Chahal","Axar Patel","Suryakumar Yadav","Ishan Kishan","Rishabh Pant","Sanju Samson","Deepak Chahar","Bhuvneshwar Kumar","Arshdeep Singh","Mohammed Siraj","Rinku Singh","Tilak Varma","Ruturaj Gaikwad","Yashasvi Jaiswal"];
 
@@ -245,21 +285,38 @@ window.submitPredictions=async function(){
 async function renderLeaderboard(){
   await loadQuestions();await loadEntries();
   const closedQ=questions.filter(q=>q.status==='closed'&&q.answer);
-  const totalPts=closedQ.reduce((s,q)=>s+(q.points||1),0);
-  document.getElementById('lb-meta').textContent=`${closedQ.length} question${closedQ.length!==1?'s':''} closed · ${totalPts} pts · ${Object.keys(entries).length} participants`;
-  const scores=Object.entries(entries).map(([name,data])=>{
-    let pts=0;closedQ.forEach(q=>{if((data.answers||{})[q.id]===q.answer)pts+=(q.points||1);});
-    return{name,pts,answered:Object.keys(data.answers||{}).length};
-  }).sort((a,b)=>b.pts-a.pts);
+  const newPtsTotal=closedQ.reduce((s,q)=>s+(q.points||1),0);
+
+  // Build full leaderboard — all prev members + any new entrants
+  const allNames=new Set([...Object.keys(PREV_PTS),...Object.keys(entries)]);
+  const maxPossible=Math.max(...[...allNames].map(n=>(PREV_PTS[n]||0)))+newPtsTotal||1;
+
+  const scores=[...allNames].map(name=>{
+    const prev=PREV_PTS[name]||0;
+    const data=entries[name]||{};
+    let newPts=0;
+    closedQ.forEach(q=>{if((data.answers||{})[q.id]===q.answer)newPts+=(q.points||1);});
+    return{name,prev,newPts,total:prev+newPts};
+  }).sort((a,b)=>b.total-a.total);
+
   const medals=['🥇','🥈','🥉'];
+  document.getElementById('lb-meta').textContent=
+    `${closedQ.length} new question${closedQ.length!==1?'s':''} · ${Object.keys(entries).length} active participants`;
+
+  const maxTotal=scores[0]?.total||1;
   const lb=document.getElementById('lb-list');
-  if(scores.length===0){lb.innerHTML='<div class="empty">📊<br>Leaderboard appears once questions are closed with correct answers.</div>';return;}
   lb.innerHTML=scores.map((s,i)=>`
-    <div class="lb-row" style="${i<3?'border-color:rgba(245,184,0,.3)':''}">
-      <div style="font-size:20px;width:34px;text-align:center">${medals[i]||'#'+(i+1)}</div>
-      <div style="flex:1"><div style="font-weight:700;color:#F9FAFB">${s.name}</div><div style="font-size:11px;color:#6B7A99">${s.answered} answered</div></div>
-      <div style="text-align:right"><div style="font-size:20px;font-weight:700;color:#F5B800">${s.pts}</div><div style="font-size:11px;color:#6B7A99">points</div></div>
-    </div>`).join('');
+    <tr>
+      <td class="lb-rank-cell">${medals[i]||i+1}</td>
+      <td class="lb-name-cell">${s.name}</td>
+      <td class="lb-prev-cell" style="color:#6B7A99">${s.prev}</td>
+      <td class="lb-new-cell">+${s.newPts}</td>
+      <td class="lb-total-cell">${s.total}</td>
+      <td class="lb-bar-cell">
+        <div class="lb-bar-bg"><div class="lb-bar-fill" style="width:${Math.round((s.total/maxTotal)*100)}%"></div></div>
+      </td>
+    </tr>`).join('');
+
   const bs=document.getElementById('breakdown-section');
   if(!closedQ.length){bs.innerHTML='';return;}
   bs.innerHTML='<div class="sec-title">📋 Question Results</div>'+closedQ.map(q=>{
@@ -411,4 +468,3 @@ window.clearEntry=async function(name){
 </script>
 </body>
 </html>
-
