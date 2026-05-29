@@ -37,6 +37,17 @@ select option{background:#0A0F1A;}
 .opts-grid{display:flex;flex-wrap:wrap;gap:7px;}
 .opt-btn{padding:7px 13px;border-radius:8px;border:1px solid #1E2C42;background:#0A0F1A;color:#C4CBD9;cursor:pointer;font-size:13px;}
 .opt-btn.selected{background:rgba(245,184,0,.12);border-color:#F5B800;color:#F5B800;font-weight:700;}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:200;display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px);}
+.modal-box{background:#0F1521;border:1px solid #1E2C42;border-radius:24px 24px 0 0;padding:24px 20px 36px;width:100%;max-width:520px;max-height:80vh;overflow-y:auto;}
+.modal-title{font-size:14px;font-weight:700;color:#F5B800;margin-bottom:4px;letter-spacing:1px;}
+.modal-q{font-size:16px;font-weight:700;color:#F9FAFB;margin-bottom:16px;line-height:1.4;}
+.modal-opts{display:flex;flex-wrap:wrap;gap:8px;}
+.modal-opt{padding:8px 16px;border-radius:20px;border:1px solid #1E2C42;background:#0A0F1A;color:#C4CBD9;cursor:pointer;font-size:13px;transition:all .15s;}
+.modal-opt:hover{border-color:#F5B800;color:#F5B800;}
+.modal-opt.selected{background:rgba(245,184,0,.12);border-color:#F5B800;color:#F5B800;font-weight:700;}
+.modal-cancel{width:100%;padding:12px;border-radius:9px;border:1px solid #1E2C42;background:transparent;color:#6B7A99;font-size:14px;cursor:pointer;margin-top:14px;}
+.q-select-btn{width:100%;padding:11px 16px;border-radius:10px;border:1px solid #1E2C42;background:#0A0F1A;color:#C4CBD9;cursor:pointer;font-size:14px;text-align:left;display:flex;justify-content:space-between;align-items:center;}
+.q-select-btn.answered{border-color:rgba(0,200,83,.4);color:#00C853;}
 .sec-title{font-size:17px;color:#F5B800;margin:10px 0 10px;font-weight:bold;}
 .stabs{display:flex;gap:7px;margin-bottom:16px;flex-wrap:wrap;}
 .stab{padding:7px 14px;border-radius:8px;border:1px solid #1E2C42;background:transparent;color:#6B7A99;cursor:pointer;font-size:13px;}
@@ -272,7 +283,7 @@ window.memberLogin=async function(){const name=document.getElementById('member-n
 
 function renderMemberQuestions(){const openQ=questions.filter(q=>q.status==='open');const el=document.getElementById('questions-list');if(!openQ.length){el.innerHTML='<div class="empty">No open questions yet!</div>';return;}el.innerHTML=openQ.map((q,i)=>`<div class="q-card" id="qcard-${q.id}" style="${memberAnswers[q.id]?'border-color:rgba(0,200,83,.3)':''}"><div class="q-num">Question ${i+1}</div><div class="q-text">${q.text}</div><div class="q-pts">Points: <span style="color:#F5B800;font-weight:700">${q.points||1}</span></div><div class="opts-grid">${(q.options||[]).map(opt=>`<button class="opt-btn ${memberAnswers[q.id]===opt?'selected':''}" onclick="selectOpt('${q.id}','${opt.replace(/'/g,"\\'")}',this)">${memberAnswers[q.id]===opt?'✓ ':''}${opt}</button>`).join('')}</div></div>`).join('');}
 
-window.selectOpt=function(qId,opt,btn){memberAnswers[qId]=opt;const card=document.getElementById('qcard-'+qId);card.querySelectorAll('.opt-btn').forEach(b=>{b.classList.remove('selected');b.textContent=b.textContent.replace('✓ ','');});btn.classList.add('selected');btn.textContent='✓ '+opt;card.style.borderColor='rgba(0,200,83,.3)';};
+
 
 window.submitPredictions=async function(){if(!currentMember)return;const btn=document.getElementById('submit-btn');btn.disabled=true;btn.textContent='Saving...';try{await setDoc(doc(db,'entries',currentMember),{answers:memberAnswers,updatedAt:Date.now()});}catch(e){}btn.disabled=false;btn.textContent='Update Predictions';document.getElementById('submit-badge').style.display='inline-block';toast('Predictions saved!');};
 
