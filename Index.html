@@ -94,7 +94,6 @@ select option{background:#0A0F1A;}
     <div style="background:linear-gradient(135deg,#0D0D0D,#1a0a00);border:2px solid rgba(255,60,0,0.4);border-radius:16px;padding:10px 16px;text-align:center;position:relative;overflow:hidden">
       <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,60,0,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,60,0,0.04) 1px,transparent 1px);background-size:24px 24px;pointer-events:none"></div>
       <div style="position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
-        <!-- Left -->
         <div style="display:flex;align-items:center;gap:8px">
           <div style="font-size:28px">🏆</div>
           <div style="text-align:left">
@@ -103,13 +102,10 @@ select option{background:#0A0F1A;}
             <div style="font-size:20px;font-weight:900;background:linear-gradient(135deg,#FFD700,#FF6B00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1">3 MONTHS FREE</div>
           </div>
         </div>
-        <!-- Right -->
         <div style="background:rgba(255,215,0,0.15);border:1px solid rgba(255,215,0,0.4);color:#FFD700;font-weight:900;font-size:20px;padding:6px 16px;border-radius:20px">₹499 🔥</div>
       </div>
     </div>
   </div>
-
-
 
 <header class="header">
   <div>
@@ -157,9 +153,10 @@ select option{background:#0A0F1A;}
 <div class="page" id="page-leaderboard">
   <div class="lb-header-box">
     <div style="font-size:24px;font-weight:bold;color:#F5B800">🏆 PREDICTION LEADERBOARD</div>
-    <div style="color:#6B7A99;font-size:11px;margin-top:4px;letter-spacing:2px">AFTER 5 COMPETITIONS</div>
+    <div id="lb-subtitle" style="color:#6B7A99;font-size:11px;margin-top:4px;letter-spacing:2px">AFTER 6 COMPETITIONS</div>
     <div class="lb-stats">
-      <div class="lb-stat">⭐ Total Possible: <span>22 PTS</span></div>
+      <div class="lb-stat">⭐ Total Possible: <span id="lb-total-pts">29 PTS</span></div>
+      <div class="lb-stat">🏆 Round <span id="lb-q-count">6</span></div>
       <div class="lb-stat">👥 <span>22</span> Players</div>
     </div>
   </div>
@@ -170,32 +167,10 @@ select option{background:#0A0F1A;}
           <th>RANK</th><th>PLAYER</th><th>POINTS</th><th>SCORE</th><th>PERCENTAGE</th><th></th>
         </tr>
       </thead>
-      <tbody>
-        <tr class="top1"><td><span style="font-size:20px">🥇</span></td><td><div style="display:flex;align-items:center"><span class="avatar" style="background:#E63946">A</span><span style="font-weight:600;color:#F9FAFB">AMMAR</span></div></td><td style="font-size:16px;font-weight:700;color:#F5B800">13</td><td style="color:#9CA3AF;font-size:12px">13 / 22</td><td style="font-weight:700;color:#00FF88">59.09%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:59%;background:#00FF88"></div></div></td></tr>
-        <tr class="top2"><td><span style="font-size:20px">🥈</span></td><td><div style="display:flex;align-items:center"><span class="avatar" style="background:#2A9D8F">B</span><span style="font-weight:600;color:#F9FAFB">BURHAN KAP</span></div></td><td style="font-size:16px;font-weight:700;color:#F5B800">7</td><td style="color:#9CA3AF;font-size:12px">7 / 12</td><td style="font-weight:700;color:#00FF88">58.33%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:58%;background:#00FF88"></div></div></td></tr>
-        <tr class="top3"><td><span style="font-size:20px">🥉</span></td><td><div style="display:flex;align-items:center"><span class="avatar" style="background:#E9C46A">S</span><span style="font-weight:600;color:#F9FAFB">SHABBIR KOT</span></div></td><td style="font-size:16px;font-weight:700;color:#F5B800">10</td><td style="color:#9CA3AF;font-size:12px">10 / 18</td><td style="font-weight:700;color:#00FF88">55.56%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:56%;background:#00FF88"></div></div></td></tr>
-        <tr><td><b>4</b></td><td><div style="display:flex;align-items:center"><span class="avatar" style="background:#1982C4">I</span><span style="font-weight:600;color:#F9FAFB">IBRAHIM</span></div></td><td style="font-size:16px;font-weight:700;color:#F5B800">12</td><td style="color:#9CA3AF;font-size:12px">12 / 22</td><td style="font-weight:700;color:#00FF88">54.55%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:55%;background:#00FF88"></div></div></td></tr>
-        <tr><td><b>5</b></td><td><div style="display:flex;align-items:center"><span class="avatar" style="background:#8AC926">M</span><span style="font-weight:600;color:#F9FAFB">MURTAZA D</span></div></td><td style="font-size:16px;font-weight:700;color:#F5B800">9</td><td style="color:#9CA3AF;font-size:12px">9 / 18</td><td style="font-weight:700;color:#00FF88">50.00%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:50%;background:#00FF88"></div></div></td></tr>
-        <tr><td><b>6</b></td><td><div style="display:flex;align-items:center"><span class="avatar" style="background:#F4A261">S</span><span style="font-weight:600;color:#F9FAFB">SHABBIR RCB</span></div></td><td style="font-size:16px;font-weight:700;color:#F5B800">9</td><td style="color:#9CA3AF;font-size:12px">9 / 18</td><td style="font-weight:700;color:#00FF88">50.00%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:50%;background:#00FF88"></div></div></td></tr>
-        <tr><td><b>7</b></td><td><div style="display:flex;align-items:center"><span class="avatar" style="background:#FF595E">T</span><span style="font-weight:600;color:#F9FAFB">TAHER</span></div></td><td style="font-size:16px;font-weight:700;color:#F5B800">7</td><td style="color:#9CA3AF;font-size:12px">7 / 14</td><td style="font-weight:700;color:#00FF88">50.00%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:50%;background:#00FF88"></div></div></td></tr>
-        <tr><td><b>8</b></td><td><div style="display:flex;align-items:center"><span class="avatar" style="background:#6A4C93">M</span><span style="font-weight:600;color:#F9FAFB">MURTAZA B</span></div></td><td style="font-size:16px;font-weight:700;color:#F5B800">10</td><td style="color:#9CA3AF;font-size:12px">10 / 22</td><td style="font-weight:700;color:#F5B800">45.45%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:45%;background:#F5B800"></div></div></td></tr>
-        <tr><td><b>9</b></td><td><div style="display:flex;align-items:center"><span class="avatar" style="background:#264653">A</span><span style="font-weight:600;color:#F9FAFB">ABBAS</span></div></td><td style="font-size:16px;font-weight:700;color:#F5B800">8</td><td style="color:#9CA3AF;font-size:12px">8 / 18</td><td style="font-weight:700;color:#F5B800">44.44%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:44%;background:#F5B800"></div></div></td></tr>
-        <tr><td><b>10</b></td><td><div style="display:flex;align-items:center"><span class="avatar" style="background:#E63946">M</span><span style="font-weight:600;color:#F9FAFB">MOHAMMED</span></div></td><td style="font-size:16px;font-weight:700;color:#F5B800">6</td><td style="color:#9CA3AF;font-size:12px">6 / 14</td><td style="font-weight:700;color:#F5B800">42.86%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:43%;background:#F5B800"></div></div></td></tr>
-        <tr><td><b>11</b></td><td><div style="display:flex;align-items:center"><span class="avatar" style="background:#1982C4">H</span><span style="font-weight:600;color:#F9FAFB">HATIM BHAI</span></div></td><td style="font-size:16px;font-weight:700;color:#F5B800">6</td><td style="color:#9CA3AF;font-size:12px">6 / 14</td><td style="font-weight:700;color:#F5B800">42.86%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:43%;background:#F5B800"></div></div></td></tr>
-        <tr><td><b>12</b></td><td><div style="display:flex;align-items:center"><span class="avatar" style="background:#FFCA3A">M</span><span style="font-weight:600;color:#F9FAFB">MOIZ</span></div></td><td style="font-size:16px;font-weight:700;color:#F5B800">4</td><td style="color:#9CA3AF;font-size:12px">4 / 10</td><td style="font-weight:700;color:#F5B800">40.00%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:40%;background:#F5B800"></div></div></td></tr>
-        <tr><td><b>13</b></td><td><div style="display:flex;align-items:center"><span class="avatar" style="background:#8AC926">A</span><span style="font-weight:600;color:#F9FAFB">ALI</span></div></td><td style="font-size:16px;font-weight:700;color:#F5B800">7</td><td style="color:#9CA3AF;font-size:12px">7 / 18</td><td style="font-weight:700;color:#FF6B6B">38.89%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:39%;background:#FF6B6B"></div></div></td></tr>
-        <tr><td><b>14</b></td><td><div style="display:flex;align-items:center"><span class="avatar" style="background:#2A9D8F">B</span><span style="font-weight:600;color:#F9FAFB">BURHAN KOT</span></div></td><td style="font-size:16px;font-weight:700;color:#F5B800">8</td><td style="color:#9CA3AF;font-size:12px">8 / 22</td><td style="font-weight:700;color:#FF6B6B">36.36%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:36%;background:#FF6B6B"></div></div></td></tr>
-        <tr><td><b>15</b></td><td><div style="display:flex;align-items:center"><span class="avatar" style="background:#6A4C93">A</span><span style="font-weight:600;color:#F9FAFB">ADNAN</span></div></td><td style="font-size:16px;font-weight:700;color:#F5B800">6</td><td style="color:#9CA3AF;font-size:12px">6 / 18</td><td style="font-weight:700;color:#FF6B6B">33.33%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:33%;background:#FF6B6B"></div></div></td></tr>
-        <tr><td><b>16</b></td><td><div style="display:flex;align-items:center"><span class="avatar" style="background:#F4A261">A</span><span style="font-weight:600;color:#F9FAFB">AZIZ</span></div></td><td style="font-size:16px;font-weight:700;color:#F5B800">6</td><td style="color:#9CA3AF;font-size:12px">6 / 18</td><td style="font-weight:700;color:#FF6B6B">33.33%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:33%;background:#FF6B6B"></div></div></td></tr>
-        <tr><td><b>17</b></td><td><div style="display:flex;align-items:center"><span class="avatar" style="background:#FF595E">T</span><span style="font-weight:600;color:#F9FAFB">TAHA</span></div></td><td style="font-size:16px;font-weight:700;color:#F5B800">7</td><td style="color:#9CA3AF;font-size:12px">7 / 22</td><td style="font-weight:700;color:#FF6B6B">31.82%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:32%;background:#FF6B6B"></div></div></td></tr>
-        <tr><td><b>18</b></td><td><div style="display:flex;align-items:center"><span class="avatar" style="background:#264653">A</span><span style="font-weight:600;color:#F9FAFB">ABDEALI</span></div></td><td style="font-size:16px;font-weight:700;color:#F5B800">3</td><td style="color:#9CA3AF;font-size:12px">3 / 10</td><td style="font-weight:700;color:#FF6B6B">30.00%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:30%;background:#FF6B6B"></div></div></td></tr>
-        <tr><td><b>19</b></td><td><div style="display:flex;align-items:center"><span class="avatar" style="background:#E9C46A">M</span><span style="font-weight:600;color:#F9FAFB">MUSTAFA</span></div></td><td style="font-size:16px;font-weight:700;color:#F5B800">2</td><td style="color:#9CA3AF;font-size:12px">2 / 9</td><td style="font-weight:700;color:#FF6B6B">22.22%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:22%;background:#FF6B6B"></div></div></td></tr>
-        <tr><td><b>20</b></td><td><div style="display:flex;align-items:center"><span class="avatar" style="background:#1982C4">I</span><span style="font-weight:600;color:#F9FAFB">IDRIS</span></div></td><td style="font-size:16px;font-weight:700;color:#F5B800">3</td><td style="color:#9CA3AF;font-size:12px">3 / 14</td><td style="font-weight:700;color:#FF6B6B">21.43%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:21%;background:#FF6B6B"></div></div></td></tr>
-        <tr><td><b>21</b></td><td><div style="display:flex;align-items:center"><span class="avatar" style="background:#8AC926">F</span><span style="font-weight:600;color:#F9FAFB">FAKHRI BHAI</span></div></td><td style="font-size:16px;font-weight:700;color:#F5B800">2</td><td style="color:#9CA3AF;font-size:12px">2 / 13</td><td style="font-weight:700;color:#FF6B6B">15.38%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:15%;background:#FF6B6B"></div></div></td></tr>
-        <tr><td><b>22</b></td><td><div style="display:flex;align-items:center"><span class="avatar" style="background:#FFCA3A">A</span><span style="font-weight:600;color:#F9FAFB">AZIZ K</span></div></td><td style="font-size:16px;font-weight:700;color:#F5B800">1</td><td style="color:#9CA3AF;font-size:12px">1 / 10</td><td style="font-weight:700;color:#FF6B6B">10.00%</td><td><div class="bar-wrap"><div class="bar-fill" style="width:10%;background:#FF6B6B"></div></div></td></tr>
-      </tbody>
+      <tbody id="lb-list"></tbody>
     </table>
   </div>
+  <div id="breakdown-section" style="margin-top:20px"></div>
 </div>
 
 <div class="page" id="page-admin">
@@ -251,7 +226,6 @@ select option{background:#0A0F1A;}
         <div class="sec-title" style="margin:0">All Entries</div>
         <button class="btn-gold" style="width:auto;padding:10px 20px" onclick="downloadPDF()">📄 Download PDF</button>
       </div>
-      <!-- Submission Status -->
       <div id="submission-status" style="margin-bottom:16px"></div>
       <div id="entries-list"></div>
     </div>
@@ -267,7 +241,9 @@ const ADMIN_PW="4450";
 
 const NAME_MAP={"Abdeali tanda":"ABDEALI","Abdeali Tanda":"ABDEALI","abdeali tanda":"ABDEALI","Abdeali":"ABDEALI","abdeali":"ABDEALI","Ali":"ALI","ali":"ALI","Aziz":"AZIZ","aziz":"AZIZ","Burhanuddin kotwal":"BURHAN KOT","Burhanuddin Kotwal":"BURHAN KOT","burhanuddin kotwal":"BURHAN KOT","Fakhri":"FAKHRI BHAI","fakhri":"FAKHRI BHAI","Ibrahim":"IBRAHIM","ibrahim":"IBRAHIM","Murtaza":"MURTAZA D","murtaza":"MURTAZA D","Murtaza B":"MURTAZA B","murtaza b":"MURTAZA B","Murtaza b":"MURTAZA B","Mustafa":"MUSTAFA","mustafa":"MUSTAFA","Taha":"TAHA","taha":"TAHA"};
 
-const PREV={"AMMAR":{pts:13,played:22},"BURHAN KAP":{pts:7,played:12},"SHABBIR KOT":{pts:10,played:18},"IBRAHIM":{pts:12,played:22},"MURTAZA D":{pts:9,played:18},"SHABBIR RCB":{pts:9,played:18},"TAHER":{pts:7,played:14},"MURTAZA B":{pts:10,played:22},"ABBAS":{pts:8,played:18},"MOHAMMED":{pts:6,played:14},"HATIM BHAI":{pts:6,played:14},"MOIZ":{pts:4,played:10},"ALI":{pts:7,played:18},"BURHAN KOT":{pts:8,played:22},"ADNAN":{pts:6,played:18},"AZIZ":{pts:6,played:18},"TAHA":{pts:7,played:22},"ABDEALI":{pts:3,played:10},"MUSTAFA":{pts:2,played:9},"IDRIS":{pts:3,played:14},"FAKHRI BHAI":{pts:2,played:13},"AZIZ K":{pts:1,played:10}};
+// ✅ UPDATED: Round 6 scores added. Each player's 'played' reflects their personal max points.
+const PREV={"AMMAR":{pts:14,played:29},"BURHAN KAP":{pts:8,played:19},"SHABBIR KOT":{pts:10,played:25},"IBRAHIM":{pts:13,played:29},"MURTAZA D":{pts:9,played:25},"SHABBIR RCB":{pts:11,played:25},"TAHER":{pts:7,played:21},"MURTAZA B":{pts:12,played:29},"ABBAS":{pts:8,played:25},"MOHAMMED":{pts:7,played:21},"HATIM BHAI":{pts:6,played:21},"MOIZ":{pts:4,played:17},"ALI":{pts:9,played:25},"BURHAN KOT":{pts:9,played:29},"ADNAN":{pts:8,played:25},"AZIZ":{pts:6,played:25},"TAHA":{pts:7,played:29},"ABDEALI":{pts:3,played:17},"MUSTAFA":{pts:3,played:16},"IDRIS":{pts:5,played:21},"FAKHRI BHAI":{pts:2,played:20},"AZIZ K":{pts:1,played:17}};
+
 const MEMBERS=Object.keys(PREV);
 const ACOLORS=["#E63946","#2A9D8F","#E9C46A","#F4A261","#264653","#6A4C93","#1982C4","#8AC926","#FF595E","#FFCA3A","#6A4C93","#1982C4","#E63946","#2A9D8F","#F4A261","#264653","#8AC926","#E9C46A","#FF595E","#1982C4","#6A4C93","#FFCA3A"];
 
@@ -312,18 +288,13 @@ window.selectOpt=function(qId,sel){
   }
 };
 
-
-
 window.submitPredictions=async function(){if(!currentMember)return;const btn=document.getElementById('submit-btn');btn.disabled=true;btn.textContent='Saving...';try{await setDoc(doc(db,'entries',currentMember),{answers:memberAnswers,updatedAt:Date.now()});}catch(e){}btn.disabled=false;btn.textContent='Update Predictions';document.getElementById('submit-badge').style.display='inline-block';toast('Predictions saved!');};
 
 async function renderLeaderboard(){
   await loadQuestions();await loadEntries();
   const closedQ=questions.filter(q=>q.status==='closed'&&q.answer);
   const newPoss=closedQ.reduce((s,q)=>s+(q.points||1),0);
-  const prevPoss=22;
-  const totalPoss=prevPoss+newPoss;
-  const totalComps=5+closedQ.length;
-  document.getElementById('lb-total-pts').textContent=totalPoss+' PTS';
+  const totalComps=6+closedQ.length;
   document.getElementById('lb-q-count').textContent=totalComps;
   document.getElementById('lb-subtitle').textContent='AFTER '+totalComps+' COMPETITION'+(totalComps!==1?'S':'');
   const scores=MEMBERS.map((name,idx)=>{
@@ -333,6 +304,7 @@ async function renderLeaderboard(){
     closedQ.forEach(q=>{if((data.answers||{})[q.id]===q.answer)newPts+=(q.points||1);});
     const totalPts=prev.pts+newPts;
     const totalPlayed=prev.played+newPoss;
+    document.getElementById('lb-total-pts').textContent=totalPlayed+' PTS';
     const pct=totalPlayed>0?(totalPts/totalPlayed)*100:0;
     return{name,idx,totalPts,totalPlayed,pct:Math.round(pct*100)/100};
   }).sort((a,b)=>b.pct-a.pct);
@@ -371,12 +343,9 @@ async function renderAdminEntries(){
   await loadEntries();
   const el=document.getElementById('entries-list');
   const names=Object.keys(entries);
-  
-  // All 22 members
   const allMembers=["AMMAR","BURHAN KAP","SHABBIR KOT","IBRAHIM","MURTAZA D","SHABBIR RCB","TAHER","MURTAZA B","ABBAS","MOHAMMED","HATIM BHAI","MOIZ","ALI","BURHAN KOT","ADNAN","AZIZ","TAHA","ABDEALI","MUSTAFA","IDRIS","FAKHRI BHAI","AZIZ K"];
   const submitted=allMembers.filter(m=>names.includes(m));
   const notSubmitted=allMembers.filter(m=>!names.includes(m));
-  
   const statusEl=document.getElementById('submission-status');
   statusEl.innerHTML=`
     <div style="background:#0F1521;border:1px solid #1E2C42;border-radius:12px;padding:14px;margin-bottom:12px">
@@ -400,7 +369,6 @@ async function renderAdminEntries(){
         ${notSubmitted.map(m=>`<span style="background:rgba(255,61,87,.1);border:1px solid rgba(255,61,87,.3);color:#FF3D57;padding:4px 10px;border-radius:20px;font-size:12px">${m}</span>`).join('')}
       </div>`:'<div style="color:#00C853;font-weight:700;font-size:13px">✅ All members have submitted!</div>'}
     </div>`;
-
   if(!names.length){el.innerHTML='<p style="color:#6B7A99">No entries yet.</p>';return;}
   el.innerHTML=names.map(name=>{const ans=entries[name].answers||{};return`<div class="entry-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px"><span style="font-size:14px;font-weight:700;color:#F5B800">${name}</span><button class="btn-sm btn-red" onclick="clearEntry('${name.replace(/'/g,"\\'")}')">Clear</button></div>${questions.map(q=>{const a=ans[q.id];const isC=q.answer&&a===q.answer;const isW=q.answer&&a&&a!==q.answer;return`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #1E2C42;font-size:12px"><span style="color:#6B7A99;max-width:58%">${q.text.length>42?q.text.slice(0,42)+'…':q.text}</span><span style="color:${isC?'#00C853':isW?'#FF3D57':'#EEE5C8'};font-weight:${isC||isW?700:400}">${a||'—'}${isC?' ✓':''}</span></div>`;}).join('')}</div>`;}).join('');}
 window.clearEntry=async function(name){if(!confirm('Clear '+name+'?'))return;try{await deleteDoc(doc(db,'entries',name));}catch(e){}await loadEntries();renderAdminEntries();toast('Cleared');};
@@ -409,57 +377,38 @@ window.downloadPDF = async function() {
   await loadQuestions(); await loadEntries();
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
-
-  // Title
   doc.setFillColor(13, 13, 13);
   doc.rect(0, 0, 297, 210, 'F');
-
   doc.setFontSize(20);
   doc.setTextColor(245, 184, 0);
   doc.setFont('helvetica', 'bold');
   doc.text('IPL 2026 - All Member Predictions', 148, 15, { align: 'center' });
-
   doc.setFontSize(10);
   doc.setTextColor(150, 150, 150);
   doc.text('Generated: ' + new Date().toLocaleString(), 148, 22, { align: 'center' });
-
-  // Build table
   const names = Object.keys(entries);
   const head = [['#', 'Member', ...questions.map((q,i) => 'Q'+(i+1)), 'Score']];
-  
   const body = names.map((name, i) => {
     const ans = entries[name].answers || {};
     const closedQ = questions.filter(q => q.status === 'closed' && q.answer);
     let score = 0;
     closedQ.forEach(q => { if(ans[q.id] === q.answer) score++; });
-    const cells = questions.map(q => {
-      const a = ans[q.id] || '—';
-      return a.length > 12 ? a.slice(0,12)+'…' : a;
-    });
+    const cells = questions.map(q => { const a = ans[q.id] || '—'; return a.length > 12 ? a.slice(0,12)+'…' : a; });
     return [i+1, name, ...cells, score + '/' + closedQ.length];
   });
-
-  // Question legend at bottom
   const legendText = questions.map((q,i) => 'Q'+(i+1)+': '+q.text).join('   |   ');
-
   doc.autoTable({
-    startY: 28,
-    head: head,
-    body: body,
-    theme: 'grid',
+    startY: 28, head: head, body: body, theme: 'grid',
     styles: { fontSize: 8, cellPadding: 3, textColor: [238, 229, 200], fillColor: [15, 21, 33], lineColor: [30, 44, 66] },
     headStyles: { fillColor: [26, 39, 68], textColor: [245, 184, 0], fontStyle: 'bold', fontSize: 9 },
     alternateRowStyles: { fillColor: [20, 28, 45] },
     columnStyles: { 0: { cellWidth: 10 }, 1: { cellWidth: 35 } },
     margin: { left: 10, right: 10 },
   });
-
-  // Legend
   const finalY = doc.lastAutoTable.finalY + 6;
   doc.setFontSize(7);
   doc.setTextColor(100, 100, 100);
   doc.text('Questions: ' + legendText, 10, finalY, { maxWidth: 277 });
-
   doc.save('IPL2026-Predictions.pdf');
   toast('PDF Downloaded!');
 };
