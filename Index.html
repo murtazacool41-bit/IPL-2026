@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>IPL 2026 Predictions 🏏</title>
+<title>IPL 2026 Predictions</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:Arial,sans-serif;background:#07090F;color:#EEE5C8;min-height:100vh;}
@@ -13,24 +13,24 @@ body{font-family:Arial,sans-serif;background:#07090F;color:#EEE5C8;min-height:10
 .nav{display:flex;gap:6px;flex-wrap:wrap;}
 .nav-btn{padding:7px 12px;border-radius:8px;border:1px solid #1E2C42;background:transparent;color:#6B7A99;cursor:pointer;font-size:13px;}
 .nav-btn.active{background:rgba(245,184,0,.15);border-color:#F5B800;color:#F5B800;font-weight:700;}
-.page{display:none;max-width:860px;margin:0 auto;padding:20px 14px;}
+.page{display:none;max-width:900px;margin:0 auto;padding:20px 14px;}
 .page.active{display:block;}
 .center{display:flex;justify-content:center;align-items:center;min-height:65vh;}
-.login-card{background:#0F1521;border:1px solid rgba(245,184,0,.2);border-radius:20px;padding:36px 28px;max-width:350px;width:100%;text-align:center;}
+.login-card{background:#0F1521;border:1px solid rgba(245,184,0,.2);border-radius:20px;padding:36px 28px;max-width:360px;width:100%;text-align:center;}
 .login-emoji{font-size:52px;margin-bottom:10px;}
 .login-title{font-size:22px;color:#F5B800;margin-bottom:6px;font-weight:bold;}
 .login-sub{color:#6B7A99;font-size:13px;margin-bottom:18px;}
-input{width:100%;padding:11px 14px;border-radius:9px;border:1px solid #1E2C42;background:#0A0F1A;color:#EEE5C8;font-size:14px;outline:none;margin-bottom:10px;box-sizing:border-box;}
-input:focus{border-color:#F5B800;}
+input,select{width:100%;padding:11px 14px;border-radius:9px;border:1px solid #1E2C42;background:#0A0F1A;color:#EEE5C8;font-size:14px;outline:none;margin-bottom:10px;box-sizing:border-box;}
+input:focus,select:focus{border-color:#F5B800;}
+select option{background:#0A0F1A;}
 .btn-gold{width:100%;padding:12px;border-radius:9px;border:none;background:linear-gradient(135deg,#F5B800,#E6A800);color:#07090F;font-size:14px;font-weight:700;cursor:pointer;}
 .btn-green{width:100%;padding:12px;border-radius:9px;border:none;background:linear-gradient(135deg,#00C853,#00A844);color:white;font-size:14px;font-weight:700;cursor:pointer;margin-top:8px;}
 .btn-sm{padding:6px 12px;border-radius:7px;border:1px solid #1E2C42;background:#1E2C42;color:#EEE5C8;font-size:12px;cursor:pointer;}
 .btn-red{background:rgba(255,61,87,.15);color:#FF3D57;border:1px solid rgba(255,61,87,.3);}
-.wrap{display:flex;flex-direction:column;gap:12px;}
-.welcome-bar{background:#0F1521;border:1px solid #1E2C42;border-radius:10px;padding:11px 15px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.welcome-bar{background:#0F1521;border:1px solid #1E2C42;border-radius:10px;padding:11px 15px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:12px;}
 .badge{padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;background:rgba(0,200,83,.15);color:#00C853;border:1px solid rgba(0,200,83,.3);}
 .card{background:#0F1521;border:1px solid rgba(245,184,0,.2);border-radius:14px;padding:18px;margin-bottom:12px;}
-.q-card{background:#0F1521;border:1px solid #1E2C42;border-radius:14px;padding:18px;}
+.q-card{background:#0F1521;border:1px solid #1E2C42;border-radius:14px;padding:18px;margin-bottom:12px;}
 .q-num{font-size:10px;color:#F5B800;text-transform:uppercase;letter-spacing:2px;margin-bottom:5px;}
 .q-text{font-size:17px;color:#F9FAFB;margin-bottom:5px;font-weight:bold;}
 .q-pts{font-size:12px;color:#6B7A99;margin-bottom:14px;}
@@ -49,28 +49,28 @@ input:focus{border-color:#F5B800;}
 .ans-grid{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px;}
 .ans-btn{padding:5px 10px;border-radius:6px;border:1px solid #1E2C42;background:#0A0F1A;color:#C4CBD9;cursor:pointer;font-size:12px;}
 .ans-btn.correct{background:rgba(0,200,83,.15);border-color:#00C853;color:#00C853;font-weight:700;}
-.lb-table{width:100%;border-collapse:collapse;margin-bottom:20px;}
-.lb-table th{background:#1E2C42;color:#F5B800;padding:10px 8px;font-size:12px;text-align:left;border-bottom:2px solid #F5B800;}
-.lb-table td{padding:10px 8px;font-size:13px;border-bottom:1px solid #1E2C42;vertical-align:middle;}
-.lb-table tr:hover td{background:rgba(245,184,0,.05);}
-.lb-rank-cell{font-weight:700;font-size:16px;text-align:center;width:40px;}
-.lb-name-cell{font-weight:600;color:#F9FAFB;}
-.lb-prev-cell{color:#6B7A99;text-align:center;}
-.lb-new-cell{color:#00C853;font-weight:700;text-align:center;}
-.lb-total-cell{color:#F5B800;font-weight:700;font-size:15px;text-align:center;}
-.lb-bar-cell{width:80px;}
-.lb-bar-bg{background:#1E2C42;border-radius:4px;height:6px;width:100%;}
-.lb-bar-fill{background:linear-gradient(90deg,#F5B800,#00C853);border-radius:4px;height:6px;}
 .entry-card{background:#0F1521;border:1px solid #1E2C42;border-radius:12px;padding:14px;margin-bottom:10px;}
 .empty{text-align:center;padding:44px 18px;color:#6B7A99;}
 .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);background:#0F1521;border:1px solid #00C853;color:#00C853;padding:9px 22px;border-radius:30px;font-size:13px;font-weight:700;z-index:999;transition:transform .3s;pointer-events:none;}
 .toast.show{transform:translateX(-50%) translateY(0);}
-.row{display:flex;gap:8px;align-items:center;margin-bottom:10px;}
 .label{font-size:12px;color:#6B7A99;display:block;margin-bottom:6px;}
 .player-row{display:flex;align-items:center;justify-content:space-between;background:#0A0F1A;border:1px solid #1E2C42;border-radius:8px;padding:7px 11px;margin-bottom:6px;}
-.lb-legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;font-size:12px;color:#6B7A99;}
-.lb-legend span{display:flex;align-items:center;gap:5px;}
-.dot{width:10px;height:10px;border-radius:50%;display:inline-block;}
+.lb-header-box{background:linear-gradient(135deg,#0D1829,#0A0F1A);border:1px solid #1E2C42;border-radius:14px;padding:16px;margin-bottom:16px;text-align:center;}
+.lb-stats{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:10px;}
+.lb-stat{background:#0A0F1A;border:1px solid #1E2C42;border-radius:8px;padding:6px 12px;font-size:12px;}
+.lb-stat span{color:#F5B800;font-weight:700;}
+.lb-table{width:100%;border-collapse:collapse;}
+.lb-table th{background:#1A2744;color:#F5B800;padding:10px 6px;font-size:11px;text-align:center;border-bottom:2px solid #F5B800;white-space:nowrap;}
+.lb-table th:nth-child(2){text-align:left;}
+.lb-table td{padding:9px 6px;font-size:13px;border-bottom:1px solid #1E2C42;text-align:center;vertical-align:middle;}
+.lb-table td:nth-child(2){text-align:left;}
+.lb-table tr:hover td{background:rgba(245,184,0,.04);}
+.lb-table tr.top1 td{background:rgba(255,215,0,.08);}
+.lb-table tr.top2 td{background:rgba(192,192,192,.05);}
+.lb-table tr.top3 td{background:rgba(205,127,50,.05);}
+.avatar{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-weight:700;font-size:11px;margin-right:6px;flex-shrink:0;color:white;}
+.bar-wrap{width:55px;background:#1E2C42;border-radius:3px;height:5px;display:inline-block;vertical-align:middle;}
+.bar-fill{height:5px;border-radius:3px;}
 </style>
 </head>
 <body>
@@ -87,15 +87,24 @@ input:focus{border-color:#F5B800;}
   </nav>
 </header>
 
-<!-- PREDICT PAGE -->
 <div class="page active" id="page-predict">
   <div class="center" id="predict-login">
     <div class="login-card">
       <div class="login-emoji">🏏</div>
       <div class="login-title">Join Predictions</div>
-      <div class="login-sub">Enter your name to start predicting</div>
-      <input type="text" id="member-name" placeholder="Your name…" onkeydown="if(event.key==='Enter')memberLogin()"/>
-      <button class="btn-gold" onclick="memberLogin()">Let's Go →</button>
+      <div class="login-sub">Select your name to start predicting</div>
+      <select id="member-name">
+        <option value="">-- Select your name --</option>
+        <option>AMMAR</option><option>BURHAN KAP</option><option>SHABBIR KOT</option>
+        <option>IBRAHIM</option><option>MURTAZA D</option><option>SHABBIR RCB</option>
+        <option>TAHER</option><option>MURTAZA B</option><option>ABBAS</option>
+        <option>MOHAMMED</option><option>HATIM BHAI</option><option>MOIZ</option>
+        <option>ALI</option><option>BURHAN KOT</option><option>ADNAN</option>
+        <option>AZIZ</option><option>TAHA</option><option>ABDEALI</option>
+        <option>MUSTAFA</option><option>IDRIS</option><option>FAKHRI BHAI</option>
+        <option>AZIZ K</option>
+      </select>
+      <button class="btn-gold" onclick="memberLogin()">Let's Go</button>
     </div>
   </div>
   <div id="predict-questions" style="display:none">
@@ -109,82 +118,75 @@ input:focus{border-color:#F5B800;}
   </div>
 </div>
 
-<!-- LEADERBOARD PAGE -->
 <div class="page" id="page-leaderboard">
-  <div style="text-align:center;margin-bottom:20px">
-    <div style="font-size:28px;color:#F5B800;font-weight:bold">🏆 Leaderboard</div>
-    <div style="color:#6B7A99;font-size:13px;margin-top:5px" id="lb-meta"></div>
-  </div>
-  <div class="lb-legend">
-    <span><span class="dot" style="background:#6B7A99"></span> Previous pts</span>
-    <span><span class="dot" style="background:#00C853"></span> New pts</span>
-    <span><span class="dot" style="background:#F5B800"></span> Total</span>
+  <div class="lb-header-box">
+    <div style="font-size:24px;font-weight:bold;color:#F5B800">🏆 PREDICTION LEADERBOARD</div>
+    <div style="color:#6B7A99;font-size:11px;margin-top:4px;letter-spacing:2px" id="lb-subtitle">LIVE RANKINGS</div>
+    <div class="lb-stats">
+      <div class="lb-stat">⭐ Total Possible: <span id="lb-total-pts">—</span></div>
+      <div class="lb-stat">👥 <span>22</span> Players</div>
+      <div class="lb-stat">🏏 <span id="lb-q-count">—</span> Competitions</div>
+    </div>
   </div>
   <div style="overflow-x:auto">
     <table class="lb-table">
       <thead>
         <tr>
-          <th style="text-align:center">Rank</th>
-          <th>Player</th>
-          <th style="text-align:center">Prev</th>
-          <th style="text-align:center">New</th>
-          <th style="text-align:center">Total</th>
-          <th>Bar</th>
+          <th>RANK</th><th>PLAYER</th><th>POINTS</th><th>SCORE</th><th>PERCENTAGE</th><th></th>
         </tr>
       </thead>
       <tbody id="lb-list"></tbody>
     </table>
   </div>
-  <div id="breakdown-section"></div>
+  <div id="breakdown-section" style="margin-top:20px"></div>
 </div>
 
-<!-- ADMIN PAGE -->
 <div class="page" id="page-admin">
   <div class="center" id="admin-login">
     <div class="login-card">
       <div class="login-emoji">🔒</div>
       <div class="login-title">Admin Access</div>
-      <input type="password" id="admin-pw" placeholder="Password…" onkeydown="if(event.key==='Enter')adminLogin()"/>
+      <input type="password" id="admin-pw" placeholder="Password" onkeydown="if(event.key==='Enter')adminLogin()"/>
       <p id="pw-err" style="color:#FF3D57;font-size:13px;margin-bottom:8px;display:none">Wrong password</p>
-      <button class="btn-gold" onclick="adminLogin()">Unlock →</button>
+      <button class="btn-gold" onclick="adminLogin()">Unlock</button>
     </div>
   </div>
   <div id="admin-panel" style="display:none">
-    <div style="font-size:22px;color:#F5B800;font-weight:bold;margin-bottom:14px">⚙️ Admin Panel</div>
+    <div style="font-size:22px;color:#F5B800;font-weight:bold;margin-bottom:14px">Admin Panel</div>
     <div class="stabs">
-      <button class="stab active" onclick="adminSection('questions',this)">📋 Questions</button>
-      <button class="stab" onclick="adminSection('players',this)">👥 Players</button>
-      <button class="stab" onclick="adminSection('entries',this)">📊 Entries</button>
+      <button class="stab active" onclick="adminSection('questions',this)">Questions</button>
+      <button class="stab" onclick="adminSection('players',this)">Players</button>
+      <button class="stab" onclick="adminSection('entries',this)">Entries</button>
     </div>
     <div id="asec-questions">
       <div class="card">
-        <div class="sec-title" style="margin-top:0">➕ New Question</div>
-        <input type="text" id="q-text" placeholder="e.g. Who will be top scorer?"/>
-        <div class="row">
+        <div class="sec-title" style="margin-top:0">New Question</div>
+        <input type="text" id="q-text" placeholder="Question text"/>
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px">
           <label class="label" style="margin:0;white-space:nowrap">Points:</label>
           <input type="number" id="q-pts" value="1" min="1" max="10" style="width:70px;margin:0"/>
         </div>
-        <label class="label" style="margin-top:8px">Pick players (min 2):</label>
+        <label class="label">Pick players (min 2):</label>
         <div class="p-grid" id="add-q-players"></div>
         <div style="display:flex;gap:8px;margin-bottom:8px">
-          <input type="text" id="custom-opt" placeholder="Custom option…" style="margin:0;flex:1"/>
-          <button class="btn-sm" onclick="addCustomOpt()">+ Add</button>
+          <input type="text" id="custom-opt" placeholder="Custom option" style="margin:0;flex:1"/>
+          <button class="btn-sm" onclick="addCustomOpt()">Add</button>
         </div>
         <div id="sel-count" style="font-size:12px;color:#6B7A99;margin-bottom:8px"></div>
-        <button class="btn-gold" onclick="addQuestion()">➕ Add Question</button>
+        <button class="btn-gold" onclick="addQuestion()">Add Question</button>
       </div>
       <div class="sec-title">All Questions</div>
       <div id="admin-q-list"></div>
     </div>
     <div id="asec-players" style="display:none">
       <div class="card">
-        <div class="sec-title" style="margin-top:0">➕ Add Player</div>
+        <div class="sec-title" style="margin-top:0">Add Player</div>
         <div style="display:flex;gap:8px">
-          <input type="text" id="new-player" placeholder="Player name…" style="margin:0;flex:1" onkeydown="if(event.key==='Enter')addPlayer()"/>
+          <input type="text" id="new-player" placeholder="Player name" style="margin:0;flex:1"/>
           <button class="btn-gold" style="width:auto;padding:11px 16px" onclick="addPlayer()">Add</button>
         </div>
       </div>
-      <div class="sec-title">Roster</div>
+      <div class="sec-title">Players</div>
       <div id="players-list"></div>
     </div>
     <div id="asec-entries" style="display:none">
@@ -197,273 +199,87 @@ input:focus{border-color:#F5B800;}
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import{getFirestore,collection,doc,getDoc,getDocs,setDoc,deleteDoc}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
 const fb=initializeApp({apiKey:"AIzaSyDLFPHmOn36JRWo-CC3KXog8XId6153pzg",authDomain:"ipl-2026-predictions.firebaseapp.com",projectId:"ipl-2026-predictions",storageBucket:"ipl-2026-predictions.firebasestorage.app",messagingSenderId:"855843129395",appId:"1:855843129395:web:374b30acd9781317a8bb46"});
 const db=getFirestore(fb);
-
 const ADMIN_PW="4450";
 
-// ── PREVIOUS POINTS FROM IMAGE ──
-const PREV_PTS={
-  "AMMAR":13,"BURHAN KAP":7,"SHABBIR KOT":10,"IBRAHIM":12,"MURTAZA D":9,
-  "SHABBIR RCB":9,"TAHER":7,"MURTAZA B":10,"ABBAS":8,"MOHAMMED":6,
-  "HATIM BHAI":6,"MOIZ":4,"ALI":7,"BURHAN KOT":8,"ADNAN":6,
-  "AZIZ":6,"TAHA":7,"ABDEALI":3,"MUSTAFA":2,"IDRIS":3,
-  "FAKHRI BHAI":2,"AZIZ K":1
-};
+const NAME_MAP={"Abdeali tanda":"ABDEALI","Abdeali Tanda":"ABDEALI","abdeali tanda":"ABDEALI","Abdeali":"ABDEALI","abdeali":"ABDEALI","Ali":"ALI","ali":"ALI","Aziz":"AZIZ","aziz":"AZIZ","Burhanuddin kotwal":"BURHAN KOT","Burhanuddin Kotwal":"BURHAN KOT","burhanuddin kotwal":"BURHAN KOT","Fakhri":"FAKHRI BHAI","fakhri":"FAKHRI BHAI","Ibrahim":"IBRAHIM","ibrahim":"IBRAHIM","Murtaza":"MURTAZA D","murtaza":"MURTAZA D","Murtaza B":"MURTAZA B","murtaza b":"MURTAZA B","Murtaza b":"MURTAZA B","Mustafa":"MUSTAFA","mustafa":"MUSTAFA","Taha":"TAHA","taha":"TAHA"};
+
+const PREV={"AMMAR":{pts:13,played:22},"BURHAN KAP":{pts:7,played:12},"SHABBIR KOT":{pts:10,played:18},"IBRAHIM":{pts:12,played:22},"MURTAZA D":{pts:9,played:18},"SHABBIR RCB":{pts:9,played:18},"TAHER":{pts:7,played:14},"MURTAZA B":{pts:10,played:22},"ABBAS":{pts:8,played:18},"MOHAMMED":{pts:6,played:14},"HATIM BHAI":{pts:6,played:14},"MOIZ":{pts:4,played:10},"ALI":{pts:7,played:18},"BURHAN KOT":{pts:8,played:22},"ADNAN":{pts:6,played:18},"AZIZ":{pts:6,played:18},"TAHA":{pts:7,played:22},"ABDEALI":{pts:3,played:10},"MUSTAFA":{pts:2,played:9},"IDRIS":{pts:3,played:14},"FAKHRI BHAI":{pts:2,played:13},"AZIZ K":{pts:1,played:10}};
+const MEMBERS=Object.keys(PREV);
+const ACOLORS=["#E63946","#2A9D8F","#E9C46A","#F4A261","#264653","#6A4C93","#1982C4","#8AC926","#FF595E","#FFCA3A","#6A4C93","#1982C4","#E63946","#2A9D8F","#F4A261","#264653","#8AC926","#E9C46A","#FF595E","#1982C4","#6A4C93","#FFCA3A"];
 
 let questions=[],entries={},currentMember=null,memberAnswers={},selectedOpts=[],adminAuthed=false;
 let players=["Rohit Sharma","Virat Kohli","Shubman Gill","KL Rahul","Shreyas Iyer","Hardik Pandya","Ravindra Jadeja","MS Dhoni","Jasprit Bumrah","Mohammed Shami","Kuldeep Yadav","Yuzvendra Chahal","Axar Patel","Suryakumar Yadav","Ishan Kishan","Rishabh Pant","Sanju Samson","Deepak Chahar","Bhuvneshwar Kumar","Arshdeep Singh","Mohammed Siraj","Rinku Singh","Tilak Varma","Ruturaj Gaikwad","Yashasvi Jaiswal"];
 
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
-
-window.showPage=function(name,btn){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('page-'+name).classList.add('active');
-  btn.classList.add('active');
-  if(name==='leaderboard')renderLeaderboard();
-  if(name==='admin'&&adminAuthed)renderAdminQuestions();
-};
-
+window.showPage=function(name,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));document.getElementById('page-'+name).classList.add('active');btn.classList.add('active');if(name==='leaderboard')renderLeaderboard();if(name==='admin'&&adminAuthed)renderAdminQuestions();};
 async function loadPlayers(){try{const s=await getDoc(doc(db,'config','players'));if(s.exists())players=s.data().list;}catch(e){}}
 async function savePlayers(){try{await setDoc(doc(db,'config','players'),{list:players});}catch(e){}}
 async function loadQuestions(){try{const s=await getDocs(collection(db,'questions'));questions=[];s.forEach(d=>questions.push({id:d.id,...d.data()}));questions.sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));}catch(e){}}
-async function loadEntries(){try{const s=await getDocs(collection(db,'entries'));entries={};s.forEach(d=>{entries[d.id]=d.data();});}catch(e){}}
+async function loadEntries(){try{const s=await getDocs(collection(db,'entries'));entries={};s.forEach(d=>{const cn=NAME_MAP[d.id]||d.id;if(!entries[cn]){entries[cn]=d.data();}else{const ex=entries[cn].answers||{};const inc=d.data().answers||{};entries[cn].answers=Object.assign({},inc,ex);}});}catch(e){}}
 
-window.memberLogin=async function(){
-  const name=document.getElementById('member-name').value.trim();
-  if(!name)return;
-  currentMember=name;
-  document.getElementById('welcome-name').textContent=name;
-  document.getElementById('predict-login').style.display='none';
-  document.getElementById('predict-questions').style.display='block';
-  document.getElementById('questions-list').innerHTML='<div class="empty">Loading questions…</div>';
-  await loadQuestions();
-  try{const snap=await getDoc(doc(db,'entries',name));memberAnswers=snap.exists()?(snap.data().answers||{}):{};
-  const submitted=Object.keys(memberAnswers).length>0;
-  document.getElementById('submit-badge').style.display=submitted?'inline-block':'none';
-  document.getElementById('submit-btn').textContent=submitted?'🔄 Update Predictions':'🚀 Submit Predictions';}catch(e){}
-  renderMemberQuestions();
-};
+window.memberLogin=async function(){const name=document.getElementById('member-name').value;if(!name)return;currentMember=name;document.getElementById('welcome-name').textContent=name;document.getElementById('predict-login').style.display='none';document.getElementById('predict-questions').style.display='block';document.getElementById('questions-list').innerHTML='<div class="empty">Loading...</div>';await loadQuestions();try{const snap=await getDoc(doc(db,'entries',name));memberAnswers=snap.exists()?(snap.data().answers||{}):{};const sub=Object.keys(memberAnswers).length>0;document.getElementById('submit-badge').style.display=sub?'inline-block':'none';document.getElementById('submit-btn').textContent=sub?'Update Predictions':'Submit Predictions';}catch(e){}renderMemberQuestions();};
 
-function renderMemberQuestions(){
-  const openQ=questions.filter(q=>q.status==='open');
-  const el=document.getElementById('questions-list');
-  if(openQ.length===0){el.innerHTML='<div class="empty">🏏<br>No open questions yet. Check back soon!</div>';return;}
-  el.innerHTML=openQ.map((q,i)=>`
-    <div class="q-card" id="qcard-${q.id}" style="margin-bottom:12px;${memberAnswers[q.id]?'border-color:rgba(0,200,83,.3)':''}">
-      <div class="q-num">Question ${i+1}</div>
-      <div class="q-text">${q.text}</div>
-      <div class="q-pts">Points: <span style="color:#F5B800;font-weight:700">${q.points||1}</span></div>
-      <div class="opts-grid">${(q.options||[]).map(opt=>`
-        <button class="opt-btn ${memberAnswers[q.id]===opt?'selected':''}"
-          onclick="selectOpt('${q.id}','${opt.replace(/'/g,"\\'")}',this)">
-          ${memberAnswers[q.id]===opt?'✓ ':''}${opt}</button>`).join('')}
-      </div>
-    </div>`).join('');
-}
+function renderMemberQuestions(){const openQ=questions.filter(q=>q.status==='open');const el=document.getElementById('questions-list');if(!openQ.length){el.innerHTML='<div class="empty">No open questions yet!</div>';return;}el.innerHTML=openQ.map((q,i)=>`<div class="q-card" id="qcard-${q.id}" style="${memberAnswers[q.id]?'border-color:rgba(0,200,83,.3)':''}"><div class="q-num">Question ${i+1}</div><div class="q-text">${q.text}</div><div class="q-pts">Points: <span style="color:#F5B800;font-weight:700">${q.points||1}</span></div><div class="opts-grid">${(q.options||[]).map(opt=>`<button class="opt-btn ${memberAnswers[q.id]===opt?'selected':''}" onclick="selectOpt('${q.id}','${opt.replace(/'/g,"\\'")}',this)">${memberAnswers[q.id]===opt?'✓ ':''}${opt}</button>`).join('')}</div></div>`).join('');}
 
-window.selectOpt=function(qId,opt,btn){
-  memberAnswers[qId]=opt;
-  const card=document.getElementById('qcard-'+qId);
-  card.querySelectorAll('.opt-btn').forEach(b=>{b.classList.remove('selected');b.textContent=b.textContent.replace('✓ ','');});
-  btn.classList.add('selected');btn.textContent='✓ '+opt;
-  card.style.borderColor='rgba(0,200,83,.3)';
-};
+window.selectOpt=function(qId,opt,btn){memberAnswers[qId]=opt;const card=document.getElementById('qcard-'+qId);card.querySelectorAll('.opt-btn').forEach(b=>{b.classList.remove('selected');b.textContent=b.textContent.replace('✓ ','');});btn.classList.add('selected');btn.textContent='✓ '+opt;card.style.borderColor='rgba(0,200,83,.3)';};
 
-window.submitPredictions=async function(){
-  if(!currentMember)return;
-  const btn=document.getElementById('submit-btn');
-  btn.disabled=true;btn.textContent='Saving…';
-  try{await setDoc(doc(db,'entries',currentMember),{answers:memberAnswers,updatedAt:Date.now()});}catch(e){}
-  btn.disabled=false;btn.textContent='🔄 Update Predictions';
-  document.getElementById('submit-badge').style.display='inline-block';
-  toast('✅ Predictions saved!');
-};
+window.submitPredictions=async function(){if(!currentMember)return;const btn=document.getElementById('submit-btn');btn.disabled=true;btn.textContent='Saving...';try{await setDoc(doc(db,'entries',currentMember),{answers:memberAnswers,updatedAt:Date.now()});}catch(e){}btn.disabled=false;btn.textContent='Update Predictions';document.getElementById('submit-badge').style.display='inline-block';toast('Predictions saved!');};
 
 async function renderLeaderboard(){
   await loadQuestions();await loadEntries();
   const closedQ=questions.filter(q=>q.status==='closed'&&q.answer);
-  const newPtsTotal=closedQ.reduce((s,q)=>s+(q.points||1),0);
-
-  // Build full leaderboard — all prev members + any new entrants
-  const allNames=new Set([...Object.keys(PREV_PTS),...Object.keys(entries)]);
-  const maxPossible=Math.max(...[...allNames].map(n=>(PREV_PTS[n]||0)))+newPtsTotal||1;
-
-  const scores=[...allNames].map(name=>{
-    const prev=PREV_PTS[name]||0;
+  const newPoss=closedQ.reduce((s,q)=>s+(q.points||1),0);
+  const prevPoss=22;
+  const totalPoss=prevPoss+newPoss;
+  const totalComps=5+closedQ.length;
+  document.getElementById('lb-total-pts').textContent=totalPoss+' PTS';
+  document.getElementById('lb-q-count').textContent=totalComps;
+  document.getElementById('lb-subtitle').textContent='AFTER '+totalComps+' COMPETITION'+(totalComps!==1?'S':'');
+  const scores=MEMBERS.map((name,idx)=>{
+    const prev=PREV[name];
     const data=entries[name]||{};
     let newPts=0;
     closedQ.forEach(q=>{if((data.answers||{})[q.id]===q.answer)newPts+=(q.points||1);});
-    return{name,prev,newPts,total:prev+newPts};
-  }).sort((a,b)=>b.total-a.total);
-
+    const totalPts=prev.pts+newPts;
+    const totalPlayed=prev.played+newPoss;
+    const pct=totalPlayed>0?(totalPts/totalPlayed)*100:0;
+    return{name,idx,totalPts,totalPlayed,pct:Math.round(pct*100)/100};
+  }).sort((a,b)=>b.pct-a.pct);
   const medals=['🥇','🥈','🥉'];
-  document.getElementById('lb-meta').textContent=
-    `${closedQ.length} new question${closedQ.length!==1?'s':''} · ${Object.keys(entries).length} active participants`;
-
-  const maxTotal=scores[0]?.total||1;
   const lb=document.getElementById('lb-list');
-  lb.innerHTML=scores.map((s,i)=>`
-    <tr>
-      <td class="lb-rank-cell">${medals[i]||i+1}</td>
-      <td class="lb-name-cell">${s.name}</td>
-      <td class="lb-prev-cell" style="color:#6B7A99">${s.prev}</td>
-      <td class="lb-new-cell">+${s.newPts}</td>
-      <td class="lb-total-cell">${s.total}</td>
-      <td class="lb-bar-cell">
-        <div class="lb-bar-bg"><div class="lb-bar-fill" style="width:${Math.round((s.total/maxTotal)*100)}%"></div></div>
-      </td>
-    </tr>`).join('');
-
+  lb.innerHTML=scores.map((s,i)=>{
+    const rc=i===0?'top1':i===1?'top2':i===2?'top3':'';
+    const pc=s.pct>=50?'#00FF88':s.pct>=35?'#F5B800':'#FF6B6B';
+    return`<tr class="${rc}">
+      <td><span style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:rgba(245,184,0,.1);font-weight:700;font-size:13px">${medals[i]||i+1}</span></td>
+      <td><div style="display:flex;align-items:center"><span class="avatar" style="background:${ACOLORS[s.idx]}">${s.name[0]}</span><span style="font-weight:600;color:#F9FAFB;font-size:13px">${s.name}</span></div></td>
+      <td style="font-size:16px;font-weight:700;color:#F5B800">${s.totalPts}</td>
+      <td style="color:#9CA3AF;font-size:12px">${s.totalPts} / ${s.totalPlayed}</td>
+      <td style="font-weight:700;color:${pc}">${s.pct.toFixed(2)}%</td>
+      <td><div class="bar-wrap"><div class="bar-fill" style="width:${Math.round(s.pct)}%;background:${pc}"></div></div></td>
+    </tr>`;
+  }).join('');
   const bs=document.getElementById('breakdown-section');
   if(!closedQ.length){bs.innerHTML='';return;}
-  bs.innerHTML='<div class="sec-title">📋 Question Results</div>'+closedQ.map(q=>{
-    const total=Object.values(entries).filter(e=>(e.answers||{})[q.id]).length;
-    const correct=Object.values(entries).filter(e=>(e.answers||{})[q.id]===q.answer).length;
-    return`<div style="background:#151E2E;border:1px solid #1E2C42;border-radius:10px;padding:12px;margin-bottom:7px">
-      <div style="font-size:13px;margin-bottom:3px">${q.text}</div>
-      <div style="font-size:12px;color:#6B7A99">Answer: <span style="color:#00C853;font-weight:700">${q.answer}</span></div>
-      <div style="font-size:11px;color:#6B7A99;margin-top:2px">${correct}/${total} correct · ${q.points||1} pt${(q.points||1)>1?'s':''}</div>
-    </div>`;
-  }).join('');
-}
+  bs.innerHTML='<div class="sec-title">Question Results</div>'+closedQ.map(q=>{const total=Object.values(entries).filter(e=>(e.answers||{})[q.id]).length;const correct=Object.values(entries).filter(e=>(e.answers||{})[q.id]===q.answer).length;return`<div style="background:#151E2E;border:1px solid #1E2C42;border-radius:10px;padding:12px;margin-bottom:7px"><div style="font-size:13px;margin-bottom:3px">${q.text}</div><div style="font-size:12px;color:#6B7A99">Answer: <span style="color:#00C853;font-weight:700">${q.answer}</span></div><div style="font-size:11px;color:#6B7A99;margin-top:2px">${correct}/${total} correct</div></div>`;}).join('');}
 
-window.adminLogin=function(){
-  if(document.getElementById('admin-pw').value===ADMIN_PW){
-    adminAuthed=true;
-    document.getElementById('admin-login').style.display='none';
-    document.getElementById('admin-panel').style.display='block';
-    Promise.all([loadQuestions(),loadEntries(),loadPlayers()]).then(()=>{renderAddQPlayers();renderAdminQuestions();renderAdminPlayers();renderAdminEntries();});
-  }else{document.getElementById('pw-err').style.display='block';}
-};
-
-window.adminSection=function(name,btn){
-  ['questions','players','entries'].forEach(s=>document.getElementById('asec-'+s).style.display=s===name?'block':'none');
-  document.querySelectorAll('.stab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
-  if(name==='entries')renderAdminEntries();
-  if(name==='players')renderAdminPlayers();
-};
-
-function renderAddQPlayers(){
-  document.getElementById('add-q-players').innerHTML=players.map(p=>
-    `<button class="p-chip ${selectedOpts.includes(p)?'selected':''}" onclick="toggleOpt('${p.replace(/'/g,"\\'")}',this)">${selectedOpts.includes(p)?'✓ ':''}${p}</button>`
-  ).join('');
-  document.getElementById('sel-count').textContent=selectedOpts.length?'Selected: '+selectedOpts.join(', '):'';
-}
-
-window.toggleOpt=function(p,btn){
-  if(selectedOpts.includes(p)){selectedOpts=selectedOpts.filter(x=>x!==p);btn.classList.remove('selected');btn.textContent=p;}
-  else{selectedOpts.push(p);btn.classList.add('selected');btn.textContent='✓ '+p;}
-  document.getElementById('sel-count').textContent=selectedOpts.length?'Selected: '+selectedOpts.join(', '):'';
-};
-
-window.addCustomOpt=function(){
-  const val=document.getElementById('custom-opt').value.trim();
-  if(!val||selectedOpts.includes(val))return;
-  selectedOpts.push(val);document.getElementById('custom-opt').value='';renderAddQPlayers();
-};
-
-window.addQuestion=async function(){
-  const text=document.getElementById('q-text').value.trim();
-  const pts=parseInt(document.getElementById('q-pts').value)||1;
-  if(!text||selectedOpts.length<2){toast('Need question & at least 2 options');return;}
-  try{await setDoc(doc(db,'questions',Date.now().toString()),{text,options:[...selectedOpts],points:pts,status:'open',answer:null,createdAt:Date.now()});}catch(e){}
-  document.getElementById('q-text').value='';document.getElementById('q-pts').value='1';selectedOpts=[];
-  await loadQuestions();renderAddQPlayers();renderAdminQuestions();toast('✅ Question added!');
-};
-
-async function renderAdminQuestions(){
-  await loadEntries();
-  const el=document.getElementById('admin-q-list');
-  if(!questions.length){el.innerHTML='<p style="color:#6B7A99">No questions yet.</p>';return;}
-  el.innerHTML=questions.map((q,i)=>{
-    const resp=Object.values(entries).filter(e=>(e.answers||{})[q.id]).length;
-    return`<div class="q-admin">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:7px">
-        <span class="status-badge" style="background:${q.status==='open'?'#065F46':'#5B21B6'}">${q.status==='open'?'🟢 Open':'🔴 Closed'}</span>
-        <span style="font-size:12px;color:#F5B800;margin-left:auto">${q.points||1} pt${(q.points||1)>1?'s':''}</span>
-      </div>
-      <div style="font-size:15px;color:#F9FAFB;font-weight:700;margin-bottom:3px">Q${i+1}: ${q.text}</div>
-      <div style="font-size:12px;color:#6B7A99;margin-bottom:10px">${resp} response${resp!==1?'s':''}</div>
-      <label class="label">Set correct answer:</label>
-      <div class="ans-grid">${(q.options||[]).map(opt=>
-        `<button class="ans-btn ${q.answer===opt?'correct':''}" onclick="setAnswer('${q.id}','${opt.replace(/'/g,"\\'")}')">
-          ${q.answer===opt?'✓ ':''}${opt}</button>`).join('')}
-      </div>
-      <div style="display:flex;gap:7px;margin-top:10px;flex-wrap:wrap">
-        <button class="btn-sm" onclick="toggleQStatus('${q.id}')">${q.status==='open'?'🔴 Close':'🟢 Open'}</button>
-        <button class="btn-sm btn-red" onclick="deleteQuestion('${q.id}')">🗑️ Delete</button>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-window.setAnswer=async function(qId,answer){
-  try{await setDoc(doc(db,'questions',qId),{answer,status:'closed'},{merge:true});}catch(e){}
-  await loadQuestions();renderAdminQuestions();toast('✅ Answer set!');
-};
-window.toggleQStatus=async function(qId){
-  const q=questions.find(x=>x.id===qId);
-  try{await setDoc(doc(db,'questions',qId),{status:q.status==='open'?'closed':'open'},{merge:true});}catch(e){}
-  await loadQuestions();renderAdminQuestions();toast('Status updated');
-};
-window.deleteQuestion=async function(qId){
-  if(!confirm('Delete this question?'))return;
-  try{await deleteDoc(doc(db,'questions',qId));}catch(e){}
-  await loadQuestions();renderAdminQuestions();toast('Deleted');
-};
-
-async function renderAdminPlayers(){
-  const el=document.getElementById('players-list');
-  el.innerHTML=players.map(p=>`
-    <div class="player-row">
-      <span style="font-size:13px">${p}</span>
-      <button class="btn-sm btn-red" onclick="removePlayer('${p.replace(/'/g,"\\'")}')">✕ Remove</button>
-    </div>`).join('');
-}
-window.addPlayer=async function(){
-  const val=document.getElementById('new-player').value.trim();
-  if(!val||players.includes(val))return;
-  players.push(val);document.getElementById('new-player').value='';
-  await savePlayers();renderAdminPlayers();renderAddQPlayers();toast('👤 Player added!');
-};
-window.removePlayer=async function(p){
-  players=players.filter(x=>x!==p);await savePlayers();renderAdminPlayers();renderAddQPlayers();toast('Removed');
-};
-
-async function renderAdminEntries(){
-  await loadEntries();
-  const el=document.getElementById('entries-list');
-  const names=Object.keys(entries);
-  if(!names.length){el.innerHTML='<p style="color:#6B7A99">No entries yet.</p>';return;}
-  el.innerHTML=names.map(name=>{
-    const ans=entries[name].answers||{};
-    return`<div class="entry-card">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px">
-        <span style="font-size:14px;font-weight:700;color:#F5B800">👤 ${name}</span>
-        <button class="btn-sm btn-red" onclick="clearEntry('${name.replace(/'/g,"\\'")}')">🗑️ Clear</button>
-      </div>
-      ${questions.map(q=>{
-        const ans2=ans[q.id];
-        const isC=q.answer&&ans2===q.answer;
-        const isW=q.answer&&ans2&&ans2!==q.answer;
-        return`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #1E2C42;font-size:12px">
-          <span style="color:#6B7A99;max-width:58%">${q.text.length>42?q.text.slice(0,42)+'…':q.text}</span>
-          <span style="color:${isC?'#00C853':isW?'#FF3D57':'#EEE5C8'};font-weight:${isC||isW?700:400}">
-            ${ans2||'—'}${isC?' ✓':''}</span>
-        </div>`;
-      }).join('')}
-    </div>`;
-  }).join('');
-}
-window.clearEntry=async function(name){
-  if(!confirm('Clear '+name+"'s answers?"))return;
-  try{await deleteDoc(doc(db,'entries',name));}catch(e){}
-  await loadEntries();renderAdminEntries();toast('Cleared');
-};
-
+window.adminLogin=function(){if(document.getElementById('admin-pw').value===ADMIN_PW){adminAuthed=true;document.getElementById('admin-login').style.display='none';document.getElementById('admin-panel').style.display='block';Promise.all([loadQuestions(),loadEntries(),loadPlayers()]).then(()=>{renderAddQPlayers();renderAdminQuestions();renderAdminPlayers();renderAdminEntries();});}else{document.getElementById('pw-err').style.display='block';}};
+window.adminSection=function(name,btn){['questions','players','entries'].forEach(s=>document.getElementById('asec-'+s).style.display=s===name?'block':'none');document.querySelectorAll('.stab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');if(name==='entries')renderAdminEntries();if(name==='players')renderAdminPlayers();};
+function renderAddQPlayers(){document.getElementById('add-q-players').innerHTML=players.map(p=>`<button class="p-chip ${selectedOpts.includes(p)?'selected':''}" onclick="toggleOpt('${p.replace(/'/g,"\\'")}',this)">${selectedOpts.includes(p)?'✓ ':''}${p}</button>`).join('');document.getElementById('sel-count').textContent=selectedOpts.length?'Selected: '+selectedOpts.join(', '):'';}
+window.toggleOpt=function(p,btn){if(selectedOpts.includes(p)){selectedOpts=selectedOpts.filter(x=>x!==p);btn.classList.remove('selected');btn.textContent=p;}else{selectedOpts.push(p);btn.classList.add('selected');btn.textContent='✓ '+p;}document.getElementById('sel-count').textContent=selectedOpts.length?'Selected: '+selectedOpts.join(', '):'';};
+window.addCustomOpt=function(){const val=document.getElementById('custom-opt').value.trim();if(!val||selectedOpts.includes(val))return;selectedOpts.push(val);document.getElementById('custom-opt').value='';renderAddQPlayers();};
+window.addQuestion=async function(){const text=document.getElementById('q-text').value.trim();const pts=parseInt(document.getElementById('q-pts').value)||1;if(!text||selectedOpts.length<2){toast('Need question & 2+ options');return;}try{await setDoc(doc(db,'questions',Date.now().toString()),{text,options:[...selectedOpts],points:pts,status:'open',answer:null,createdAt:Date.now()});}catch(e){}document.getElementById('q-text').value='';document.getElementById('q-pts').value='1';selectedOpts=[];await loadQuestions();renderAddQPlayers();renderAdminQuestions();toast('Question added!');};
+async function renderAdminQuestions(){await loadEntries();const el=document.getElementById('admin-q-list');if(!questions.length){el.innerHTML='<p style="color:#6B7A99">No questions yet.</p>';return;}el.innerHTML=questions.map((q,i)=>{const resp=Object.values(entries).filter(e=>(e.answers||{})[q.id]).length;return`<div class="q-admin"><div style="display:flex;align-items:center;gap:8px;margin-bottom:7px"><span class="status-badge" style="background:${q.status==='open'?'#065F46':'#5B21B6'}">${q.status==='open'?'Open':'Closed'}</span><span style="font-size:12px;color:#F5B800;margin-left:auto">${q.points||1} pt</span></div><div style="font-size:15px;color:#F9FAFB;font-weight:700;margin-bottom:3px">Q${i+1}: ${q.text}</div><div style="font-size:12px;color:#6B7A99;margin-bottom:10px">${resp} responses</div><label class="label">Set correct answer:</label><div class="ans-grid">${(q.options||[]).map(opt=>`<button class="ans-btn ${q.answer===opt?'correct':''}" onclick="setAnswer('${q.id}','${opt.replace(/'/g,"\\'")}')"> ${q.answer===opt?'✓ ':''}${opt}</button>`).join('')}</div><div style="display:flex;gap:7px;margin-top:10px;flex-wrap:wrap"><button class="btn-sm" onclick="toggleQStatus('${q.id}')">${q.status==='open'?'Close':'Open'}</button><button class="btn-sm btn-red" onclick="deleteQuestion('${q.id}')">Delete</button></div></div>`;}).join('');}
+window.setAnswer=async function(qId,answer){try{await setDoc(doc(db,'questions',qId),{answer,status:'closed'},{merge:true});}catch(e){}await loadQuestions();renderAdminQuestions();toast('Answer set!');};
+window.toggleQStatus=async function(qId){const q=questions.find(x=>x.id===qId);try{await setDoc(doc(db,'questions',qId),{status:q.status==='open'?'closed':'open'},{merge:true});}catch(e){}await loadQuestions();renderAdminQuestions();toast('Status updated');};
+window.deleteQuestion=async function(qId){if(!confirm('Delete?'))return;try{await deleteDoc(doc(db,'questions',qId));}catch(e){}await loadQuestions();renderAdminQuestions();toast('Deleted');};
+async function renderAdminPlayers(){document.getElementById('players-list').innerHTML=players.map(p=>`<div class="player-row"><span style="font-size:13px">${p}</span><button class="btn-sm btn-red" onclick="removePlayer('${p.replace(/'/g,"\\'")}')">Remove</button></div>`).join('');}
+window.addPlayer=async function(){const val=document.getElementById('new-player').value.trim();if(!val||players.includes(val))return;players.push(val);document.getElementById('new-player').value='';await savePlayers();renderAdminPlayers();renderAddQPlayers();toast('Player added!');};
+window.removePlayer=async function(p){players=players.filter(x=>x!==p);await savePlayers();renderAdminPlayers();renderAddQPlayers();toast('Removed');};
+async function renderAdminEntries(){await loadEntries();const el=document.getElementById('entries-list');const names=Object.keys(entries);if(!names.length){el.innerHTML='<p style="color:#6B7A99">No entries yet.</p>';return;}el.innerHTML=names.map(name=>{const ans=entries[name].answers||{};return`<div class="entry-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px"><span style="font-size:14px;font-weight:700;color:#F5B800">${name}</span><button class="btn-sm btn-red" onclick="clearEntry('${name.replace(/'/g,"\\'")}')">Clear</button></div>${questions.map(q=>{const a=ans[q.id];const isC=q.answer&&a===q.answer;const isW=q.answer&&a&&a!==q.answer;return`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #1E2C42;font-size:12px"><span style="color:#6B7A99;max-width:58%">${q.text.length>42?q.text.slice(0,42)+'…':q.text}</span><span style="color:${isC?'#00C853':isW?'#FF3D57':'#EEE5C8'};font-weight:${isC||isW?700:400}">${a||'—'}${isC?' ✓':''}</span></div>`;}).join('')}</div>`;}).join('');}
+window.clearEntry=async function(name){if(!confirm('Clear '+name+'?'))return;try{await deleteDoc(doc(db,'entries',name));}catch(e){}await loadEntries();renderAdminEntries();toast('Cleared');};
 (async()=>{await loadPlayers();})();
 </script>
 </body>
