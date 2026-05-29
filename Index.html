@@ -72,6 +72,8 @@ select option{background:#0A0F1A;}
 .bar-wrap{width:55px;background:#1E2C42;border-radius:3px;height:5px;display:inline-block;vertical-align:middle;}
 .bar-fill{height:5px;border-radius:3px;}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.6.0/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
 <div class="toast" id="toast"></div>
@@ -211,7 +213,10 @@ select option{background:#0A0F1A;}
       <div id="players-list"></div>
     </div>
     <div id="asec-entries" style="display:none">
-      <div class="sec-title">All Entries</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div class="sec-title" style="margin:0">All Entries</div>
+        <button class="btn-gold" style="width:auto;padding:10px 20px" onclick="downloadPDF()">📄 Download PDF</button>
+      </div>
       <div id="entries-list"></div>
     </div>
   </div>
@@ -301,6 +306,66 @@ window.addPlayer=async function(){const val=document.getElementById('new-player'
 window.removePlayer=async function(p){players=players.filter(x=>x!==p);await savePlayers();renderAdminPlayers();renderAddQPlayers();toast('Removed');};
 async function renderAdminEntries(){await loadEntries();const el=document.getElementById('entries-list');const names=Object.keys(entries);if(!names.length){el.innerHTML='<p style="color:#6B7A99">No entries yet.</p>';return;}el.innerHTML=names.map(name=>{const ans=entries[name].answers||{};return`<div class="entry-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px"><span style="font-size:14px;font-weight:700;color:#F5B800">${name}</span><button class="btn-sm btn-red" onclick="clearEntry('${name.replace(/'/g,"\\'")}')">Clear</button></div>${questions.map(q=>{const a=ans[q.id];const isC=q.answer&&a===q.answer;const isW=q.answer&&a&&a!==q.answer;return`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #1E2C42;font-size:12px"><span style="color:#6B7A99;max-width:58%">${q.text.length>42?q.text.slice(0,42)+'…':q.text}</span><span style="color:${isC?'#00C853':isW?'#FF3D57':'#EEE5C8'};font-weight:${isC||isW?700:400}">${a||'—'}${isC?' ✓':''}</span></div>`;}).join('')}</div>`;}).join('');}
 window.clearEntry=async function(name){if(!confirm('Clear '+name+'?'))return;try{await deleteDoc(doc(db,'entries',name));}catch(e){}await loadEntries();renderAdminEntries();toast('Cleared');};
+
+window.downloadPDF = async function() {
+  await loadQuestions(); await loadEntries();
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+
+  // Title
+  doc.setFillColor(13, 13, 13);
+  doc.rect(0, 0, 297, 210, 'F');
+
+  doc.setFontSize(20);
+  doc.setTextColor(245, 184, 0);
+  doc.setFont('helvetica', 'bold');
+  doc.text('IPL 2026 - All Member Predictions', 148, 15, { align: 'center' });
+
+  doc.setFontSize(10);
+  doc.setTextColor(150, 150, 150);
+  doc.text('Generated: ' + new Date().toLocaleString(), 148, 22, { align: 'center' });
+
+  // Build table
+  const names = Object.keys(entries);
+  const head = [['#', 'Member', ...questions.map((q,i) => 'Q'+(i+1)), 'Score']];
+  
+  const body = names.map((name, i) => {
+    const ans = entries[name].answers || {};
+    const closedQ = questions.filter(q => q.status === 'closed' && q.answer);
+    let score = 0;
+    closedQ.forEach(q => { if(ans[q.id] === q.answer) score++; });
+    const cells = questions.map(q => {
+      const a = ans[q.id] || '—';
+      return a.length > 12 ? a.slice(0,12)+'…' : a;
+    });
+    return [i+1, name, ...cells, score + '/' + closedQ.length];
+  });
+
+  // Question legend at bottom
+  const legendText = questions.map((q,i) => 'Q'+(i+1)+': '+q.text).join('   |   ');
+
+  doc.autoTable({
+    startY: 28,
+    head: head,
+    body: body,
+    theme: 'grid',
+    styles: { fontSize: 8, cellPadding: 3, textColor: [238, 229, 200], fillColor: [15, 21, 33], lineColor: [30, 44, 66] },
+    headStyles: { fillColor: [26, 39, 68], textColor: [245, 184, 0], fontStyle: 'bold', fontSize: 9 },
+    alternateRowStyles: { fillColor: [20, 28, 45] },
+    columnStyles: { 0: { cellWidth: 10 }, 1: { cellWidth: 35 } },
+    margin: { left: 10, right: 10 },
+  });
+
+  // Legend
+  const finalY = doc.lastAutoTable.finalY + 6;
+  doc.setFontSize(7);
+  doc.setTextColor(100, 100, 100);
+  doc.text('Questions: ' + legendText, 10, finalY, { maxWidth: 277 });
+
+  doc.save('IPL2026-Predictions.pdf');
+  toast('PDF Downloaded!');
+};
+
 (async()=>{await loadPlayers();})();
 </script>
 </body>
