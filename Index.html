@@ -283,7 +283,34 @@ async function loadEntries(){try{const s=await getDocs(collection(db,'entries'))
 
 window.memberLogin=async function(){const name=document.getElementById('member-name').value;if(!name)return;currentMember=name;document.getElementById('welcome-name').textContent=name;document.getElementById('predict-login').style.display='none';document.getElementById('predict-questions').style.display='block';document.getElementById('questions-list').innerHTML='<div class="empty">Loading...</div>';await loadQuestions();try{const snap=await getDoc(doc(db,'entries',name));memberAnswers=snap.exists()?(snap.data().answers||{}):{};const sub=Object.keys(memberAnswers).length>0;document.getElementById('submit-badge').style.display=sub?'inline-block':'none';document.getElementById('submit-btn').textContent=sub?'Update Predictions':'Submit Predictions';}catch(e){}renderMemberQuestions();};
 
-function renderMemberQuestions(){const openQ=questions.filter(q=>q.status==='open');const el=document.getElementById('questions-list');if(!openQ.length){el.innerHTML='<div class="empty">No open questions yet!</div>';return;}el.innerHTML=openQ.map((q,i)=>`<div class="q-card" id="qcard-${q.id}" style="${memberAnswers[q.id]?'border-color:rgba(0,200,83,.3)':''}"><div class="q-num">Question ${i+1}</div><div class="q-text">${q.text}</div><div class="q-pts">Points: <span style="color:#F5B800;font-weight:700">${q.points||1}</span></div><div class="opts-grid">${(q.options||[]).map(opt=>`<button class="opt-btn ${memberAnswers[q.id]===opt?'selected':''}" onclick="selectOpt('${q.id}','${opt.replace(/'/g,"\\'")}',this)">${memberAnswers[q.id]===opt?'✓ ':''}${opt}</button>`).join('')}</div></div>`).join('');}
+function renderMemberQuestions(){
+  const openQ=questions.filter(q=>q.status==='open');
+  const el=document.getElementById('questions-list');
+  if(!openQ.length){el.innerHTML='<div class="empty">No open questions yet!</div>';return;}
+  el.innerHTML=openQ.map((q,i)=>{
+    const ans=memberAnswers[q.id]||'';
+    return `<div class="q-card" id="qcard-${q.id}" style="${ans?'border-color:rgba(0,200,83,.3)':''}">
+      <div class="q-num">Question ${i+1} &middot; <span style="color:#F5B800">${q.points||1} pt</span></div>
+      <div class="q-text">${q.text}</div>
+      <select onchange="selectOpt('${q.id}',this)" style="margin-top:8px;margin-bottom:0;color:${ans?'#00C853':'#C4CBD9'};border-color:${ans?'rgba(0,200,83,.5)':'#1E2C42'}">
+        <option value="">-- Select your answer --</option>
+        ${(q.options||[]).map(opt=>`<option value="${opt}" ${ans===opt?'selected':''}>${opt}</option>`).join('')}
+      </select>
+    </div>`;
+  }).join('');
+}
+
+window.selectOpt=function(qId,sel){
+  const opt=sel.value;
+  if(!opt)return;
+  memberAnswers[qId]=opt;
+  const card=document.getElementById('qcard-'+qId);
+  if(card){
+    card.style.borderColor='rgba(0,200,83,.3)';
+    sel.style.borderColor='rgba(0,200,83,.5)';
+    sel.style.color='#00C853';
+  }
+};
 
 
 
