@@ -292,7 +292,9 @@ window.submitPredictions=async function(){if(!currentMember)return;const btn=doc
 
 async function renderLeaderboard(){
   await loadQuestions();await loadEntries();
-  const closedQ=questions.filter(q=>q.status==='closed'&&q.answer);
+  // Only count Firebase questions created AFTER round 6 (after May 30 2026)
+  const PREV_CUTOFF=1748649600000; // May 31 2026 00:00 UTC - questions before this are already in PREV
+  const closedQ=questions.filter(q=>q.status==='closed'&&q.answer&&(q.createdAt||0)>=PREV_CUTOFF);
   const newPoss=closedQ.reduce((s,q)=>s+(q.points||1),0);
   const totalComps=6+closedQ.length;
   document.getElementById('lb-q-count').textContent=totalComps;
