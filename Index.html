@@ -559,22 +559,42 @@ function renderCountdown(){
   if(!openQ.length){document.getElementById('countdown-wrap').innerHTML='';return;}
   const nearest=openQ.reduce((a,b)=>new Date(a.deadline)<new Date(b.deadline)?a:b);
   const wrap=document.getElementById('countdown-wrap');
+  let autoClosedShown=false;
+  async function checkAutoClose(){
+    // Auto close all open questions past deadline
+    const now=new Date();
+    let anyChanged=false;
+    for(const q of questions){
+      if(q.status==='open'&&q.deadline&&new Date(q.deadline)<=now){
+        try{await setDoc(doc(db,'questions',q.id),{status:'closed'},{merge:true});anyChanged=true;}catch(e){}
+      }
+    }
+    if(anyChanged){await loadQuestions();renderMemberQuestions();}
+  }
   function update(){
     const diff=new Date(nearest.deadline)-new Date();
-    if(diff<=0){wrap.innerHTML=`<div class="countdown-box"><div class="cd-label">⏱️ PREDICTIONS CLOSED</div><div class="cd-closed">TIME'S UP!</div></div>`;return;}
+    if(diff<=0){
+      wrap.innerHTML=`<div class="countdown-box"><div class="cd-label">⏱️ PREDICTIONS CLOSED</div><div class="cd-closed">TIME'S UP! ⛔</div></div>`;
+      if(!autoClosedShown){autoClosedShown=true;checkAutoClose();}
+      return;
+    }
     const h=Math.floor(diff/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
-    wrap.innerHTML=`<div class="countdown-box">
-      <div class="cd-label">⏱️ PREDICTIONS CLOSE IN</div>
+    // Warning colors
+    const urgent=diff<3600000;
+    wrap.innerHTML=`<div class="countdown-box" style="${urgent?'border-color:rgba(255,61,87,0.4);':''}">
+      <div class="cd-label" style="${urgent?'color:var(--red);':''}">⏱️ PREDICTIONS CLOSE IN</div>
       <div class="cd-timer">
-        <div class="cd-block"><div class="cd-num">${String(h).padStart(2,'0')}</div><div class="cd-unit">HOURS</div></div>
-        <div class="cd-sep">:</div>
-        <div class="cd-block"><div class="cd-num">${String(m).padStart(2,'0')}</div><div class="cd-unit">MINS</div></div>
-        <div class="cd-sep">:</div>
-        <div class="cd-block"><div class="cd-num">${String(s).padStart(2,'0')}</div><div class="cd-unit">SECS</div></div>
+        <div class="cd-block" style="${urgent?'border-color:rgba(255,61,87,0.3);':''}"><div class="cd-num" style="${urgent?'color:var(--red);':''}">${String(h).padStart(2,'0')}</div><div class="cd-unit">HOURS</div></div>
+        <div class="cd-sep" style="${urgent?'color:var(--red);':''}">:</div>
+        <div class="cd-block" style="${urgent?'border-color:rgba(255,61,87,0.3);':''}"><div class="cd-num" style="${urgent?'color:var(--red);':''}">${String(m).padStart(2,'0')}</div><div class="cd-unit">MINS</div></div>
+        <div class="cd-sep" style="${urgent?'color:var(--red);':''}">:</div>
+        <div class="cd-block" style="${urgent?'border-color:rgba(255,61,87,0.3);':''}"><div class="cd-num" style="${urgent?'color:var(--red);':''}">${String(s).padStart(2,'0')}</div><div class="cd-unit">SECS</div></div>
       </div>
     </div>`;
   }
   update();setInterval(update,1000);
+  // Check every minute for auto-close
+  setInterval(checkAutoClose,60000);
 }
 
 window.memberLogin=async function(){
@@ -764,8 +784,9 @@ async function renderLeaderboard(){
     </div>`;
   }).join('');
 
-  // ALL ROWS (skip top 3)
-  document.getElementById('lb-list').innerHTML=scores.map((s,i)=>{
+  // ALL ROWS - only from rank 4 onwards (top 3 already on podium)
+  document.getElementById('lb-list').innerHTML=scores.slice(3).map((s,i)=>{
+    i=i+3; // offset for correct rank display
     const rc=i===0?'rank1':i===1?'rank2':i===2?'rank3':'';
     const pc=s.pct>=45?'#00FF88':s.pct>=30?'#F5B800':'#FF6B6B';
     const barW=Math.min(100,Math.round(s.pct*2));
