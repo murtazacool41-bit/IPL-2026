@@ -217,6 +217,18 @@ select option{background:#080D18;}
 .empty{text-align:center;padding:40px 20px;color:var(--muted);}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--card2);border:1px solid var(--green);color:var(--green);padding:10px 24px;border-radius:30px;font-size:13px;font-weight:700;z-index:999;transition:transform .3s;pointer-events:none;backdrop-filter:blur(10px);}
 .toast.show{transform:translateX(-50%) translateY(0);}
+
+/* SPONSOR AD */
+.sponsor-bar{max-width:900px;margin:10px auto 0;padding:0 14px;}
+.sponsor-inner{background:linear-gradient(135deg,rgba(139,90,43,0.25),rgba(101,67,33,0.15));border:1px solid rgba(139,90,43,0.4);border-radius:14px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;position:relative;overflow:hidden;}
+.sponsor-inner::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#8B5A2B,#D4A853,#8B5A2B);}
+.sponsor-label{font-size:8px;color:rgba(212,168,83,0.7);letter-spacing:3px;font-weight:700;margin-bottom:2px;}
+.sponsor-name{font-family:'Orbitron',sans-serif;font-size:15px;color:#D4A853;font-weight:700;letter-spacing:1px;}
+.sponsor-desc{font-size:11px;color:rgba(212,168,83,0.6);margin-top:2px;}
+.sponsor-wa{display:flex;align-items:center;gap:7px;background:#25D366;border:none;border-radius:20px;padding:9px 16px;color:white;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;white-space:nowrap;box-shadow:0 4px 15px rgba(37,211,102,0.35);}
+.sponsor-wa:hover{background:#20BC5C;}
+.sponsor-emoji{font-size:16px;}
+
 .install-bar{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(12,18,32,0.95);border-top:1px solid var(--gold);padding:12px 16px;z-index:500;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;backdrop-filter:blur(20px);}
 .ios-bar{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(12,18,32,0.95);border-top:1px solid var(--gold);padding:14px 16px;z-index:500;backdrop-filter:blur(20px);}
 </style>
@@ -278,6 +290,51 @@ select option{background:#080D18;}
       </div>
     </div>
     <div class="prize-amount">₹499 🔥</div>
+  </div>
+</div>
+
+
+<!-- SPONSOR AD -->
+<div class="sponsor-bar">
+  <div class="sponsor-inner">
+    <div style="position:relative;z-index:1">
+      <div class="sponsor-label">🌟 PROUD SPONSOR</div>
+      <div class="sponsor-name">🪵 ALAMDAR TIMBERS</div>
+      <div class="sponsor-desc">Premium Plywoods & Wood Products</div>
+    </div>
+    <a class="sponsor-wa" href="https://wa.me/919665899597" target="_blank">
+      <span class="sponsor-emoji">💬</span> WhatsApp
+    </a>
+  </div>
+</div>
+
+
+<!-- GT VS RCB MATCH BANNER -->
+<div style="max-width:900px;margin:10px auto 0;padding:0 14px;">
+  <div style="background:linear-gradient(135deg,#0a1628,#1a0a0a);border:1px solid #2A3550;border-radius:14px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:10px;position:relative;overflow:hidden;">
+    <!-- Subtle divider line -->
+    <div style="position:absolute;left:50%;top:10%;bottom:10%;width:1px;background:linear-gradient(to bottom,transparent,#444,transparent);transform:translateX(-50%);"></div>
+    <!-- GT Side -->
+    <div style="display:flex;align-items:center;gap:10px;flex:1;">
+      <div style="width:44px;height:44px;background:linear-gradient(135deg,#1B3A6B,#2A5298);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🦁</div>
+      <div>
+        <div style="font-size:9px;color:#6B8EC4;letter-spacing:3px;font-weight:700;">GUJARAT</div>
+        <div style="font-family:'Orbitron',sans-serif;font-size:14px;color:#4A90D9;font-weight:700;letter-spacing:1px;">TITANS</div>
+      </div>
+    </div>
+    <!-- VS -->
+    <div style="text-align:center;flex-shrink:0;padding:0 8px;">
+      <div style="font-family:'Orbitron',sans-serif;font-size:11px;color:#F5B800;font-weight:900;letter-spacing:2px;">VS</div>
+      <div style="font-size:9px;color:#4A5568;letter-spacing:1px;margin-top:2px;">FINAL</div>
+    </div>
+    <!-- RCB Side -->
+    <div style="display:flex;align-items:center;gap:10px;flex:1;justify-content:flex-end;">
+      <div style="text-align:right;">
+        <div style="font-size:9px;color:#C46B6B;letter-spacing:3px;font-weight:700;">ROYAL CHALLENGERS</div>
+        <div style="font-family:'Orbitron',sans-serif;font-size:14px;color:#E03535;font-weight:700;letter-spacing:1px;">BENGALURU</div>
+      </div>
+      <div style="width:44px;height:44px;background:linear-gradient(135deg,#6B1B1B,#A52929);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🔥</div>
+    </div>
   </div>
 </div>
 
