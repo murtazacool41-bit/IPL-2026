@@ -407,6 +407,14 @@ select option{background:#080D18;}
       <button class="stab" onclick="adminSection('entries',this)">📊 Entries</button>
     </div>
     <div id="asec-questions">
+      <!-- GLOBAL DEADLINE -->
+      <div class="admin-card" style="border-color:rgba(108,99,255,0.3)">
+        <div class="sec-title">⏱️ SET PREDICTION DEADLINE</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Set one closing time for ALL open questions at once</div>
+        <input type="datetime-local" id="global-deadline" style="margin-bottom:10px"/>
+        <button class="btn-primary" onclick="setGlobalDeadline()">⏱️ APPLY TO ALL QUESTIONS</button>
+      </div>
+
       <div class="admin-card">
         <div class="sec-title">➕ NEW QUESTION</div>
         <input type="text" id="q-text" placeholder="Question text..."/>
@@ -826,6 +834,19 @@ window.sendChat=async function(){
 };
 
 // ── ADMIN ──
+
+window.setGlobalDeadline=async function(){
+  const deadline=document.getElementById('global-deadline').value;
+  if(!deadline){toast('Please select a date and time','#FF3D57');return;}
+  const openQ=questions.filter(q=>q.status==='open');
+  if(!openQ.length){toast('No open questions found','#FF3D57');return;}
+  for(const q of openQ){
+    try{await setDoc(doc(db,'questions',q.id),{deadline},{merge:true});}catch(e){}
+  }
+  await loadQuestions();renderAdminQuestions();
+  toast('✅ Deadline set for all '+openQ.length+' questions!');
+};
+
 window.adminLogin=function(){
   if(document.getElementById('admin-pw').value===ADMIN_PW){
     adminAuthed=true;
