@@ -786,12 +786,12 @@ async function renderLeaderboard(){
 
   // ALL ROWS - only from rank 4 onwards (top 3 already on podium)
   document.getElementById('lb-list').innerHTML=scores.slice(3).map((s,i)=>{
-    i=i+3; // offset for correct rank display
-    const rc=i===0?'rank1':i===1?'rank2':i===2?'rank3':'';
+    i=i+3;
+    const rc='';
     const pc=s.pct>=45?'#00FF88':s.pct>=30?'#F5B800':'#FF6B6B';
     const barW=Math.min(100,Math.round(s.pct*2));
     return`<div class="lb-row ${rc}">
-      <div class="lb-rank" style="color:${i<3?['#FFD700','#C0C0C0','#CD7F32'][i]:'#4A5568'}">${medals[i]||i+1}</div>
+      <div class="lb-rank" style="color:#4A5568">${i+1}</div>
       <div class="lb-av" style="background:${ACOLORS[s.idx]}">${s.name[0]}</div>
       <div class="lb-info">
         <div class="lb-name">${s.name}</div>
