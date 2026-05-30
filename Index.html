@@ -594,51 +594,104 @@ function renderMemberQuestions(){
   const openQ=questions.filter(q=>q.status==='open');
   const el=document.getElementById('questions-list');
   if(!openQ.length){el.innerHTML='<div class="empty">🏏<br><br>No open questions yet!</div>';return;}
-  // Load entries for vote stats
   loadEntries().then(()=>{
     el.innerHTML=openQ.map((q,i)=>{
       const ans=memberAnswers[q.id]||'';
-      // Vote stats
       const votes={};
       (q.options||[]).forEach(o=>votes[o]=0);
       Object.values(entries).forEach(e=>{const a=(e.answers||{})[q.id];if(a&&votes[a]!==undefined)votes[a]++;});
       const totalVotes=Object.values(votes).reduce((s,v)=>s+v,0);
-      const topOpts=(q.options||[]).slice(0,4);
-      const voteHtml=totalVotes>0?`<div class="vote-stats">${topOpts.map(o=>`
-        <div class="vote-row">
-          <div class="vote-name">${o}</div>
-          <div class="vote-bar-bg"><div class="vote-bar-fill" style="width:${totalVotes>0?Math.round((votes[o]||0)/totalVotes*100):0}%"></div></div>
-          <div class="vote-count">${votes[o]||0} vote${votes[o]!==1?'s':''}</div>
-        </div>`).join('')}
-        <div style="font-size:11px;color:var(--muted);margin-top:4px">Total: ${totalVotes} votes</div>
-      </div>`:'';
+      // Sort options by votes
+      const sortedOpts=[...(q.options||[])].sort((a,b)=>(votes[b]||0)-(votes[a]||0));
+      const top3=sortedOpts.slice(0,3);
+      const rest=sortedOpts.slice(3);
+      const avatarColors=["#E63946","#2A9D8F","#E9C46A","#F4A261","#264653","#6A4C93","#1982C4","#8AC926","#FF595E","#FFCA3A"];
+      
+      // Top 3 big cards
+      const top3Html=`<div style="display:grid;grid-template-columns:repeat(${Math.min(top3.length,3)},1fr);gap:8px;margin-bottom:${rest.length?'10px':'0'}">
+        ${top3.map((opt,oi)=>{
+          const isSelected=ans===opt;
+          const vCount=votes[opt]||0;
+          const pct=totalVotes>0?Math.round(vCount/totalVotes*100):0;
+          const color=avatarColors[oi%avatarColors.length];
+          return`<div onclick="selectOptDirect('${q.id}','${opt.replace(/'/g,"\'")}')"
+            style="background:${isSelected?'rgba(108,99,255,0.2)':'rgba(255,255,255,0.03)'};
+            border:2px solid ${isSelected?'var(--accent)':'var(--border)'};
+            border-radius:14px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;">
+            ${isSelected?`<div style="position:absolute;top:6px;right:6px;width:16px;height:16px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:white;font-weight:700;">✓</div>`:''}
+            <div style="width:44px;height:44px;border-radius:50%;background:${color};display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:16px;font-weight:700;color:white;margin:0 auto 8px;border:2px solid ${isSelected?'var(--accent)':'transparent'};">
+              ${opt[0].toUpperCase()}
+            </div>
+            <div style="font-size:12px;font-weight:700;color:${isSelected?'#E8E8FF':'#C4CBD9'};margin-bottom:4px;line-height:1.2;">${opt.length>12?opt.slice(0,12)+'…':opt}</div>
+            <div style="font-size:11px;color:${isSelected?'var(--accent)':'var(--muted)'};">${vCount} vote${vCount!==1?'s':''}</div>
+            ${totalVotes>0?`<div style="margin-top:6px;height:3px;background:var(--border);border-radius:3px;"><div style="width:${pct}%;height:100%;background:${isSelected?'var(--accent)':'var(--gold)'};border-radius:3px;"></div></div>`:''}
+          </div>`;
+        }).join('')}
+      </div>`;
+
+      // Rest - horizontal scroll
+      const restHtml=rest.length?`
+        <div style="font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:6px;">MORE OPTIONS</div>
+        <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch;scrollbar-width:none;">
+          ${rest.map((opt,oi)=>{
+            const isSelected=ans===opt;
+            const vCount=votes[opt]||0;
+            const color=avatarColors[(oi+3)%avatarColors.length];
+            return`<div onclick="selectOptDirect('${q.id}','${opt.replace(/'/g,"\'")}')"
+              style="flex-shrink:0;width:80px;background:${isSelected?'rgba(108,99,255,0.2)':'rgba(255,255,255,0.03)'};
+              border:2px solid ${isSelected?'var(--accent)':'var(--border)'};
+              border-radius:12px;padding:10px 6px;text-align:center;cursor:pointer;transition:all .2s;">
+              <div style="width:36px;height:36px;border-radius:50%;background:${color};display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:white;margin:0 auto 6px;">
+                ${opt[0].toUpperCase()}
+              </div>
+              <div style="font-size:10px;font-weight:700;color:${isSelected?'#E8E8FF':'#C4CBD9'};line-height:1.2;">${opt.length>9?opt.slice(0,9)+'…':opt}</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:2px;">${vCount}v</div>
+              ${isSelected?`<div style="font-size:10px;color:var(--accent);font-weight:700;">✓</div>`:''}
+            </div>`;
+          }).join('')}
+        </div>`:'';
+
       return`<div class="q-card ${ans?'answered':''}" id="qcard-${q.id}">
         <div class="q-header">
-          <div class="q-num">QUESTION ${i+1}</div>
-          <div class="q-pts-badge">⭐ ${q.points||1} PT${(q.points||1)>1?'S':''}</div>
+          <div class="q-num">Q${i+1}</div>
+          <div style="display:flex;align-items:center;gap:6px;">
+            ${totalVotes>0?`<span style="font-size:11px;color:var(--muted)">👥 ${totalVotes} votes</span>`:''}
+            <div class="q-pts-badge">⭐ ${q.points||1} PT</div>
+          </div>
         </div>
         <div class="q-text">${q.text}</div>
-        <select id="sel-${q.id}" class="q-select ${ans?'sel-ok':''}" onchange="selectOpt('${q.id}',this)">
-          <option value="">— Select your answer —</option>
-          ${(q.options||[]).map(opt=>`<option value="${opt}" ${ans===opt?'selected':''}>${opt}</option>`).join('')}
-        </select>
-        ${ans?`<div class="q-answered-tag">✅ Your pick: <strong>${ans}</strong></div>`:''}
-        ${voteHtml}
+        ${ans?`<div class="q-answered-tag" id="tag-${q.id}">✅ Your pick: <strong>${ans}</strong></div>`:`<div class="q-answered-tag" id="tag-${q.id}" style="display:none"></div>`}
+        <div style="margin-top:10px">
+          ${top3Html}
+          ${restHtml}
+        </div>
       </div>`;
     }).join('');
-    openQ.forEach(q=>{const a=memberAnswers[q.id];if(a){const s=document.getElementById('sel-'+q.id);if(s)s.value=a;}});
   });
 }
 
-window.selectOpt=function(qId,sel){
-  const opt=sel.value;if(!opt)return;
+window.selectOptDirect=function(qId,opt){
   memberAnswers[qId]=opt;
+  // Re-render just this question
+  const q=questions.find(x=>x.id===qId);
+  if(!q)return;
   const card=document.getElementById('qcard-'+qId);
-  if(card){card.classList.add('answered');sel.classList.add('sel-ok');
-  const tag=card.querySelector('.q-answered-tag');
-  if(tag)tag.innerHTML=`✅ Your pick: <strong>${opt}</strong>`;
-  else{const d=document.createElement('div');d.className='q-answered-tag';d.innerHTML=`✅ Your pick: <strong>${opt}</strong>`;sel.after(d);}}
+  if(!card)return;
+  card.classList.add('answered');
+  const tag=document.getElementById('tag-'+qId);
+  if(tag){tag.style.display='block';tag.innerHTML=`✅ Your pick: <strong>${opt}</strong>`;}
+  // Update visual selection
+  card.querySelectorAll('[onclick]').forEach(el=>{
+    const elOpt=el.getAttribute('onclick').match(/'([^']+)'\s*\)$/);
+    if(!elOpt)return;
+    const isNowSelected=elOpt[1]===opt;
+    el.style.background=isNowSelected?'rgba(108,99,255,0.2)':'rgba(255,255,255,0.03)';
+    el.style.border=`2px solid ${isNowSelected?'var(--accent)':'var(--border)'}`;
+  });
+  toast(`✅ Selected: ${opt}`);
 };
+
+
 
 window.submitPredictions=async function(){
   if(!currentMember)return;
