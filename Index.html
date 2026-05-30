@@ -2,6 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="IPL Predict">
+<meta name="theme-color" content="#F5B800">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='40' fill='%230D1829'/><text y='130' x='96' text-anchor='middle' font-size='120'>🏏</text></svg>">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>IPL 2026 Predictions</title>
 <style>
@@ -94,6 +101,7 @@ select option{background:#0A0F1A;}
     <div style="background:linear-gradient(135deg,#0D0D0D,#1a0a00);border:2px solid rgba(255,60,0,0.4);border-radius:16px;padding:10px 16px;text-align:center;position:relative;overflow:hidden">
       <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,60,0,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,60,0,0.04) 1px,transparent 1px);background-size:24px 24px;pointer-events:none"></div>
       <div style="position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+        <!-- Left -->
         <div style="display:flex;align-items:center;gap:8px">
           <div style="font-size:28px">🏆</div>
           <div style="text-align:left">
@@ -102,10 +110,13 @@ select option{background:#0A0F1A;}
             <div style="font-size:20px;font-weight:900;background:linear-gradient(135deg,#FFD700,#FF6B00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1">3 MONTHS FREE</div>
           </div>
         </div>
+        <!-- Right -->
         <div style="background:rgba(255,215,0,0.15);border:1px solid rgba(255,215,0,0.4);color:#FFD700;font-weight:900;font-size:20px;padding:6px 16px;border-radius:20px">₹499 🔥</div>
       </div>
     </div>
   </div>
+
+
 
 <header class="header">
   <div>
@@ -153,11 +164,11 @@ select option{background:#0A0F1A;}
 <div class="page" id="page-leaderboard">
   <div class="lb-header-box">
     <div style="font-size:24px;font-weight:bold;color:#F5B800">🏆 PREDICTION LEADERBOARD</div>
-    <div id="lb-subtitle" style="color:#6B7A99;font-size:11px;margin-top:4px;letter-spacing:2px">AFTER 6 COMPETITIONS</div>
+    <div style="color:#6B7A99;font-size:11px;margin-top:4px;letter-spacing:2px" id="lb-subtitle">LIVE RANKINGS</div>
     <div class="lb-stats">
-      <div class="lb-stat">⭐ Total Possible: <span id="lb-total-pts">29 PTS</span></div>
-      <div class="lb-stat">🏆 Round <span id="lb-q-count">6</span></div>
+      <div class="lb-stat">⭐ Total Possible: <span id="lb-total-pts">—</span></div>
       <div class="lb-stat">👥 <span>22</span> Players</div>
+      <div class="lb-stat">🏏 <span id="lb-q-count">—</span> Competitions</div>
     </div>
   </div>
   <div style="overflow-x:auto">
@@ -167,7 +178,7 @@ select option{background:#0A0F1A;}
           <th>RANK</th><th>PLAYER</th><th>POINTS</th><th>SCORE</th><th>PERCENTAGE</th><th></th>
         </tr>
       </thead>
-      <tbody id="lb-list"></tbody>
+      <tbody id="lb-list"><tr><td colspan="6" style="text-align:center;color:#6B7A99;padding:20px">Loading...</td></tr></tbody>
     </table>
   </div>
   <div id="breakdown-section" style="margin-top:20px"></div>
@@ -226,6 +237,7 @@ select option{background:#0A0F1A;}
         <div class="sec-title" style="margin:0">All Entries</div>
         <button class="btn-gold" style="width:auto;padding:10px 20px" onclick="downloadPDF()">📄 Download PDF</button>
       </div>
+      <!-- Submission Status -->
       <div id="submission-status" style="margin-bottom:16px"></div>
       <div id="entries-list"></div>
     </div>
@@ -241,9 +253,7 @@ const ADMIN_PW="4450";
 
 const NAME_MAP={"Abdeali tanda":"ABDEALI","Abdeali Tanda":"ABDEALI","abdeali tanda":"ABDEALI","Abdeali":"ABDEALI","abdeali":"ABDEALI","Ali":"ALI","ali":"ALI","Aziz":"AZIZ","aziz":"AZIZ","Burhanuddin kotwal":"BURHAN KOT","Burhanuddin Kotwal":"BURHAN KOT","burhanuddin kotwal":"BURHAN KOT","Fakhri":"FAKHRI BHAI","fakhri":"FAKHRI BHAI","Ibrahim":"IBRAHIM","ibrahim":"IBRAHIM","Murtaza":"MURTAZA D","murtaza":"MURTAZA D","Murtaza B":"MURTAZA B","murtaza b":"MURTAZA B","Murtaza b":"MURTAZA B","Mustafa":"MUSTAFA","mustafa":"MUSTAFA","Taha":"TAHA","taha":"TAHA"};
 
-// ✅ UPDATED: Round 6 scores added. Each player's 'played' reflects their personal max points.
-const PREV={"AMMAR":{pts:14,played:29},"BURHAN KAP":{pts:8,played:19},"SHABBIR KOT":{pts:10,played:25},"IBRAHIM":{pts:13,played:29},"MURTAZA D":{pts:9,played:25},"SHABBIR RCB":{pts:11,played:25},"TAHER":{pts:7,played:21},"MURTAZA B":{pts:12,played:29},"ABBAS":{pts:8,played:25},"MOHAMMED":{pts:7,played:21},"HATIM BHAI":{pts:6,played:21},"MOIZ":{pts:4,played:17},"ALI":{pts:9,played:25},"BURHAN KOT":{pts:9,played:29},"ADNAN":{pts:8,played:25},"AZIZ":{pts:6,played:25},"TAHA":{pts:7,played:29},"ABDEALI":{pts:3,played:17},"MUSTAFA":{pts:3,played:16},"IDRIS":{pts:5,played:21},"FAKHRI BHAI":{pts:2,played:20},"AZIZ K":{pts:1,played:17}};
-
+const PREV={"AMMAR":{pts:13,played:22},"BURHAN KAP":{pts:7,played:12},"SHABBIR KOT":{pts:10,played:18},"IBRAHIM":{pts:12,played:22},"MURTAZA D":{pts:9,played:18},"SHABBIR RCB":{pts:9,played:18},"TAHER":{pts:7,played:14},"MURTAZA B":{pts:10,played:22},"ABBAS":{pts:8,played:18},"MOHAMMED":{pts:6,played:14},"HATIM BHAI":{pts:6,played:14},"MOIZ":{pts:4,played:10},"ALI":{pts:7,played:18},"BURHAN KOT":{pts:8,played:22},"ADNAN":{pts:6,played:18},"AZIZ":{pts:6,played:18},"TAHA":{pts:7,played:22},"ABDEALI":{pts:3,played:10},"MUSTAFA":{pts:2,played:9},"IDRIS":{pts:3,played:14},"FAKHRI BHAI":{pts:2,played:13},"AZIZ K":{pts:1,played:10}};
 const MEMBERS=Object.keys(PREV);
 const ACOLORS=["#E63946","#2A9D8F","#E9C46A","#F4A261","#264653","#6A4C93","#1982C4","#8AC926","#FF595E","#FFCA3A","#6A4C93","#1982C4","#E63946","#2A9D8F","#F4A261","#264653","#8AC926","#E9C46A","#FF595E","#1982C4","#6A4C93","#FFCA3A"];
 
@@ -265,15 +275,25 @@ function renderMemberQuestions(){
   if(!openQ.length){el.innerHTML='<div class="empty">No open questions yet!</div>';return;}
   el.innerHTML=openQ.map((q,i)=>{
     const ans=memberAnswers[q.id]||'';
+    const opts=(q.options||[]).map(opt=>`<option value="${opt}" ${ans===opt?'selected':''}>${opt}</option>`).join('');
     return `<div class="q-card" id="qcard-${q.id}" style="${ans?'border-color:rgba(0,200,83,.3)':''}">
       <div class="q-num">Question ${i+1} &middot; <span style="color:#F5B800">${q.points||1} pt</span></div>
       <div class="q-text">${q.text}</div>
-      <select onchange="selectOpt('${q.id}',this)" style="margin-top:8px;margin-bottom:0;color:${ans?'#00C853':'#C4CBD9'};border-color:${ans?'rgba(0,200,83,.5)':'#1E2C42'}">
+      <select id="sel-${q.id}" onchange="selectOpt('${q.id}',this)" style="margin-top:8px;margin-bottom:0;color:${ans?'#00C853':'#C4CBD9'};border-color:${ans?'rgba(0,200,83,.5)':'#1E2C42'}">
         <option value="">-- Select your answer --</option>
-        ${(q.options||[]).map(opt=>`<option value="${opt}" ${ans===opt?'selected':''}>${opt}</option>`).join('')}
+        ${opts}
       </select>
+      ${ans?`<div style="font-size:12px;color:#00C853;margin-top:5px">✓ Previously selected: <strong>${ans}</strong></div>`:''}
     </div>`;
   }).join('');
+  // Force dropdowns to show selected value after render
+  openQ.forEach(q=>{
+    const ans=memberAnswers[q.id];
+    if(ans){
+      const sel=document.getElementById('sel-'+q.id);
+      if(sel) sel.value=ans;
+    }
+  });
 }
 
 window.selectOpt=function(qId,sel){
@@ -288,15 +308,18 @@ window.selectOpt=function(qId,sel){
   }
 };
 
+
+
 window.submitPredictions=async function(){if(!currentMember)return;const btn=document.getElementById('submit-btn');btn.disabled=true;btn.textContent='Saving...';try{await setDoc(doc(db,'entries',currentMember),{answers:memberAnswers,updatedAt:Date.now()});}catch(e){}btn.disabled=false;btn.textContent='Update Predictions';document.getElementById('submit-badge').style.display='inline-block';toast('Predictions saved!');};
 
 async function renderLeaderboard(){
   await loadQuestions();await loadEntries();
-  // Only count Firebase questions created AFTER round 6 (after May 30 2026)
-  const PREV_CUTOFF=1748649600000; // May 31 2026 00:00 UTC - questions before this are already in PREV
-  const closedQ=questions.filter(q=>q.status==='closed'&&q.answer&&(q.createdAt||0)>=PREV_CUTOFF);
+  const closedQ=questions.filter(q=>q.status==='closed'&&q.answer);
   const newPoss=closedQ.reduce((s,q)=>s+(q.points||1),0);
-  const totalComps=6+closedQ.length;
+  const prevPoss=22;
+  const totalPoss=prevPoss+newPoss;
+  const totalComps=5+closedQ.length;
+  document.getElementById('lb-total-pts').textContent=totalPoss+' PTS';
   document.getElementById('lb-q-count').textContent=totalComps;
   document.getElementById('lb-subtitle').textContent='AFTER '+totalComps+' COMPETITION'+(totalComps!==1?'S':'');
   const scores=MEMBERS.map((name,idx)=>{
@@ -306,7 +329,6 @@ async function renderLeaderboard(){
     closedQ.forEach(q=>{if((data.answers||{})[q.id]===q.answer)newPts+=(q.points||1);});
     const totalPts=prev.pts+newPts;
     const totalPlayed=prev.played+newPoss;
-    document.getElementById('lb-total-pts').textContent=totalPlayed+' PTS';
     const pct=totalPlayed>0?(totalPts/totalPlayed)*100:0;
     return{name,idx,totalPts,totalPlayed,pct:Math.round(pct*100)/100};
   }).sort((a,b)=>b.pct-a.pct);
@@ -345,9 +367,12 @@ async function renderAdminEntries(){
   await loadEntries();
   const el=document.getElementById('entries-list');
   const names=Object.keys(entries);
+  
+  // All 22 members
   const allMembers=["AMMAR","BURHAN KAP","SHABBIR KOT","IBRAHIM","MURTAZA D","SHABBIR RCB","TAHER","MURTAZA B","ABBAS","MOHAMMED","HATIM BHAI","MOIZ","ALI","BURHAN KOT","ADNAN","AZIZ","TAHA","ABDEALI","MUSTAFA","IDRIS","FAKHRI BHAI","AZIZ K"];
   const submitted=allMembers.filter(m=>names.includes(m));
   const notSubmitted=allMembers.filter(m=>!names.includes(m));
+  
   const statusEl=document.getElementById('submission-status');
   statusEl.innerHTML=`
     <div style="background:#0F1521;border:1px solid #1E2C42;border-radius:12px;padding:14px;margin-bottom:12px">
@@ -371,6 +396,7 @@ async function renderAdminEntries(){
         ${notSubmitted.map(m=>`<span style="background:rgba(255,61,87,.1);border:1px solid rgba(255,61,87,.3);color:#FF3D57;padding:4px 10px;border-radius:20px;font-size:12px">${m}</span>`).join('')}
       </div>`:'<div style="color:#00C853;font-weight:700;font-size:13px">✅ All members have submitted!</div>'}
     </div>`;
+
   if(!names.length){el.innerHTML='<p style="color:#6B7A99">No entries yet.</p>';return;}
   el.innerHTML=names.map(name=>{const ans=entries[name].answers||{};return`<div class="entry-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px"><span style="font-size:14px;font-weight:700;color:#F5B800">${name}</span><button class="btn-sm btn-red" onclick="clearEntry('${name.replace(/'/g,"\\'")}')">Clear</button></div>${questions.map(q=>{const a=ans[q.id];const isC=q.answer&&a===q.answer;const isW=q.answer&&a&&a!==q.answer;return`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #1E2C42;font-size:12px"><span style="color:#6B7A99;max-width:58%">${q.text.length>42?q.text.slice(0,42)+'…':q.text}</span><span style="color:${isC?'#00C853':isW?'#FF3D57':'#EEE5C8'};font-weight:${isC||isW?700:400}">${a||'—'}${isC?' ✓':''}</span></div>`;}).join('')}</div>`;}).join('');}
 window.clearEntry=async function(name){if(!confirm('Clear '+name+'?'))return;try{await deleteDoc(doc(db,'entries',name));}catch(e){}await loadEntries();renderAdminEntries();toast('Cleared');};
@@ -379,43 +405,133 @@ window.downloadPDF = async function() {
   await loadQuestions(); await loadEntries();
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+
+  // Title
   doc.setFillColor(13, 13, 13);
   doc.rect(0, 0, 297, 210, 'F');
+
   doc.setFontSize(20);
   doc.setTextColor(245, 184, 0);
   doc.setFont('helvetica', 'bold');
   doc.text('IPL 2026 - All Member Predictions', 148, 15, { align: 'center' });
+
   doc.setFontSize(10);
   doc.setTextColor(150, 150, 150);
   doc.text('Generated: ' + new Date().toLocaleString(), 148, 22, { align: 'center' });
+
+  // Build table
   const names = Object.keys(entries);
   const head = [['#', 'Member', ...questions.map((q,i) => 'Q'+(i+1)), 'Score']];
+  
   const body = names.map((name, i) => {
     const ans = entries[name].answers || {};
     const closedQ = questions.filter(q => q.status === 'closed' && q.answer);
     let score = 0;
     closedQ.forEach(q => { if(ans[q.id] === q.answer) score++; });
-    const cells = questions.map(q => { const a = ans[q.id] || '—'; return a.length > 12 ? a.slice(0,12)+'…' : a; });
+    const cells = questions.map(q => {
+      const a = ans[q.id] || '—';
+      return a.length > 12 ? a.slice(0,12)+'…' : a;
+    });
     return [i+1, name, ...cells, score + '/' + closedQ.length];
   });
+
+  // Question legend at bottom
   const legendText = questions.map((q,i) => 'Q'+(i+1)+': '+q.text).join('   |   ');
+
   doc.autoTable({
-    startY: 28, head: head, body: body, theme: 'grid',
+    startY: 28,
+    head: head,
+    body: body,
+    theme: 'grid',
     styles: { fontSize: 8, cellPadding: 3, textColor: [238, 229, 200], fillColor: [15, 21, 33], lineColor: [30, 44, 66] },
     headStyles: { fillColor: [26, 39, 68], textColor: [245, 184, 0], fontStyle: 'bold', fontSize: 9 },
     alternateRowStyles: { fillColor: [20, 28, 45] },
     columnStyles: { 0: { cellWidth: 10 }, 1: { cellWidth: 35 } },
     margin: { left: 10, right: 10 },
   });
+
+  // Legend
   const finalY = doc.lastAutoTable.finalY + 6;
   doc.setFontSize(7);
   doc.setTextColor(100, 100, 100);
   doc.text('Questions: ' + legendText, 10, finalY, { maxWidth: 277 });
+
   doc.save('IPL2026-Predictions.pdf');
   toast('PDF Downloaded!');
 };
 
 (async()=>{await loadPlayers();})();
+</script>
+
+<!-- PWA Install Banner -->
+<div id="install-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#0D1829,#1a2744);border-top:2px solid #F5B800;padding:14px 18px;z-index:500;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+  <div style="display:flex;align-items:center;gap:10px">
+    <span style="font-size:28px">🏏</span>
+    <div>
+      <div style="font-size:14px;font-weight:700;color:#F5B800">Install IPL Predict App</div>
+      <div style="font-size:11px;color:#6B7A99">Add to home screen for quick access</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px">
+    <button onclick="dismissInstall()" style="padding:8px 14px;border-radius:8px;border:1px solid #1E2C42;background:transparent;color:#6B7A99;cursor:pointer;font-size:13px">Later</button>
+    <button onclick="installApp()" style="padding:8px 16px;border-radius:8px;border:none;background:linear-gradient(135deg,#F5B800,#E6A800);color:#07090F;font-weight:700;cursor:pointer;font-size:13px">Install ✓</button>
+  </div>
+</div>
+
+<!-- iPhone install instructions (shown once) -->
+<div id="ios-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#0D1829,#1a2744);border-top:2px solid #F5B800;padding:14px 18px;z-index:500">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+    <div style="font-size:14px;font-weight:700;color:#F5B800">🏏 Install on iPhone</div>
+    <button onclick="document.getElementById('ios-banner').style.display='none';localStorage.setItem('iosDismissed','1')" style="background:none;border:none;color:#6B7A99;font-size:20px;cursor:pointer">✕</button>
+  </div>
+  <div style="font-size:13px;color:#EEE5C8">Tap <strong style="color:#F5B800">Share ⬆️</strong> then <strong style="color:#F5B800">"Add to Home Screen"</strong> to install the app!</div>
+</div>
+
+
+<script>
+// Register Service Worker
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js')
+      .then(r => console.log('SW registered'))
+      .catch(e => console.log('SW error', e));
+  });
+}
+
+// Install prompt
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('install-banner').style.display = 'flex';
+});
+
+window.installApp = function() {
+  if(deferredPrompt){
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(c => {
+      deferredPrompt = null;
+      document.getElementById('install-banner').style.display = 'none';
+    });
+  }
+};
+
+window.dismissInstall = function() {
+  document.getElementById('install-banner').style.display = 'none';
+};
+
+window.addEventListener('appinstalled', () => {
+  document.getElementById('install-banner').style.display = 'none';
+});
+</script>
+
+<script>
+const isIOS = /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase());
+const isStandalone = window.navigator.standalone;
+const dismissed = localStorage.getItem('iosDismissed');
+if(isIOS && !isStandalone && !dismissed){
+  document.getElementById('ios-banner').style.display = 'block';
+}
 </script>
 </body>
 </html>
