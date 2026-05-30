@@ -253,7 +253,7 @@ const ADMIN_PW="4450";
 
 const NAME_MAP={"Abdeali tanda":"ABDEALI","Abdeali Tanda":"ABDEALI","abdeali tanda":"ABDEALI","Abdeali":"ABDEALI","abdeali":"ABDEALI","Ali":"ALI","ali":"ALI","Aziz":"AZIZ","aziz":"AZIZ","Burhanuddin kotwal":"BURHAN KOT","Burhanuddin Kotwal":"BURHAN KOT","burhanuddin kotwal":"BURHAN KOT","Fakhri":"FAKHRI BHAI","fakhri":"FAKHRI BHAI","Ibrahim":"IBRAHIM","ibrahim":"IBRAHIM","Murtaza":"MURTAZA D","murtaza":"MURTAZA D","Murtaza B":"MURTAZA B","murtaza b":"MURTAZA B","Murtaza b":"MURTAZA B","Mustafa":"MUSTAFA","mustafa":"MUSTAFA","Taha":"TAHA","taha":"TAHA"};
 
-const PREV={"AMMAR":{pts:13,played:22},"BURHAN KAP":{pts:7,played:12},"SHABBIR KOT":{pts:10,played:18},"IBRAHIM":{pts:12,played:22},"MURTAZA D":{pts:9,played:18},"SHABBIR RCB":{pts:9,played:18},"TAHER":{pts:7,played:14},"MURTAZA B":{pts:10,played:22},"ABBAS":{pts:8,played:18},"MOHAMMED":{pts:6,played:14},"HATIM BHAI":{pts:6,played:14},"MOIZ":{pts:4,played:10},"ALI":{pts:7,played:18},"BURHAN KOT":{pts:8,played:22},"ADNAN":{pts:6,played:18},"AZIZ":{pts:6,played:18},"TAHA":{pts:7,played:22},"ABDEALI":{pts:3,played:10},"MUSTAFA":{pts:2,played:9},"IDRIS":{pts:3,played:14},"FAKHRI BHAI":{pts:2,played:13},"AZIZ K":{pts:1,played:10}};
+const PREV={"AMMAR":{pts:14,played:29},"BURHAN KAP":{pts:8,played:19},"SHABBIR KOT":{pts:10,played:25},"IBRAHIM":{pts:13,played:29},"MURTAZA D":{pts:9,played:25},"SHABBIR RCB":{pts:11,played:25},"TAHER":{pts:7,played:21},"MURTAZA B":{pts:12,played:29},"ABBAS":{pts:8,played:25},"MOHAMMED":{pts:7,played:21},"HATIM BHAI":{pts:6,played:21},"MOIZ":{pts:4,played:17},"ALI":{pts:9,played:25},"BURHAN KOT":{pts:9,played:29},"ADNAN":{pts:8,played:25},"AZIZ":{pts:6,played:25},"TAHA":{pts:7,played:29},"ABDEALI":{pts:3,played:17},"MUSTAFA":{pts:3,played:16},"IDRIS":{pts:5,played:21},"FAKHRI BHAI":{pts:2,played:20},"AZIZ K":{pts:1,played:17}};
 const MEMBERS=Object.keys(PREV);
 const ACOLORS=["#E63946","#2A9D8F","#E9C46A","#F4A261","#264653","#6A4C93","#1982C4","#8AC926","#FF595E","#FFCA3A","#6A4C93","#1982C4","#E63946","#2A9D8F","#F4A261","#264653","#8AC926","#E9C46A","#FF595E","#1982C4","#6A4C93","#FFCA3A"];
 
@@ -316,9 +316,9 @@ async function renderLeaderboard(){
   await loadQuestions();await loadEntries();
   const closedQ=questions.filter(q=>q.status==='closed'&&q.answer);
   const newPoss=closedQ.reduce((s,q)=>s+(q.points||1),0);
-  const prevPoss=22;
+  const prevPoss=29;
   const totalPoss=prevPoss+newPoss;
-  const totalComps=5+closedQ.length;
+  const totalComps=6+closedQ.length;
   document.getElementById('lb-total-pts').textContent=totalPoss+' PTS';
   document.getElementById('lb-q-count').textContent=totalComps;
   document.getElementById('lb-subtitle').textContent='AFTER '+totalComps+' COMPETITION'+(totalComps!==1?'S':'');
@@ -399,7 +399,21 @@ async function renderAdminEntries(){
 
   if(!names.length){el.innerHTML='<p style="color:#6B7A99">No entries yet.</p>';return;}
   el.innerHTML=names.map(name=>{const ans=entries[name].answers||{};return`<div class="entry-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px"><span style="font-size:14px;font-weight:700;color:#F5B800">${name}</span><button class="btn-sm btn-red" onclick="clearEntry('${name.replace(/'/g,"\\'")}')">Clear</button></div>${questions.map(q=>{const a=ans[q.id];const isC=q.answer&&a===q.answer;const isW=q.answer&&a&&a!==q.answer;return`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #1E2C42;font-size:12px"><span style="color:#6B7A99;max-width:58%">${q.text.length>42?q.text.slice(0,42)+'…':q.text}</span><span style="color:${isC?'#00C853':isW?'#FF3D57':'#EEE5C8'};font-weight:${isC||isW?700:400}">${a||'—'}${isC?' ✓':''}</span></div>`;}).join('')}</div>`;}).join('');}
-window.clearEntry=async function(name){if(!confirm('Clear '+name+'?'))return;try{await deleteDoc(doc(db,'entries',name));}catch(e){}await loadEntries();renderAdminEntries();toast('Cleared');};
+window.clearEntry=async function(name){
+  if(!confirm('Clear '+name+"'s entry?"))return;
+  try{
+    // Delete by exact name
+    await deleteDoc(doc(db,'entries',name));
+    // Also delete any mapped old names that point to this member
+    const reverseMap={"ABDEALI":["Abdeali tanda","Abdeali","abdeali","abdeali tanda"],"ALI":["Ali","ali"],"AZIZ":["Aziz","aziz"],"BURHAN KOT":["Burhanuddin kotwal","Burhanuddin Kotwal"],"FAKHRI BHAI":["Fakhri","fakhri"],"IBRAHIM":["Ibrahim","ibrahim"],"MURTAZA D":["Murtaza","murtaza"],"MURTAZA B":["Murtaza B","murtaza b","Murtaza b"],"MUSTAFA":["Mustafa","mustafa"],"TAHA":["Taha","taha"]};
+    if(reverseMap[name]){
+      for(const oldName of reverseMap[name]){
+        try{await deleteDoc(doc(db,'entries',oldName));}catch(e2){}
+      }
+    }
+  }catch(e){console.log(e);}
+  await loadEntries();renderAdminEntries();toast('Entry cleared!');
+};
 
 window.downloadPDF = async function() {
   await loadQuestions(); await loadEntries();
