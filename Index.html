@@ -52,16 +52,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .nav-btn{padding:7px 10px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-size:11px;font-weight:600;transition:all .2s;}
 .nav-btn.active{background:rgba(245,184,0,0.12);border-color:var(--gold);color:var(--gold);}
 
-/* PRIZE BANNER */
-.prize-banner{max-width:900px;margin:10px auto 0;padding:0 14px;}
-.prize-inner{background:linear-gradient(135deg,rgba(204,34,0,0.2),rgba(245,184,0,0.1));border:1px solid rgba(245,184,0,0.3);border-radius:14px;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;position:relative;overflow:hidden;}
-.prize-inner::before{content:'';position:absolute;inset:0;background:conic-gradient(transparent,rgba(245,184,0,0.03),transparent 30%);animation:rotatePrize 6s linear infinite;}
-@keyframes rotatePrize{to{transform:rotate(360deg);}}
-.prize-left{display:flex;align-items:center;gap:10px;position:relative;z-index:1;}
-.prize-text .plabel{font-size:9px;color:var(--gold);letter-spacing:3px;font-weight:700;}
-.prize-text .pvalue{font-family:'Orbitron',sans-serif;font-size:13px;color:white;font-weight:700;}
-.prize-text .psub{font-size:17px;font-weight:900;background:linear-gradient(135deg,#FFD700,#FF4500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.prize-amount{position:relative;z-index:1;background:rgba(255,215,0,0.15);border:1px solid rgba(255,215,0,0.4);color:#FFD700;font-weight:900;font-size:16px;padding:6px 14px;border-radius:20px;white-space:nowrap;}
+
 
 /* PAGES */
 .page{display:none;max-width:900px;margin:0 auto;padding:16px 14px;}
@@ -175,7 +166,7 @@ select option{background:#080D18;}
 .chat-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;background:var(--card2);}
 .chat-title{font-family:'Orbitron',sans-serif;font-size:12px;color:var(--gold);letter-spacing:1px;}
 .chat-online{font-size:10px;color:var(--green);margin-left:auto;}
-.chat-messages{height:220px;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;}
+.chat-messages{height:calc(100vh - 320px);min-height:300px;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;}
 .chat-msg{display:flex;gap:8px;align-items:flex-start;}
 .chat-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0;}
 .chat-bubble{background:var(--card2);border:1px solid var(--border);border-radius:12px 12px 12px 4px;padding:8px 12px;max-width:80%;}
@@ -218,16 +209,7 @@ select option{background:#080D18;}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--card2);border:1px solid var(--green);color:var(--green);padding:10px 24px;border-radius:30px;font-size:13px;font-weight:700;z-index:999;transition:transform .3s;pointer-events:none;backdrop-filter:blur(10px);}
 .toast.show{transform:translateX(-50%) translateY(0);}
 
-/* SPONSOR AD */
-.sponsor-bar{max-width:900px;margin:10px auto 0;padding:0 14px;}
-.sponsor-inner{background:linear-gradient(135deg,rgba(139,90,43,0.25),rgba(101,67,33,0.15));border:1px solid rgba(139,90,43,0.4);border-radius:14px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;position:relative;overflow:hidden;}
-.sponsor-inner::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#8B5A2B,#D4A853,#8B5A2B);}
-.sponsor-label{font-size:8px;color:rgba(212,168,83,0.7);letter-spacing:3px;font-weight:700;margin-bottom:2px;}
-.sponsor-name{font-family:'Orbitron',sans-serif;font-size:15px;color:#D4A853;font-weight:700;letter-spacing:1px;}
-.sponsor-desc{font-size:11px;color:rgba(212,168,83,0.6);margin-top:2px;}
-.sponsor-wa{display:flex;align-items:center;gap:7px;background:#25D366;border:none;border-radius:20px;padding:9px 16px;color:white;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;white-space:nowrap;box-shadow:0 4px 15px rgba(37,211,102,0.35);}
-.sponsor-wa:hover{background:#20BC5C;}
-.sponsor-emoji{font-size:16px;}
+
 
 .install-bar{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(12,18,32,0.95);border-top:1px solid var(--gold);padding:12px 16px;z-index:500;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;backdrop-filter:blur(20px);}
 .ios-bar{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(12,18,32,0.95);border-top:1px solid var(--gold);padding:14px 16px;z-index:500;backdrop-filter:blur(20px);}
@@ -279,36 +261,70 @@ select option{background:#080D18;}
   </div>
 </header>
 
-<!-- PRIZE BANNER -->
-<div class="prize-banner">
-  <div class="prize-inner">
-    <div class="prize-left">
-      <div style="font-size:26px">🏆</div>
-      <div class="prize-text">
-        <div class="plabel">🎁 WINNER GETS</div>
-        <div class="pvalue"><span style="color:#FF0000">YouTube</span> Premium</div>
-        <div class="psub">3 MONTHS FREE</div>
+
+
+
+
+
+
+<!-- ROTATING BANNER -->
+<div style="max-width:900px;margin:10px auto 0;padding:0 14px;">
+  <div id="rot-banner" style="position:relative;border-radius:16px;overflow:hidden;height:72px;">
+
+    <!-- Slide 1: YouTube Prize -->
+    <div id="rb-0" style="position:absolute;inset:0;opacity:1;transition:opacity 0.7s ease;background:linear-gradient(135deg,rgba(204,34,0,0.2),rgba(245,184,0,0.1));border:1px solid rgba(245,184,0,0.3);border-radius:16px;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:24px;">🏆</span>
+        <div>
+          <div style="font-size:8px;color:var(--gold);letter-spacing:3px;font-weight:700;">🎁 WINNER GETS</div>
+          <div style="font-size:14px;font-weight:700;color:white;"><span style="color:#FF0000">YouTube</span> Premium</div>
+          <div style="font-size:15px;font-weight:900;background:linear-gradient(135deg,#FFD700,#FF4500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">3 MONTHS FREE</div>
+        </div>
+      </div>
+      <div style="background:rgba(255,215,0,0.15);border:1px solid rgba(255,215,0,0.4);color:#FFD700;font-weight:900;font-size:16px;padding:6px 14px;border-radius:20px;white-space:nowrap;">₹499 🔥</div>
+    </div>
+
+    <!-- Slide 2: AHK Caterers -->
+    <div id="rb-1" style="position:absolute;inset:0;opacity:0;transition:opacity 0.7s ease;background:linear-gradient(135deg,rgba(139,0,0,0.3),rgba(80,20,0,0.2));border:1px solid rgba(200,100,0,0.4);border-radius:16px;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#8B0000,#D4A853,#8B0000);border-radius:16px 16px 0 0;"></div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:44px;height:44px;background:linear-gradient(135deg,#8B0000,#CC2200);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">👨‍🍳</div>
+        <div>
+          <div style="font-size:8px;color:rgba(212,168,83,0.8);letter-spacing:3px;font-weight:700;">🌟 FOOD SPONSOR</div>
+          <div style="font-family:'Orbitron',sans-serif;font-size:13px;color:#D4A853;font-weight:700;letter-spacing:1px;">AHK CATERERS SHOP</div>
+          <div style="font-size:10px;color:rgba(212,168,83,0.6);">Biryani · Moghlai · Bohra Thaal · Kushalgarh</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;flex-shrink:0;">
+        <a href="https://wa.me/919724108553" target="_blank" style="display:inline-flex;align-items:center;gap:5px;background:#25D366;border-radius:12px;padding:5px 12px;color:white;font-size:11px;font-weight:700;text-decoration:none;">💬 9724 108 553</a>
+        <a href="https://wa.me/918733990753" target="_blank" style="display:inline-flex;align-items:center;gap:5px;background:#25D366;border-radius:12px;padding:5px 12px;color:white;font-size:11px;font-weight:700;text-decoration:none;">💬 8733 990 753</a>
       </div>
     </div>
-    <div class="prize-amount">₹499 🔥</div>
-  </div>
-</div>
 
-
-<!-- SPONSOR AD -->
-<div class="sponsor-bar">
-  <div class="sponsor-inner">
-    <div style="position:relative;z-index:1">
-      <div class="sponsor-label">🌟 PROUD SPONSOR</div>
-      <div class="sponsor-name">🪵 ALAMDAR TIMBERS</div>
-      <div class="sponsor-desc">Premium Plywoods & Wood Products</div>
+    <!-- Dots -->
+    <div style="position:absolute;bottom:4px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:10;">
+      <div id="rd-0" style="width:14px;height:5px;border-radius:3px;background:var(--gold);transition:all .4s;"></div>
+      <div id="rd-1" style="width:5px;height:5px;border-radius:3px;background:rgba(255,255,255,0.3);transition:all .4s;"></div>
     </div>
-    <a class="sponsor-wa" href="https://wa.me/919665899597" target="_blank">
-      <span class="sponsor-emoji">💬</span> WhatsApp
-    </a>
   </div>
 </div>
 
+<script>
+(function(){
+  let cur=0;
+  const total=2;
+  function rotate(){
+    document.getElementById('rb-'+cur).style.opacity='0';
+    document.getElementById('rd-'+cur).style.width='5px';
+    document.getElementById('rd-'+cur).style.background='rgba(255,255,255,0.3)';
+    cur=(cur+1)%total;
+    document.getElementById('rb-'+cur).style.opacity='1';
+    document.getElementById('rd-'+cur).style.width='14px';
+    document.getElementById('rd-'+cur).style.background='var(--gold)';
+  }
+  setInterval(rotate,5000);
+})();
+</script>
 
 <!-- PREDICT PAGE -->
 <div class="page active" id="page-predict">
