@@ -372,40 +372,32 @@ select option{background:#080D18;}
 <!-- LIVE SCORE PAGE -->
 <div class="page" id="page-score">
   <div style="font-family:'Orbitron',sans-serif;font-size:13px;color:var(--gold);margin-bottom:14px;letter-spacing:1px;">📊 LIVE SCORECARD</div>
-  
+
   <!-- Match Banner -->
   <div style="background:linear-gradient(135deg,#0C1220,#060D1A);border:1px solid var(--border);border-radius:16px;padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;">
     <div style="display:flex;align-items:center;gap:8px;">
       <div style="width:36px;height:36px;background:linear-gradient(135deg,#1B3A6B,#2A5298);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;">🦁</div>
       <div style="font-family:'Orbitron',sans-serif;font-size:13px;color:#4A90D9;font-weight:700;">GT</div>
     </div>
-    <div style="font-family:'Orbitron',sans-serif;font-size:11px;color:var(--gold);font-weight:900;letter-spacing:3px;">IPL 2026 FINAL</div>
+    <div style="text-align:center;">
+      <div style="font-family:'Orbitron',sans-serif;font-size:10px;color:var(--gold);font-weight:900;letter-spacing:3px;">IPL 2026 FINAL</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:2px;letter-spacing:1px;">LIVE NOW 🔴</div>
+    </div>
     <div style="display:flex;align-items:center;gap:8px;">
       <div style="font-family:'Orbitron',sans-serif;font-size:13px;color:#E03535;font-weight:700;">RCB</div>
       <div style="width:36px;height:36px;background:linear-gradient(135deg,#6B1B1B,#A52929);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;">🔥</div>
     </div>
   </div>
 
-  <!-- Widget -->
-  <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:14px;">
-    <div id="cricket-widget-container"></div>
-    <script>
-    (function() {
-      var parentDomain = window.location.hostname;
-      var iframe = document.createElement('iframe');
-      iframe.src = 'https://cricketstance.com/widgets/live-scores-widget.html?ref=' + encodeURIComponent(parentDomain);
-      iframe.width = '100%';
-      iframe.height = '400';
-      iframe.frameBorder = '0';
-      iframe.style.border = 'none';
-      iframe.style.width = '100%';
-      document.getElementById('cricket-widget-container').appendChild(iframe);
-    })();
-    </script>
+  <!-- CricketData Widget - JS based, no iframe, no external navigation -->
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;padding:14px;margin-bottom:12px;">
+    <div style="font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:10px;">🔴 LIVE · AUTO UPDATES</div>
+    <!-- Widget container -->
+    <div id="cdata-widget" style="width:100%;min-height:300px;"></div>
   </div>
 
   <div style="text-align:center;color:var(--muted);font-size:11px;letter-spacing:1px;">
-    🔄 Score updates automatically · Powered by CricketStance
+    🔄 Updates automatically every few seconds
   </div>
 </div>
 
@@ -587,6 +579,7 @@ window.showPage=function(name,btn){
   document.getElementById('page-'+name).classList.add('active');
   btn.classList.add('active');
   if(name==='leaderboard')renderLeaderboard();
+  if(name==='score')window.loadScoreWidget();
   if(name==='admin'&&adminAuthed)renderAdminQuestions();
   if(name==='chat')initChat();
 };
@@ -1028,5 +1021,51 @@ if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serv
 
 (async()=>{await loadPlayers();})();
 </script>
+
+<script>
+// CricketData.org live score widget - loads only when Score tab is opened
+window.loadScoreWidget = function() {
+  const container = document.getElementById('cdata-widget');
+  if (!container || container.dataset.loaded) return;
+  container.dataset.loaded = 'true';
+
+  // Create widget using cricketdata.org JS widget
+  const script = document.createElement('script');
+  script.src = 'https://cricketdata.org/widget/cricketwidget.js';
+  script.onload = function() {
+    if (window.CricketWidget) {
+      window.CricketWidget.init({
+        container: 'cdata-widget',
+        type: 'live',
+        theme: 'dark',
+        width: '100%',
+        height: '350'
+      });
+    } else {
+      // Fallback - show iframe widget
+      container.innerHTML = `
+        <iframe 
+          src="https://cricketdata.org/widget/live/?theme=dark&width=100%25&height=350" 
+          width="100%" 
+          height="350" 
+          frameborder="0" 
+          style="border:none;width:100%;border-radius:10px;"
+          scrolling="no">
+        </iframe>`;
+    }
+  };
+  script.onerror = function() {
+    // Final fallback
+    container.innerHTML = `
+      <div style="text-align:center;padding:30px;color:#6B7A99;">
+        <div style="font-size:36px;margin-bottom:10px;">📡</div>
+        <div style="font-size:14px;margin-bottom:6px;color:#EEE5C8;">Loading live score...</div>
+        <div style="font-size:12px;">If score doesn't load, check your internet connection</div>
+      </div>`;
+  };
+  document.head.appendChild(script);
+};
+</script>
+
 </body>
 </html>
