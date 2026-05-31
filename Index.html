@@ -20,6 +20,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 @keyframes twinkle{0%,100%{opacity:0.1;}50%{opacity:0.8;}}
 .bg-glow{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 50% 0%,rgba(108,99,255,0.15) 0%,transparent 60%),radial-gradient(ellipse at 0% 100%,rgba(255,61,87,0.08) 0%,transparent 50%);}
 
+/* SPLASH */
 .splash{position:fixed;inset:0;z-index:999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.6s;}
 .splash.hide{opacity:0;pointer-events:none;}
 .splash-ball{font-size:80px;animation:splashBounce 1s ease-in-out infinite;}
@@ -30,6 +31,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .splash-progress{height:100%;background:linear-gradient(90deg,var(--gold),var(--accent));border-radius:3px;animation:load 1.8s ease forwards;}
 @keyframes load{from{width:0;}to{width:100%;}}
 
+/* WELCOME BACK */
 .welcome-back{position:fixed;inset:0;z-index:998;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;padding:24px;}
 .wb-card{background:var(--card);border:1px solid rgba(245,184,0,0.3);border-radius:24px;padding:36px 28px;max-width:340px;width:100%;text-align:center;}
 .wb-check{width:64px;height:64px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 16px;}
@@ -39,6 +41,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .wb-btn{width:100%;padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--gold),#E6A800);color:#060810;font-size:15px;font-weight:700;cursor:pointer;font-family:'Orbitron',sans-serif;letter-spacing:1px;}
 .wb-other{margin-top:12px;color:var(--muted);font-size:13px;cursor:pointer;text-decoration:underline;}
 
+/* HEADER */
 .header{position:sticky;top:0;z-index:100;background:rgba(6,8,16,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:10px 16px;}
 .header-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
 .logo{display:flex;align-items:center;gap:10px;}
@@ -49,9 +52,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .nav-btn{padding:7px 10px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-size:11px;font-weight:600;transition:all .2s;}
 .nav-btn.active{background:rgba(245,184,0,0.12);border-color:var(--gold);color:var(--gold);}
 
+
+
+/* PAGES */
 .page{display:none;max-width:900px;margin:0 auto;padding:16px 14px;}
 .page.active{display:block;}
 
+/* LOGIN */
 .login-wrap{display:flex;justify-content:center;align-items:center;min-height:60vh;}
 .login-card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:32px 24px;max-width:360px;width:100%;text-align:center;position:relative;overflow:hidden;}
 .login-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--accent));background-size:200%;animation:shimTop 2s linear infinite;}
@@ -68,12 +75,14 @@ select option{background:#080D18;}
 .btn-sm{padding:6px 14px;border-radius:8px;border:1px solid var(--border);background:var(--card2);color:var(--text);font-size:12px;cursor:pointer;}
 .btn-danger{background:rgba(255,61,87,0.15);color:var(--red);border:1px solid rgba(255,61,87,0.3);}
 
+/* WELCOME BAR */
 .welcome-bar{background:linear-gradient(135deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:14px;padding:12px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;position:relative;overflow:hidden;}
 .welcome-bar::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--gold));}
 .xp-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;border:2px solid var(--gold);color:white;}
 .xp-name{font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;color:var(--gold);}
 .badge-ok{padding:5px 14px;border-radius:20px;font-size:11px;font-weight:700;background:rgba(0,255,136,0.15);color:var(--green);border:1px solid rgba(0,255,136,0.3);}
 
+/* COUNTDOWN */
 .countdown-box{background:linear-gradient(135deg,#0C1220,#060D1A);border:1px solid rgba(245,184,0,0.25);border-radius:16px;padding:14px 16px;margin-bottom:14px;text-align:center;}
 .cd-label{font-size:10px;color:var(--muted);letter-spacing:3px;margin-bottom:8px;}
 .cd-timer{display:flex;justify-content:center;gap:8px;align-items:center;}
@@ -84,6 +93,7 @@ select option{background:#080D18;}
 @keyframes blink2{0%,100%{opacity:1;}50%{opacity:0.2;}}
 .cd-closed{font-family:'Orbitron',sans-serif;font-size:14px;color:var(--red);letter-spacing:2px;}
 
+/* Q CARD */
 .q-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:12px;position:relative;overflow:hidden;}
 .q-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);border-radius:3px 0 0 3px;}
 .q-card.answered::before{background:var(--green);}
@@ -95,6 +105,7 @@ select option{background:#080D18;}
 .q-select{margin-bottom:0;border-radius:10px;}
 .q-select.sel-ok{border-color:rgba(0,255,136,0.4);color:var(--green);}
 .q-answered-tag{font-size:11px;color:var(--green);margin-top:6px;}
+/* Vote stats */
 .vote-stats{margin-top:10px;display:flex;flex-direction:column;gap:5px;}
 .vote-row{display:flex;align-items:center;gap:8px;}
 .vote-name{font-size:12px;color:var(--muted);width:100px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0;}
@@ -102,6 +113,7 @@ select option{background:#080D18;}
 .vote-bar-fill{height:6px;border-radius:6px;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width 0.8s ease;}
 .vote-count{font-size:11px;color:var(--muted);width:50px;text-align:right;flex-shrink:0;}
 
+/* LEADERBOARD */
 .lb-scoreboard{background:linear-gradient(135deg,#0C1220,#060D1A);border:1px solid var(--border);border-radius:20px;padding:20px;margin-bottom:16px;text-align:center;position:relative;overflow:hidden;}
 .lb-scoreboard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
 .lb-live{display:inline-flex;align-items:center;gap:6px;background:rgba(255,61,87,0.15);border:1px solid rgba(255,61,87,0.3);color:var(--red);font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:10px;letter-spacing:2px;}
@@ -114,6 +126,7 @@ select option{background:#080D18;}
 .lb-stat-num{font-family:'Orbitron',sans-serif;font-size:18px;color:var(--gold);}
 .lb-stat-label{font-size:9px;color:var(--muted);letter-spacing:2px;}
 
+/* PODIUM */
 .podium-wrap{display:flex;align-items:flex-end;justify-content:center;gap:8px;margin-bottom:20px;padding:0 10px;}
 .podium-item{display:flex;flex-direction:column;align-items:center;flex:1;max-width:130px;}
 .podium-avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:white;margin-bottom:6px;position:relative;}
@@ -129,6 +142,7 @@ select option{background:#080D18;}
 .podium-base.b2{background:linear-gradient(135deg,#808080,#C0C0C0);height:50px;font-family:'Orbitron',sans-serif;font-size:20px;color:#060810;font-weight:900;}
 .podium-base.b3{background:linear-gradient(135deg,#8B4513,#CD7F32);height:40px;font-family:'Orbitron',sans-serif;font-size:18px;color:#060810;font-weight:900;}
 
+/* LB ROWS */
 .lb-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:16px;}
 .lb-row{display:flex;align-items:center;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,0.04);gap:10px;transition:background .2s;}
 .lb-row:last-child{border-bottom:none;}
@@ -147,6 +161,7 @@ select option{background:#080D18;}
 .lb-pct{font-size:12px;font-weight:700;flex-shrink:0;min-width:48px;text-align:right;}
 .lb-move{font-size:11px;font-weight:700;flex-shrink:0;width:28px;text-align:center;}
 
+/* CHAT */
 .chat-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:16px;}
 .chat-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;background:var(--card2);}
 .chat-title{font-family:'Orbitron',sans-serif;font-size:12px;color:var(--gold);letter-spacing:1px;}
@@ -164,6 +179,7 @@ select option{background:#080D18;}
 .chat-input{flex:1;padding:9px 14px;border-radius:20px;border:1px solid var(--border);background:#080D18;color:var(--text);font-size:13px;outline:none;margin:0;}
 .chat-send{padding:9px 16px;border-radius:20px;border:none;background:linear-gradient(135deg,var(--accent),#8B83FF);color:white;font-size:13px;font-weight:700;cursor:pointer;}
 
+/* ADMIN */
 .admin-card{background:var(--card);border:1px solid rgba(245,184,0,0.2);border-radius:16px;padding:18px;margin-bottom:14px;}
 .sec-title{font-family:'Orbitron',sans-serif;font-size:12px;color:var(--gold);margin:8px 0 12px;letter-spacing:1px;}
 .stabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;}
@@ -193,12 +209,17 @@ select option{background:#080D18;}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--card2);border:1px solid var(--green);color:var(--green);padding:10px 24px;border-radius:30px;font-size:13px;font-weight:700;z-index:999;transition:transform .3s;pointer-events:none;backdrop-filter:blur(10px);}
 .toast.show{transform:translateX(-50%) translateY(0);}
 
+
+
 .install-bar{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(12,18,32,0.95);border-top:1px solid var(--gold);padding:12px 16px;z-index:500;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;backdrop-filter:blur(20px);}
 .ios-bar{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(12,18,32,0.95);border-top:1px solid var(--gold);padding:14px 16px;z-index:500;backdrop-filter:blur(20px);}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
 </head>
 <body>
 
+<!-- SPLASH -->
 <div class="splash" id="splash">
   <div class="splash-ball">🏏</div>
   <div class="splash-title">IPL PREDICT</div>
@@ -206,6 +227,7 @@ select option{background:#080D18;}
   <div class="splash-bar"><div class="splash-progress"></div></div>
 </div>
 
+<!-- WELCOME BACK -->
 <div class="welcome-back" id="wb-screen">
   <div class="wb-card">
     <div class="wb-check">✓</div>
@@ -221,6 +243,7 @@ select option{background:#080D18;}
 <div class="bg-glow"></div>
 <div class="toast" id="toast"></div>
 
+<!-- HEADER -->
 <header class="header">
   <div class="header-inner">
     <div class="logo">
@@ -240,9 +263,17 @@ select option{background:#080D18;}
   </div>
 </header>
 
+
+
+
+
+
+
 <!-- ROTATING BANNER -->
 <div style="max-width:900px;margin:10px auto 0;padding:0 14px;">
   <div id="rot-banner" style="position:relative;border-radius:16px;overflow:hidden;height:72px;">
+
+    <!-- Slide 1: YouTube Prize -->
     <div id="rb-0" style="position:absolute;inset:0;opacity:1;transition:opacity 0.7s ease;background:linear-gradient(135deg,rgba(204,34,0,0.2),rgba(245,184,0,0.1));border:1px solid rgba(245,184,0,0.3);border-radius:16px;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
       <div style="display:flex;align-items:center;gap:10px;">
         <span style="font-size:24px;">🏆</span>
@@ -254,6 +285,8 @@ select option{background:#080D18;}
       </div>
       <div style="background:rgba(255,215,0,0.15);border:1px solid rgba(255,215,0,0.4);color:#FFD700;font-weight:900;font-size:16px;padding:6px 14px;border-radius:20px;white-space:nowrap;">₹499 🔥</div>
     </div>
+
+    <!-- Slide 2: AHK Caterers -->
     <div id="rb-1" style="position:absolute;inset:0;opacity:0;transition:opacity 0.7s ease;background:linear-gradient(135deg,rgba(139,0,0,0.3),rgba(80,20,0,0.2));border:1px solid rgba(200,100,0,0.4);border-radius:16px;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
       <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#8B0000,#D4A853,#8B0000);border-radius:16px 16px 0 0;"></div>
       <div style="display:flex;align-items:center;gap:10px;">
@@ -269,6 +302,8 @@ select option{background:#080D18;}
         <a href="https://wa.me/918733990753" target="_blank" style="display:inline-flex;align-items:center;gap:5px;background:#25D366;border-radius:12px;padding:5px 12px;color:white;font-size:11px;font-weight:700;text-decoration:none;">💬 8733 990 753</a>
       </div>
     </div>
+
+    <!-- Dots -->
     <div style="position:absolute;bottom:4px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:10;">
       <div id="rd-0" style="width:14px;height:5px;border-radius:3px;background:var(--gold);transition:all .4s;"></div>
       <div id="rd-1" style="width:5px;height:5px;border-radius:3px;background:rgba(255,255,255,0.3);transition:all .4s;"></div>
@@ -278,7 +313,8 @@ select option{background:#080D18;}
 
 <script>
 (function(){
-  let cur=0;const total=2;
+  let cur=0;
+  const total=2;
   function rotate(){
     document.getElementById('rb-'+cur).style.opacity='0';
     document.getElementById('rd-'+cur).style.width='5px';
@@ -343,14 +379,19 @@ select option{background:#080D18;}
       <div class="lb-stat"><div class="lb-stat-num" id="lb-q-count">—</div><div class="lb-stat-label">ROUNDS</div></div>
     </div>
   </div>
+  <!-- PODIUM -->
   <div class="podium-wrap" id="podium"></div>
+  <!-- ALL ROWS -->
   <div class="lb-wrap" id="lb-list"></div>
   <div id="breakdown-section"></div>
 </div>
 
+
 <!-- LIVE SCORE PAGE -->
 <div class="page" id="page-score">
   <div style="font-family:'Orbitron',sans-serif;font-size:13px;color:var(--gold);margin-bottom:14px;letter-spacing:1px;">📊 LIVE SCORECARD</div>
+
+  <!-- Match Banner -->
   <div style="background:linear-gradient(135deg,#0C1220,#060D1A);border:1px solid var(--border);border-radius:16px;padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;">
     <div style="display:flex;align-items:center;gap:8px;">
       <div style="width:36px;height:36px;background:linear-gradient(135deg,#1B3A6B,#2A5298);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;">🦁</div>
@@ -365,12 +406,19 @@ select option{background:#080D18;}
       <div style="width:36px;height:36px;background:linear-gradient(135deg,#6B1B1B,#A52929);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;">🔥</div>
     </div>
   </div>
+
+  <!-- CricketData Widget - JS based, no iframe, no external navigation -->
   <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;padding:14px;margin-bottom:12px;">
     <div style="font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:10px;">🔴 LIVE · AUTO UPDATES</div>
+    <!-- Widget container -->
     <div id="cdata-widget" style="width:100%;min-height:300px;"></div>
   </div>
-  <div style="text-align:center;color:var(--muted);font-size:11px;letter-spacing:1px;">🔄 Updates automatically every few seconds</div>
+
+  <div style="text-align:center;color:var(--muted);font-size:11px;letter-spacing:1px;">
+    🔄 Updates automatically every few seconds
+  </div>
 </div>
+
 
 <!-- CHAT PAGE -->
 <div class="page" id="page-chat">
@@ -388,7 +436,9 @@ select option{background:#080D18;}
       <button class="chat-send" onclick="sendChat()">Send</button>
     </div>
   </div>
-  <div style="text-align:center;color:var(--muted);font-size:11px;margin-top:8px">💡 Select your name in Predict tab first to chat</div>
+  <div style="text-align:center;color:var(--muted);font-size:11px;margin-top:8px">
+    💡 Select your name in Predict tab first to chat
+  </div>
 </div>
 
 <!-- ADMIN PAGE -->
@@ -410,12 +460,14 @@ select option{background:#080D18;}
       <button class="stab" onclick="adminSection('entries',this)">📊 Entries</button>
     </div>
     <div id="asec-questions">
+      <!-- GLOBAL DEADLINE -->
       <div class="admin-card" style="border-color:rgba(108,99,255,0.3)">
         <div class="sec-title">⏱️ SET PREDICTION DEADLINE</div>
         <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Set one closing time for ALL open questions at once</div>
         <input type="datetime-local" id="global-deadline" style="margin-bottom:10px"/>
         <button class="btn-primary" onclick="setGlobalDeadline()">⏱️ APPLY TO ALL QUESTIONS</button>
       </div>
+
       <div class="admin-card">
         <div class="sec-title">➕ NEW QUESTION</div>
         <input type="text" id="q-text" placeholder="Question text..."/>
@@ -453,7 +505,7 @@ select option{background:#080D18;}
     <div id="asec-entries" style="display:none">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
         <div class="sec-title" style="margin:0">ALL ENTRIES</div>
-        <button class="btn-sm" onclick="downloadPDF()">📄 PDF</button>
+        <button class="btn-sm" onclick="downloadExcel()" style="background:rgba(0,200,83,0.15);border-color:rgba(0,200,83,0.3);color:#00C853;">📊 Excel</button>
       </div>
       <div id="submission-status"></div>
       <div id="entries-list"></div>
@@ -461,6 +513,7 @@ select option{background:#080D18;}
   </div>
 </div>
 
+<!-- INSTALL -->
 <div class="install-bar" id="install-banner">
   <div style="display:flex;align-items:center;gap:10px">
     <span style="font-size:22px">🏏</span>
@@ -495,9 +548,11 @@ const ACOLORS=["#E63946","#2A9D8F","#E9C46A","#F4A261","#264653","#6A4C93","#198
 let questions=[],entries={},currentMember=null,memberAnswers={},selectedOpts=[],adminAuthed=false,prevRankings={};
 let players=["Rohit Sharma","Virat Kohli","Shubman Gill","KL Rahul","Shreyas Iyer","Hardik Pandya","Ravindra Jadeja","MS Dhoni","Jasprit Bumrah","Mohammed Shami","Kuldeep Yadav","Yuzvendra Chahal","Axar Patel","Suryakumar Yadav","Ishan Kishan","Rishabh Pant","Sanju Samson","Deepak Chahar","Bhuvneshwar Kumar","Arshdeep Singh","Mohammed Siraj","Rinku Singh","Tilak Varma","Ruturaj Gaikwad","Yashasvi Jaiswal"];
 
+// Stars
 const starsEl=document.getElementById('bgStars');
 for(let i=0;i<60;i++){const s=document.createElement('div');s.className='star';s.style.cssText=`width:${Math.random()*2+1}px;height:${Math.random()*2+1}px;top:${Math.random()*100}%;left:${Math.random()*100}%;animation-duration:${3+Math.random()*4}s;animation-delay:${Math.random()*4}s;`;starsEl.appendChild(s);}
 
+// Remember user
 const savedName=localStorage.getItem('iplMember');
 if(savedName&&MEMBERS.includes(savedName)){
   setTimeout(()=>{
@@ -552,6 +607,7 @@ async function savePlayers(){try{await setDoc(doc(db,'config','players'),{list:p
 async function loadQuestions(){try{const s=await getDocs(collection(db,'questions'));questions=[];s.forEach(d=>questions.push({id:d.id,...d.data()}));questions.sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));}catch(e){}}
 async function loadEntries(){try{const s=await getDocs(collection(db,'entries'));entries={};s.forEach(d=>{const cn=NAME_MAP[d.id]||d.id;if(!entries[cn]){entries[cn]=d.data();}else{const ex=entries[cn].answers||{};const inc=d.data().answers||{};entries[cn].answers=Object.assign({},inc,ex);}});}catch(e){}}
 
+// ── COUNTDOWN ──
 function renderCountdown(){
   const openQ=questions.filter(q=>q.status==='open'&&q.deadline);
   if(!openQ.length){document.getElementById('countdown-wrap').innerHTML='';return;}
@@ -559,14 +615,25 @@ function renderCountdown(){
   const wrap=document.getElementById('countdown-wrap');
   let autoClosedShown=false;
   async function checkAutoClose(){
-    const now=new Date();let anyChanged=false;
-    for(const q of questions){if(q.status==='open'&&q.deadline&&new Date(q.deadline)<=now){try{await setDoc(doc(db,'questions',q.id),{status:'closed'},{merge:true});anyChanged=true;}catch(e){}}}
+    // Auto close all open questions past deadline
+    const now=new Date();
+    let anyChanged=false;
+    for(const q of questions){
+      if(q.status==='open'&&q.deadline&&new Date(q.deadline)<=now){
+        try{await setDoc(doc(db,'questions',q.id),{status:'closed'},{merge:true});anyChanged=true;}catch(e){}
+      }
+    }
     if(anyChanged){await loadQuestions();renderMemberQuestions();}
   }
   function update(){
     const diff=new Date(nearest.deadline)-new Date();
-    if(diff<=0){wrap.innerHTML=`<div class="countdown-box"><div class="cd-label">⏱️ PREDICTIONS CLOSED</div><div class="cd-closed">TIME'S UP! ⛔</div></div>`;if(!autoClosedShown){autoClosedShown=true;checkAutoClose();}return;}
+    if(diff<=0){
+      wrap.innerHTML=`<div class="countdown-box"><div class="cd-label">⏱️ PREDICTIONS CLOSED</div><div class="cd-closed">TIME'S UP! ⛔</div></div>`;
+      if(!autoClosedShown){autoClosedShown=true;checkAutoClose();}
+      return;
+    }
     const h=Math.floor(diff/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+    // Warning colors
     const urgent=diff<3600000;
     wrap.innerHTML=`<div class="countdown-box" style="${urgent?'border-color:rgba(255,61,87,0.4);':''}">
       <div class="cd-label" style="${urgent?'color:var(--red);':''}">⏱️ PREDICTIONS CLOSE IN</div>
@@ -579,7 +646,9 @@ function renderCountdown(){
       </div>
     </div>`;
   }
-  update();setInterval(update,1000);setInterval(checkAutoClose,60000);
+  update();setInterval(update,1000);
+  // Check every minute for auto-close
+  setInterval(checkAutoClose,60000);
 }
 
 window.memberLogin=async function(){
@@ -614,10 +683,13 @@ function renderMemberQuestions(){
       (q.options||[]).forEach(o=>votes[o]=0);
       Object.values(entries).forEach(e=>{const a=(e.answers||{})[q.id];if(a&&votes[a]!==undefined)votes[a]++;});
       const totalVotes=Object.values(votes).reduce((s,v)=>s+v,0);
+      // Sort options by votes
       const sortedOpts=[...(q.options||[])].sort((a,b)=>(votes[b]||0)-(votes[a]||0));
       const top3=sortedOpts.slice(0,3);
       const rest=sortedOpts.slice(3);
       const avatarColors=["#E63946","#2A9D8F","#E9C46A","#F4A261","#264653","#6A4C93","#1982C4","#8AC926","#FF595E","#FFCA3A"];
+      
+      // Top 3 big cards
       const top3Html=`<div style="display:grid;grid-template-columns:repeat(${Math.min(top3.length,3)},1fr);gap:8px;margin-bottom:${rest.length?'10px':'0'}">
         ${top3.map((opt,oi)=>{
           const isSelected=ans===opt;
@@ -638,6 +710,8 @@ function renderMemberQuestions(){
           </div>`;
         }).join('')}
       </div>`;
+
+      // Rest - horizontal scroll
       const restHtml=rest.length?`
         <div style="font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:6px;">MORE OPTIONS</div>
         <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch;scrollbar-width:none;">
@@ -658,6 +732,7 @@ function renderMemberQuestions(){
             </div>`;
           }).join('')}
         </div>`:'';
+
       return`<div class="q-card ${ans?'answered':''}" id="qcard-${q.id}">
         <div class="q-header">
           <div class="q-num">Q${i+1}</div>
@@ -668,7 +743,10 @@ function renderMemberQuestions(){
         </div>
         <div class="q-text">${q.text}</div>
         ${ans?`<div class="q-answered-tag" id="tag-${q.id}">✅ Your pick: <strong>${ans}</strong></div>`:`<div class="q-answered-tag" id="tag-${q.id}" style="display:none"></div>`}
-        <div style="margin-top:10px">${top3Html}${restHtml}</div>
+        <div style="margin-top:10px">
+          ${top3Html}
+          ${restHtml}
+        </div>
       </div>`;
     }).join('');
   });
@@ -676,6 +754,7 @@ function renderMemberQuestions(){
 
 window.selectOptDirect=function(qId,opt){
   memberAnswers[qId]=opt;
+  // Re-render just this question
   const q=questions.find(x=>x.id===qId);
   if(!q)return;
   const card=document.getElementById('qcard-'+qId);
@@ -683,6 +762,7 @@ window.selectOptDirect=function(qId,opt){
   card.classList.add('answered');
   const tag=document.getElementById('tag-'+qId);
   if(tag){tag.style.display='block';tag.innerHTML=`✅ Your pick: <strong>${opt}</strong>`;}
+  // Update visual selection
   card.querySelectorAll('[onclick]').forEach(el=>{
     const elOpt=el.getAttribute('onclick').match(/'([^']+)'\s*\)$/);
     if(!elOpt)return;
@@ -692,6 +772,8 @@ window.selectOptDirect=function(qId,opt){
   });
   toast(`✅ Selected: ${opt}`);
 };
+
+
 
 window.submitPredictions=async function(){
   if(!currentMember)return;
@@ -703,6 +785,7 @@ window.submitPredictions=async function(){
   toast('✅ Predictions saved!');
 };
 
+// ── LEADERBOARD ──
 async function renderLeaderboard(){
   await loadQuestions();await loadEntries();
   const closedQ=questions.filter(q=>q.status==='closed'&&q.answer);
@@ -712,6 +795,7 @@ async function renderLeaderboard(){
   document.getElementById('lb-total-pts').textContent=totalPoss;
   document.getElementById('lb-q-count').textContent=totalComps;
   document.getElementById('lb-subtitle').textContent='AFTER '+totalComps+' COMPETITION'+(totalComps!==1?'S':'');
+
   const scores=MEMBERS.map((name,idx)=>{
     const prev=PREV[name];
     const data=entries[name]||{};
@@ -722,6 +806,8 @@ async function renderLeaderboard(){
     const pct=totalPlayed>0?(totalPts/totalPlayed)*100:0;
     return{name,idx,totalPts,totalPlayed,pct:Math.round(pct*100)/100};
   }).sort((a,b)=>b.pct-a.pct);
+
+  // Rank movement
   const currentRanks={};scores.forEach((s,i)=>currentRanks[s.name]=i+1);
   const moveHtml=(name)=>{
     const prev=prevRankings[name],curr=currentRanks[name];
@@ -730,27 +816,35 @@ async function renderLeaderboard(){
     return`<div class="lb-move" style="color:var(--red)">▼${curr-prev}</div>`;
   };
   prevRankings={...currentRanks};
+
+  // PODIUM - top 3
+  const medals=['🥇','🥈','🥉'];
   const top3=scores.slice(0,3);
-  const podiumOrder=[top3[1],top3[0],top3[2]];
+  const podiumOrder=[top3[1],top3[0],top3[2]]; // 2nd, 1st, 3rd
   const podiumClass=['p2','p1','p3'],baseClass=['b2','b1','b3'];
   document.getElementById('podium').innerHTML=podiumOrder.map((s,i)=>{
     if(!s)return'';
+    const realIdx=podiumOrder.indexOf(s);
     const rank=[2,1,3][i];
     const pc=rank===1?'#FFD700':rank===2?'#C0C0C0':'#CD7F32';
     return`<div class="podium-item">
       <div class="podium-avatar ${podiumClass[i]}" style="background:${ACOLORS[s.idx]}">
-        ${rank===1?'<div class="podium-crown">👑</div>':''}${s.name[0]}
+        ${rank===1?'<div class="podium-crown">👑</div>':''}
+        ${s.name[0]}
       </div>
       <div class="podium-name">${s.name}</div>
       <div class="podium-pct" style="color:${pc}">${s.pct.toFixed(1)}%</div>
       <div class="podium-base ${baseClass[i]}">${rank}</div>
     </div>`;
   }).join('');
+
+  // ALL ROWS - only from rank 4 onwards (top 3 already on podium)
   document.getElementById('lb-list').innerHTML=scores.slice(3).map((s,i)=>{
     i=i+3;
+    const rc='';
     const pc=s.pct>=45?'#00FF88':s.pct>=30?'#F5B800':'#FF6B6B';
     const barW=Math.min(100,Math.round(s.pct*2));
-    return`<div class="lb-row">
+    return`<div class="lb-row ${rc}">
       <div class="lb-rank" style="color:#4A5568">${i+1}</div>
       <div class="lb-av" style="background:${ACOLORS[s.idx]}">${s.name[0]}</div>
       <div class="lb-info">
@@ -765,6 +859,7 @@ async function renderLeaderboard(){
       <div class="lb-pct" style="color:${pc}">${s.pct.toFixed(1)}%</div>
     </div>`;
   }).join('');
+
   const bs=document.getElementById('breakdown-section');
   if(!closedQ.length){bs.innerHTML='';return;}
   bs.innerHTML='<div class="sec-title" style="margin-top:16px">📋 ROUND RESULTS</div>'+closedQ.map(q=>{
@@ -777,6 +872,7 @@ async function renderLeaderboard(){
   }).join('');
 }
 
+// ── CHAT ──
 let chatUnsub=null;
 function initChat(){
   const msgEl=document.getElementById('chat-messages');
@@ -812,12 +908,16 @@ window.sendChat=async function(){
   try{await addDoc(collection(db,'chat'),{name:currentMember,text,ts:serverTimestamp()});}catch(e){toast('Failed to send','#FF3D57');}
 };
 
+// ── ADMIN ──
+
 window.setGlobalDeadline=async function(){
   const deadline=document.getElementById('global-deadline').value;
   if(!deadline){toast('Please select a date and time','#FF3D57');return;}
   const openQ=questions.filter(q=>q.status==='open');
   if(!openQ.length){toast('No open questions found','#FF3D57');return;}
-  for(const q of openQ){try{await setDoc(doc(db,'questions',q.id),{deadline},{merge:true});}catch(e){}}
+  for(const q of openQ){
+    try{await setDoc(doc(db,'questions',q.id),{deadline},{merge:true});}catch(e){}
+  }
   await loadQuestions();renderAdminQuestions();
   toast('✅ Deadline set for all '+openQ.length+' questions!');
 };
@@ -926,67 +1026,74 @@ window.clearEntry=async function(name){
   await loadEntries();renderAdminEntries();toast('Cleared','#FF3D57');
 };
 
-// ✅ FIXED PDF DOWNLOAD
-window.downloadPDF=async function(){
-  await loadEntries();
-  const names=Object.keys(entries);
-  if(!names.length){toast('No entries to download','#FF3D57');return;}
-  toast('📄 Opening PDF...');
+window.downloadExcel=async function(){
+  await loadQuestions();await loadEntries();
+  const wb=XLSX.utils.book_new();
 
-  let rows='';
-  names.forEach(name=>{
+  // ── SHEET 1: All Entries ──
+  const names=Object.keys(entries);
+  const closedQ=questions.filter(q=>q.status==='closed'&&q.answer);
+
+  // Header row
+  const header=['#','Member Name',...questions.map((q,i)=>'Q'+(i+1)+': '+q.text.slice(0,30)),'Score','Points'];
+  const rows=[header];
+
+  names.forEach((name,i)=>{
     const ans=entries[name].answers||{};
-    const qRows=questions.map(q=>{
+    let score=0,pts=0;
+    closedQ.forEach(q=>{if(ans[q.id]===q.answer){score++;pts+=(q.points||1);}});
+    const cells=questions.map(q=>{
       const a=ans[q.id]||'—';
-      const isC=q.answer&&a===q.answer;
-      const isW=q.answer&&a!=='—'&&a!==q.answer;
-      return`<tr>
-        <td style="padding:6px 10px;border:1px solid #ddd;font-size:12px;">${q.text}</td>
-        <td style="padding:6px 10px;border:1px solid #ddd;font-size:12px;font-weight:${isC||isW?700:400};color:${isC?'#1a7a1a':isW?'#cc0000':'#333'};">${a}</td>
-        <td style="padding:6px 10px;border:1px solid #ddd;font-size:14px;text-align:center;">${isC?'✅':isW?'❌':''}</td>
-      </tr>`;
-    }).join('');
-    rows+=`<div style="page-break-inside:avoid;margin-bottom:24px;">
-      <div style="background:#f0f4ff;border-left:4px solid #B8860B;padding:8px 14px;margin-bottom:6px;border-radius:0 6px 6px 0;">
-        <span style="font-size:15px;font-weight:700;color:#B8860B;">👤 ${name}</span>
-      </div>
-      <table style="width:100%;border-collapse:collapse;">
-        <thead>
-          <tr style="background:#f5f5f5;">
-            <th style="padding:6px 10px;border:1px solid #ddd;font-size:12px;text-align:left;">Question</th>
-            <th style="padding:6px 10px;border:1px solid #ddd;font-size:12px;text-align:left;">Answer</th>
-            <th style="padding:6px 10px;border:1px solid #ddd;font-size:12px;text-align:center;">Result</th>
-          </tr>
-        </thead>
-        <tbody>${qRows}</tbody>
-      </table>
-    </div>`;
+      const isCorrect=q.answer&&a===q.answer;
+      const isWrong=q.answer&&a&&a!==q.answer;
+      return a+(isCorrect?' ✓':isWrong?' ✗':'');
+    });
+    rows.push([i+1,name,...cells,score+'/'+closedQ.length,pts]);
   });
 
-  const win=window.open('','_blank');
-  if(!win){toast('Allow popups to download PDF','#FF3D57');return;}
-  win.document.write(`<!DOCTYPE html>
-<html>
-<head>
-  <title>IPL 2026 — All Entries</title>
-  <style>
-    body{font-family:Arial,sans-serif;padding:24px;color:#222;max-width:900px;margin:0 auto;}
-    h1{color:#B8860B;margin-bottom:4px;}
-    .meta{color:#888;font-size:13px;margin-bottom:20px;}
-    .print-btn{display:inline-block;margin-bottom:20px;padding:10px 24px;background:#B8860B;color:white;border:none;border-radius:6px;font-size:14px;cursor:pointer;font-weight:700;}
-    @media print{.print-btn{display:none!important;} body{padding:10px;}}
-  </style>
-</head>
-<body>
-  <h1>🏏 IPL 2026 — All Entries</h1>
-  <div class="meta">Generated: ${new Date().toLocaleString()} &nbsp;·&nbsp; Total entries: ${names.length} &nbsp;·&nbsp; Questions: ${questions.length}</div>
-  <button class="print-btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
-  ${rows}
-</body>
-</html>`);
-  win.document.close();
+  const ws1=XLSX.utils.aoa_to_sheet(rows);
+
+  // Column widths
+  ws1['!cols']=[{wch:4},{wch:18},...questions.map(()=>({wch:20})),{wch:8},{wch:8}];
+
+  XLSX.utils.book_append_sheet(wb,ws1,'Predictions');
+
+  // ── SHEET 2: Leaderboard ──
+  const PREV={"AMMAR":{pts:14,played:29},"BURHAN KAP":{pts:8,played:19},"SHABBIR KOT":{pts:10,played:25},"IBRAHIM":{pts:13,played:29},"MURTAZA D":{pts:9,played:25},"SHABBIR RCB":{pts:11,played:25},"TAHER":{pts:7,played:21},"MURTAZA B":{pts:12,played:29},"ABBAS":{pts:8,played:25},"MOHAMMED":{pts:7,played:21},"HATIM BHAI":{pts:6,played:21},"MOIZ":{pts:4,played:17},"ALI":{pts:9,played:25},"BURHAN KOT":{pts:9,played:29},"ADNAN":{pts:8,played:25},"AZIZ":{pts:6,played:25},"TAHA":{pts:7,played:29},"ABDEALI":{pts:3,played:17},"MUSTAFA":{pts:3,played:16},"IDRIS":{pts:5,played:21},"FAKHRI BHAI":{pts:2,played:20},"AZIZ K":{pts:1,played:17}};
+  const newPoss=closedQ.reduce((s,q)=>s+(q.points||1),0);
+
+  const lbRows=[['Rank','Player','Previous Pts','New Pts','Total Pts','Played','Score','Percentage']];
+  Object.keys(PREV).map(name=>{
+    const prev=PREV[name];
+    const data=entries[name]||{};
+    let newPts=0;
+    closedQ.forEach(q=>{if((data.answers||{})[q.id]===q.answer)newPts+=(q.points||1);});
+    const totalPts=prev.pts+newPts;
+    const totalPlayed=prev.played+newPoss;
+    const pct=totalPlayed>0?(totalPts/totalPlayed)*100:0;
+    return{name,prevPts:prev.pts,newPts,totalPts,totalPlayed,pct};
+  }).sort((a,b)=>b.pct-a.pct).forEach((s,i)=>{
+    lbRows.push([i+1,s.name,s.prevPts,s.newPts,s.totalPts,s.totalPlayed,s.totalPts+'/'+s.totalPlayed,s.pct.toFixed(2)+'%']);
+  });
+
+  const ws2=XLSX.utils.aoa_to_sheet(lbRows);
+  ws2['!cols']=[{wch:6},{wch:18},{wch:14},{wch:10},{wch:10},{wch:8},{wch:10},{wch:12}];
+  XLSX.utils.book_append_sheet(wb,ws2,'Leaderboard');
+
+  // ── SHEET 3: Questions ──
+  const qRows=[['#','Question','Options','Correct Answer','Points','Status']];
+  questions.forEach((q,i)=>{
+    qRows.push([i+1,q.text,(q.options||[]).join(' | '),q.answer||'Not set yet',q.points||1,q.status]);
+  });
+  const ws3=XLSX.utils.aoa_to_sheet(qRows);
+  ws3['!cols']=[{wch:4},{wch:35},{wch:50},{wch:20},{wch:8},{wch:8}];
+  XLSX.utils.book_append_sheet(wb,ws3,'Questions');
+
+  XLSX.writeFile(wb,'IPL2026-Predictions.xlsx');
+  toast('✅ Excel Downloaded!');
 };
 
+// PWA
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById('install-banner').style.display='flex';});
 window.installApp=function(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(()=>{deferredPrompt=null;document.getElementById('install-banner').style.display='none';});}};
@@ -999,21 +1106,45 @@ if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serv
 </script>
 
 <script>
-window.loadScoreWidget=function(){
-  const container=document.getElementById('cdata-widget');
-  if(!container||container.dataset.loaded)return;
-  container.dataset.loaded='true';
-  const script=document.createElement('script');
-  script.src='https://cricketdata.org/widget/cricketwidget.js';
-  script.onload=function(){
-    if(window.CricketWidget){
-      window.CricketWidget.init({container:'cdata-widget',type:'live',theme:'dark',width:'100%',height:'350'});
-    }else{
-      container.innerHTML=`<iframe src="https://cricketdata.org/widget/live/?theme=dark&width=100%25&height=350" width="100%" height="350" frameborder="0" style="border:none;width:100%;border-radius:10px;" scrolling="no"></iframe>`;
+// CricketData.org live score widget - loads only when Score tab is opened
+window.loadScoreWidget = function() {
+  const container = document.getElementById('cdata-widget');
+  if (!container || container.dataset.loaded) return;
+  container.dataset.loaded = 'true';
+
+  // Create widget using cricketdata.org JS widget
+  const script = document.createElement('script');
+  script.src = 'https://cricketdata.org/widget/cricketwidget.js';
+  script.onload = function() {
+    if (window.CricketWidget) {
+      window.CricketWidget.init({
+        container: 'cdata-widget',
+        type: 'live',
+        theme: 'dark',
+        width: '100%',
+        height: '350'
+      });
+    } else {
+      // Fallback - show iframe widget
+      container.innerHTML = `
+        <iframe 
+          src="https://cricketdata.org/widget/live/?theme=dark&width=100%25&height=350" 
+          width="100%" 
+          height="350" 
+          frameborder="0" 
+          style="border:none;width:100%;border-radius:10px;"
+          scrolling="no">
+        </iframe>`;
     }
   };
-  script.onerror=function(){
-    container.innerHTML=`<div style="text-align:center;padding:30px;color:#6B7A99;"><div style="font-size:36px;margin-bottom:10px;">📡</div><div style="font-size:14px;margin-bottom:6px;color:#EEE5C8;">Loading live score...</div><div style="font-size:12px;">If score doesn't load, check your internet connection</div></div>`;
+  script.onerror = function() {
+    // Final fallback
+    container.innerHTML = `
+      <div style="text-align:center;padding:30px;color:#6B7A99;">
+        <div style="font-size:36px;margin-bottom:10px;">📡</div>
+        <div style="font-size:14px;margin-bottom:6px;color:#EEE5C8;">Loading live score...</div>
+        <div style="font-size:12px;">If score doesn't load, check your internet connection</div>
+      </div>`;
   };
   document.head.appendChild(script);
 };
