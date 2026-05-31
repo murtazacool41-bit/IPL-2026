@@ -272,6 +272,7 @@ select option{background:#080D18;}
     <nav class="nav">
       <button class="nav-btn active" id="nb-predict" onclick="showPage('predict',this)">🏏 Predict</button>
       <button class="nav-btn" id="nb-leaderboard" onclick="showPage('leaderboard',this)">🏆 Board</button>
+      <button class="nav-btn" id="nb-score" onclick="showPage('score',this)">📊 Score</button>
       <button class="nav-btn" id="nb-chat" onclick="showPage('chat',this)">💬 Chat</button>
       <button class="nav-btn" id="nb-admin" onclick="showPage('admin',this)">🔒 Admin</button>
     </nav>
@@ -366,6 +367,48 @@ select option{background:#080D18;}
   <div class="lb-wrap" id="lb-list"></div>
   <div id="breakdown-section"></div>
 </div>
+
+
+<!-- LIVE SCORE PAGE -->
+<div class="page" id="page-score">
+  <div style="font-family:'Orbitron',sans-serif;font-size:13px;color:var(--gold);margin-bottom:14px;letter-spacing:1px;">📊 LIVE SCORECARD</div>
+  
+  <!-- Match Banner -->
+  <div style="background:linear-gradient(135deg,#0C1220,#060D1A);border:1px solid var(--border);border-radius:16px;padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;">
+    <div style="display:flex;align-items:center;gap:8px;">
+      <div style="width:36px;height:36px;background:linear-gradient(135deg,#1B3A6B,#2A5298);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;">🦁</div>
+      <div style="font-family:'Orbitron',sans-serif;font-size:13px;color:#4A90D9;font-weight:700;">GT</div>
+    </div>
+    <div style="font-family:'Orbitron',sans-serif;font-size:11px;color:var(--gold);font-weight:900;letter-spacing:3px;">IPL 2026 FINAL</div>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <div style="font-family:'Orbitron',sans-serif;font-size:13px;color:#E03535;font-weight:700;">RCB</div>
+      <div style="width:36px;height:36px;background:linear-gradient(135deg,#6B1B1B,#A52929);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;">🔥</div>
+    </div>
+  </div>
+
+  <!-- Widget -->
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:14px;">
+    <div id="cricket-widget-container"></div>
+    <script>
+    (function() {
+      var parentDomain = window.location.hostname;
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://cricketstance.com/widgets/live-scores-widget.html?ref=' + encodeURIComponent(parentDomain);
+      iframe.width = '100%';
+      iframe.height = '400';
+      iframe.frameBorder = '0';
+      iframe.style.border = 'none';
+      iframe.style.width = '100%';
+      document.getElementById('cricket-widget-container').appendChild(iframe);
+    })();
+    </script>
+  </div>
+
+  <div style="text-align:center;color:var(--muted);font-size:11px;letter-spacing:1px;">
+    🔄 Score updates automatically · Powered by CricketStance
+  </div>
+</div>
+
 
 <!-- CHAT PAGE -->
 <div class="page" id="page-chat">
