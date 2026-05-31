@@ -1108,45 +1108,44 @@ if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serv
 <script>
 // CricketData.org live score widget - loads only when Score tab is opened
 window.loadScoreWidget = function() {
-  const container = document.getElementById('cdata-widget');
+  const container = document.getElementById('criczop-widget');
   if (!container || container.dataset.loaded) return;
   container.dataset.loaded = 'true';
+  container.innerHTML = '<div style="text-align:center;padding:30px;color:#6B7A99;"><div style="font-size:36px;margin-bottom:10px;">📡</div><div style="font-size:14px;color:#EEE5C8;">Loading live score...</div></div>';
 
-  // Create widget using cricketdata.org JS widget
+  // Try Criczop widget first
   const script = document.createElement('script');
-  script.src = 'https://cricketdata.org/widget/cricketwidget.js';
+  script.src = 'https://widget.criczop.com/widget.js';
+  script.setAttribute('data-widget-id', 'live-scores');
+  script.setAttribute('data-theme', 'dark');
+  script.setAttribute('data-container', 'criczop-widget');
   script.onload = function() {
-    if (window.CricketWidget) {
-      window.CricketWidget.init({
-        container: 'cdata-widget',
-        type: 'live',
+    if(window.CriczopWidget) {
+      window.CriczopWidget.render({
+        container: 'criczop-widget',
         theme: 'dark',
-        width: '100%',
-        height: '350'
+        type: 'live'
       });
-    } else {
-      // Fallback - show iframe widget
-      container.innerHTML = `
-        <iframe 
-          src="https://cricketdata.org/widget/live/?theme=dark&width=100%25&height=350" 
-          width="100%" 
-          height="350" 
-          frameborder="0" 
-          style="border:none;width:100%;border-radius:10px;"
-          scrolling="no">
-        </iframe>`;
-    }
+    } else { loadFallback(); }
   };
-  script.onerror = function() {
-    // Final fallback
-    container.innerHTML = `
-      <div style="text-align:center;padding:30px;color:#6B7A99;">
-        <div style="font-size:36px;margin-bottom:10px;">📡</div>
-        <div style="font-size:14px;margin-bottom:6px;color:#EEE5C8;">Loading live score...</div>
-        <div style="font-size:12px;">If score doesn't load, check your internet connection</div>
-      </div>`;
-  };
+  script.onerror = function(){ loadFallback(); };
   document.head.appendChild(script);
+
+  function loadFallback(){
+    // Fallback: cricketdata.org iframe  
+    container.innerHTML = `<iframe 
+      src="https://cricketdata.org/widget/livescores.html" 
+      width="100%" height="420" frameborder="0"
+      style="border:none;width:100%;background:#0C1220;border-radius:10px;"
+      allow="autoplay" loading="lazy">
+    </iframe>`;
+  }
+
+  // Auto refresh every 30 seconds
+  setInterval(()=>{
+    const iframe = container.querySelector('iframe');
+    if(iframe) iframe.src = iframe.src;
+  }, 30000);
 };
 </script>
 
